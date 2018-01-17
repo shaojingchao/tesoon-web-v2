@@ -1,14 +1,11 @@
 <template>
-  <div>
-    <MyHeader class="wow fadeIn" data-wow-delay="0"/>
+  <div class="page-index">
+    <page-header/>
+    <Slider class="slider-wrap" :bannerPics="bannerPics" :style="{height:'600px'}" :time="4"/>
     <div class="platform-data">
       <div class="content clearfix" >
-        <div class="data-item wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.1s">
-          <div class="num hide-xs">19</div>
-          <p>天星砥砺前行19年</p>
-        </div>
         <div class="data-item wow fadeInUp" data-wow-duration="0.6s" data-wow-delay="0.3s">
-          <div class="num hide-xs">5000</div>
+          <div class="num hide-xs">5000<sup>+</sup></div>
           <p>5000余位特优级教师加盟</p>
         </div>
         <div class="data-item wow fadeInUp" data-wow-duration="0.7s" data-wow-delay="0.5s">
@@ -20,14 +17,14 @@
           <p>推出26大畅销系列</p>
         </div>
         <div class="data-item wow fadeInUp" data-wow-duration="0.9s" data-wow-delay="0.9s">
-          <div class="num hide-xs">2000</div>
+          <div class="num hide-xs">2000<sup>+</sup></div>
           <p>单品研发2000余册</p>
         </div>
       </div>
     </div>
 
     <div class="index-section bg-white wow fadeInUp" data-wow-offset="100">
-      <h1 class="section-title">天星动态</h1>
+      <h1 class="section-title">天星动态<br><small>STAR EDUCATION</small></h1>
       <div class="content">
         <ul class="dynamic-show clearfix" v-if="dynamicList.length>0">
           <router-link
@@ -58,7 +55,7 @@
 
     <!--教育出版-->
     <div class="index-section index-section-gray wow fadeInUp" data-wow-offset="200">
-      <h1 class="section-title">教育出版</h1>
+      <h1 class="section-title">教育出版<br><small>EDUCATION PUBLISHING</small></h1>
       <div class="content">
         <p class="section-text">
           天星教育以独到、敏锐的市场眼光，独辟蹊径地首创MOOK教辅理念，开中国教辅杂志化先河，实现了图书优势和杂志优势的完美结合，出版的《金考卷》《试题调研》等系列图书，将全国示范名校优质备考资源传递给万千学子，一时畅销大江南北。</p>
@@ -78,7 +75,7 @@
 
     <!--综合出版-->
     <div class="index-section bg-white wow fadeInUp" data-wow-offset="200">
-      <h1 class="section-title">综合出版</h1>
+      <h1 class="section-title">综合出版<br><small>COMPREHENSIVE PUBLICATION</small></h1>
       <div class="content">
         <p class="section-text">
           天星教育打造的疯狂系列期刊群已成为青少年阅读拓展领军品牌，秉承激情专注之精神，怀抱出类拔萃之信念，长期执着于读写研究。彰显时代特征，吻合中、高考精神，全方位提升青少年人文素养及读写能力。使青少年在阅读中生发智慧，奠定内涵，在潜移默化中完善人格，提升能力，走向成功！</p>
@@ -98,7 +95,7 @@
 
     <!--数字出版-->
     <div class="index-section index-section-gray wow fadeInUp" data-wow-offset="200">
-      <h1 class="section-title">数字出版</h1>
+      <h1 class="section-title">数字出版<br><small>DIGITAL PUBLISHING</small></h1>
       <div class="content">
         <p class="section-text">
           全国首家微学习出版云平台，我们提供基于自主产权的云编辑系统，诚邀全国4000余名师协同在线开发丰富的微学习卡、微试题贴、微学杂志和微学习书， 并致力于为k-12各阶段学习者提供权威学习解决方案。</p>
@@ -146,19 +143,38 @@
         </div>
       </div>
     </div>
-    <MyFooter/>
+    <page-footer/>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import MyHeader from '../components/indexHeader.vue'
-  import MyFooter from '../components/common/footer.vue'
+  import MyHeader from '../components/indexHeader'
+  import Slider from '../components/common/slider'
   import WOW from '../bower_components/wow/dist/wow.min'
   import CF from '../api/index'
   export default{
+    name: 'PageIndex',
+    components: {
+      MyHeader,
+      Slider
+    },
+    metaInfo () {
+      return {
+        title: '天星教育 - 首页',
+        meta: [{
+          name: '河南天星教育传媒股份有限公司',
+          content: '天星教育是一家致力于教育图书出版及提供教育信息服务的文化教育机构，自1998年成立以来，已发展成为河南民营书业的旗舰品牌。公司坐落于历史文化源远流长的中原大地，秉承着中原儿女自强不息、上下求索的民族精神，积极投身于文化产业发展的大潮中，为了民族教育的振兴和发展，贡献着自己的智慧和热忱。'
+        }]
+      }
+    },
     data () {
       return {
         baseUrl: CF.baseUrl,
+        bannerPics: [
+          require('../assets/img/banner/idx_banner_1.png')
+        ],
+        clientSize: {
+        },
         dynamicList: [],
         pingJiaList: [
           {
@@ -191,10 +207,6 @@
         return this.isMobile ? this.mobileWidth * 0.78 : 1000
       }
     },
-    components: {
-      MyHeader,
-      MyFooter
-    },
     mounted () {
       this.initWOW('wow').init()
       this.$http.get(CF.getDynamicsList + '?pagesize=' + 6).then(res => {
@@ -207,15 +219,6 @@
           this.initWOW('news-wow').init()
         })
       })
-    },
-    metaInfo () {
-      return {
-        title: '天星教育 - 首页',
-        meta: [{
-          name: '河南天星教育传媒股份有限公司',
-          content: '天星教育是一家致力于教育图书出版及提供教育信息服务的文化教育机构，自1998年成立以来，已发展成为河南民营书业的旗舰品牌。公司坐落于历史文化源远流长的中原大地，秉承着中原儿女自强不息、上下求索的民族精神，积极投身于文化产业发展的大潮中，为了民族教育的振兴和发展，贡献着自己的智慧和热忱。'
-        }]
-      }
     },
     methods: {
       initWOW (cls) {
@@ -245,32 +248,49 @@
 </script>
 <style lang="less">
   @import "../assets/css/base.less";
+  .page-index{}
 
   /*平台数据*/
   .platform-data {
     position: relative;
-    height: 110px;
-    margin-top: -170px;
+    height:150px;
+    margin-top:-55px;
+    .content{
+      height:100%;
+      background-color: #fff;
+      box-shadow: 0 10px 30px -8px fade(@primary-lighter, 20%);
+      align-content: center;
+    }
     .data-item {
+      height:100%;
+      box-sizing: border-box;
+      padding-top:28px;
       position: relative;
       float: left;
-      width: 220px;
+      width: 25%;
       text-align: center;
-      color: #556c82;
       .num {
-        font-size: 26px;
-        color: #fff;
+        font-size: 36px;
         margin-bottom: 5px;
+        sup{
+          top:-20px;
+          font-size:14px;
+          color:#aaa;
+        }
       }
       &:not(:first-child):after {
         position: absolute;
-        top: 25px;
+        top: 50%;
         left: 0;
         display: block;
         content: '';
         width: 1px;
-        height: 25px;
-        background-color: #34506a;
+        height: 26px;
+        margin-top:-13px;
+        background-color: #eee;
+      }
+      p{
+        color:#999;
       }
     }
   }
@@ -279,8 +299,13 @@
   .section-title {
     font-weight: 400;
     padding: 0 0 30px;
+    line-height:1.2;
     text-align: center;
-    font-size: 42px;
+    font-size: 24px;
+    small{
+      font-size:14px;
+      color:#ccc;
+    }
   }
 
   .index-section {

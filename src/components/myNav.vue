@@ -1,29 +1,107 @@
 <template>
   <div class="nav-menu" :class="{'nav-open':isShowNavMenu}">
     <span class="menu-toggle show-xs" @click="showNavMenu"><b></b></span>
-    <transition name="fadeInDown">
-      <ul class="nav" v-show="isShowNavMenu || !isMobile">
-        <router-link tag="li" to="/" v-if="$route.path !== '/'"><a>首页</a></router-link>
-        <router-link tag="li" to="/dynamic" active-class="current"><a>天星动态</a></router-link>
-        <router-link tag="li" to="/service" active-class="current"><a>集团业务</a></router-link>
-        <router-link tag="li" to="/about" active-class="current"><a>了解天星</a></router-link>
-        <!--<li class="web-ewm-item cur-def hide-xs" @mouseenter="mouseoverEwm" @mouseleave="mouseoutEwm">-->
+    <keep-alive>
+      <transition name="fadeIn-up">
+        <ul class="nav" v-show="isShowNavMenu || !isMobile">
+          <router-link tag="li" to="/" v-if="$route.path !== '/'"><a>首页</a></router-link>
+          <li v-for="(item,index) in navList"
+              @mouseenter="navItemVisible = index"
+              @mouseleave="navItemVisible = false">
+            <router-link :to="item.to">{{item.name}} <i class="iconfont tx-icon-down"></i></router-link>
+            <transition name="fadeIn-up">
+              <div class="nav-item-menu" v-if="item.children && navItemVisible === index">
+                <router-link v-for="(subItem,index) in item.children"
+                             :to="subItem.to"
+                             :key="index">{{subItem.name}}
+                </router-link>
+              </div>
+            </transition>
+          </li>
+          <!--<li class="web-ewm-item cur-def hide-xs" @mouseenter="mouseoverEwm" @mouseleave="mouseoutEwm">-->
           <!--<a>手机访问</a>-->
           <!--<transition name="fadeIn-up">-->
-            <!--<div class="web-ewm-content" v-if="isShowEwm">-->
-              <!--<img src="../assets/img/ewm.png">-->
-              <!--<p>请使用微信扫描二维码</p>-->
-            <!--</div>-->
+          <!--<div class="web-ewm-content" v-if="isShowEwm">-->
+          <!--<img src="../assets/img/ewm.png">-->
+          <!--<p>请使用微信扫描二维码</p>-->
+          <!--</div>-->
           <!--</transition>-->
-        <!--</li>-->
-      </ul>
-    </transition>
+          <!--</li>-->
+        </ul>
+      </transition>
+    </keep-alive>
+
   </div>
 </template>
 <script type="text/ecmascript-6">
   export default {
     data () {
       return {
+        navList: [
+          {
+            name: '天星动态',
+            to: '#',
+            children: [
+              {
+                name: '集团新闻',
+                to: '/dynamic/9'
+              },
+              {
+                name: '行业新闻',
+                to: '/dynamic/10'
+              },
+              {
+                name: '员工活动',
+                to: '/dynamic/11'
+              }
+            ]
+          },
+          {
+            name: '集团业务',
+            to: '#',
+            children: [
+              {
+                name: '教育出版',
+                to: '/service/jiaoyu'
+              },
+              {
+                name: '综合出版',
+                to: '/service/zonghe'
+              },
+              {
+                name: '数字出版',
+                to: '/service/shuzi'
+              }
+            ]
+          },
+          {
+            name: '了解天星',
+            to: '#',
+            children: [
+              {
+                name: '集团简介',
+                to: '/about/jianjie'
+              },
+              {
+                name: '发展历程',
+                to: '/about/licheng'
+              },
+              {
+                name: '天星文化',
+                to: '/about/wenhua'
+              },
+              {
+                name: '荣誉资质',
+                to: '/about/zizhi'
+              },
+              {
+                name: '联系我们',
+                to: '/about/lianxi'
+              }
+            ]
+          }
+        ],
+        navItemVisible: false,
         isShowEwm: false,
         isShowNavMenu: false
       }
@@ -34,6 +112,12 @@
       }
     },
     methods: {
+      navItemMouseenter (item) {
+        this.navItemVisible = item
+      },
+      navItemMouseleave (hide) {
+        this.navItemVisible = hide
+      },
       mouseoverEwm () {
         this.isShowEwm = true
       },
@@ -60,79 +144,71 @@
     }
     .nav {
       li {
+        position: relative;
         box-sizing: border-box;
-        font-size: 16px;
+        font-size: 14px;
         display: inline-block;
-        padding: 0 6px;
+        padding: 20px 6px;
         margin: 0 14px;
         height: 80px;
-        line-height: 80px;
-        transition: border .3s;
+        line-height: 40px;
         &:last-child {
           margin-right: 0;
         }
-        a {
-          display: block;
-          color: #999;
-          transition: color .3s;
+        .iconfont {
+          font-size: 14px;
         }
-        &.current, &:hover {
-          border-bottom: 4px solid @primary;
-          a {
+        & > a {
+          position: relative;
+          display: block;
+          transition: color .3s;
+          &:after {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            content: '';
+            display: block;
+            background-color: @primary;
+            height: 2px;
+            width: 0;
+            transition: width 0.2s;
+          }
+        }
+        &.active, &:hover {
+          & > a {
             color: @primary;
+            &:after {
+              width: 100%;
+            }
           }
         }
         &.web-ewm-item {
+          z-index: 100;
           &:hover {
             border-bottom: none;
           }
         }
-      }
-    }
-  }
-  .nav-menu {
-    float: right;
-    .menu-toggle{
-      position: absolute;
-      right:14px;
-      top:15px;
-      b,&:after,&:before{
-        display: block;
-        width:22px;
-        height:2px;
-        background-color: rgba(255,255,255,.3);
-        border-radius: 2px;
-      }
-      &:after,&:before{
-        content:'';
-      }
-      b,&:after{
-        margin-top:6px;
-      }
-    }
-  }
-
-  .index-header {
-    .header {
-      position: relative;
-      z-index: 10;
-      .logo {
-        background: url(../assets/img/logo-1.png) 50% 50% no-repeat;
-      }
-      .nav {
-        li {
+        .nav-item-menu {
+          position: absolute;
+          top: 70px;
+          padding-top: 10px;
+          left: 50%;
+          z-index: 100;
+          margin-left: -80px;
+          width: 160px;
+          background-color: #fff;
+          box-shadow: 0 3px 18px -2px rgba(0, 0, 0, 0.2);
           a {
-            color: #b7c0c9;
-          }
-          &.current, &:hover {
-            border-bottom: 4px solid #fff;
-            a {
-              color: #fff;
-            }
-          }
-          &.web-ewm-item {
+            display: block;
+            line-height: 40px;
+            color: #999;
+            text-align: center;
+            transition: all 0.3s;
+            background-color: #fff;
+            border-bottom: 1px solid #eee;
             &:hover {
-              border-bottom: none;
+              color: #333;
+              background-color: #f5f5f5;
             }
           }
         }
@@ -140,12 +216,26 @@
     }
   }
 
-  .page-header {
-    border-bottom: 1px solid #e8ecef;
-  }
-
-  .slider-wrap {
-    top: -80px;
+  .nav-menu {
+    float: right;
+    .menu-toggle {
+      position: absolute;
+      right: 14px;
+      top: 15px;
+      b, &:after, &:before {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background-color: rgba(255, 255, 255, .3);
+        border-radius: 2px;
+      }
+      &:after, &:before {
+        content: '';
+      }
+      b, &:after {
+        margin-top: 6px;
+      }
+    }
   }
 
   // 二维码
@@ -201,41 +291,41 @@
       .logo {
         width: 100px;
         height: 48px;
-        background-size:contain;
+        background-size: contain;
       }
       .nav-menu {
-        .menu-toggle{
-          b,&:after,&:before{
-            background-color: rgba(255,255,255,.3);
+        .menu-toggle {
+          b, &:after, &:before {
+            background-color: rgba(255, 255, 255, .3);
           }
         }
       }
-      .nav{
-        float:none;
+      .nav {
+        float: none;
         position: absolute;
-        top:48px;
-        left:0;
-        right:0;
-        padding:10px 0;
+        top: 48px;
+        left: 0;
+        right: 0;
+        padding: 10px 0;
         background-color: #103356;
-        border-top:1px solid rgba(255,255,255,0.05);
-        box-shadow:0 4px 10px rgba(0,0,0,.1);
-        li{
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, .1);
+        li {
           display: block;
-          height:50px;
-          line-height:50px;
-          padding:0;
-          margin:0;
-          border-top:1px solid rgba(255,255,255,.02);
-          a{
-            padding:0 20px;
+          height: 50px;
+          line-height: 50px;
+          padding: 0;
+          margin: 0;
+          border-top: 1px solid rgba(255, 255, 255, .02);
+          a {
+            padding: 0 20px;
           }
           &.current, &:hover {
             border-bottom: none !important;
-            background-color: rgba(255,255,255,.1);
+            background-color: rgba(255, 255, 255, .1);
           }
           &:not(:visited):first-child {
-            border-top:none;
+            border-top: none;
           }
         }
       }
@@ -243,47 +333,47 @@
 
     .nav-menu {
       float: right;
-      .menu-toggle{
+      .menu-toggle {
         position: absolute;
-        right:14px;
-        top:15px;
-        b,&:after,&:before{
+        right: 14px;
+        top: 15px;
+        b, &:after, &:before {
           display: block;
-          width:22px;
-          height:2px;
-          background-color: rgba(255,255,255,.3);
+          width: 22px;
+          height: 2px;
+          background-color: rgba(255, 255, 255, .3);
           border-radius: 2px;
         }
-        &:after,&:before{
-          content:'';
+        &:after, &:before {
+          content: '';
           transition: transform 0.3s;
         }
-        &:before{
+        &:before {
           transform-origin: 0 4px;
         }
-        &:after{
+        &:after {
           transform-origin: 12px -3px;
         }
-        b{
+        b {
           transform-origin: 0 0;
-          transition: transform 0.3s,opacity 0.3s;
+          transition: transform 0.3s, opacity 0.3s;
         }
-        b,&:after{
-          margin-top:6px;
+        b, &:after {
+          margin-top: 6px;
         }
       }
-      &.nav-open{
-        .menu-toggle{
-          &:after{
+      &.nav-open {
+        .menu-toggle {
+          &:after {
             transform: rotate(135deg);
           }
-          &:before{
+          &:before {
             transform: rotate(45deg);
           }
 
-          b{
+          b {
             transform: rotate(90deg);
-            opacity:0;
+            opacity: 0;
           }
         }
       }
@@ -292,17 +382,17 @@
     .page-header {
       border-bottom: 1px solid #e8ecef;
       .nav-menu {
-        .menu-toggle{
-          b,&:after,&:before{
+        .menu-toggle {
+          b, &:after, &:before {
             background-color: #484aa2;
           }
         }
       }
       .nav {
         background-color: #fff;
-        border-top:1px solid #eee;
-        li{
-          border-top:1px solid #f7f7f7;
+        border-top: 1px solid #eee;
+        li {
+          border-top: 1px solid #f7f7f7;
         }
       }
     }

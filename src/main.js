@@ -1,6 +1,7 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
+import jQuery from 'jquery'
 import App from './App'
 import router from './router'
 import './assets/css/base.less'
@@ -22,10 +23,9 @@ Vue.use(MetaInfo)
 // common components
 Vue.component(PageHeader.name, PageHeader)
 Vue.component(PageFooter.name, PageFooter)
-
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
-
+window.$ = jQuery
 window.tesoon = new Vue({
   el: '#app',
   router,

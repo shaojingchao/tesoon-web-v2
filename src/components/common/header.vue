@@ -1,6 +1,6 @@
 <template>
-  <header class="page-header header clearfix">
-    <div class="content wow fadeInUp" data-wow-delay="0.2s">
+  <header class="page-header header wow fadeInDown clearfix" data-wow-duration="0.5s" data-wow-delay="0.1s">
+    <div class="content">
       <router-link class="logo fl cur-poi" title="首页" tag="div" to="/"></router-link>
       <MyNav/>
     </div>

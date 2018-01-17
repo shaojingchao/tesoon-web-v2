@@ -21,6 +21,7 @@ Vue.use(Router)
 
 const router = new Router({
   mode: 'hash',
+  linkActiveClass: 'active',
   // 仅在 mode history 可用
   scrollBehavior (to, from, savedPosition) {
     if (to.hash) {
