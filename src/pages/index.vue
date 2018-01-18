@@ -3,7 +3,7 @@
     <page-header/>
     <Slider class="slider-wrap" :bannerPics="bannerPics" :style="{height:'600px'}" :time="4"/>
     <div class="platform-data">
-      <div class="content clearfix" >
+      <div class="content clearfix">
         <div class="data-item wow fadeInUp" data-wow-duration="0.6s" data-wow-delay="0.3s">
           <div class="num hide-xs">5000<sup>+</sup></div>
           <p>5000余位特优级教师加盟</p>
@@ -23,93 +23,114 @@
       </div>
     </div>
 
+    <!--天星动态-->
     <div class="index-section bg-white wow fadeInUp" data-wow-offset="100">
-      <h1 class="section-title">天星动态<br><small>STAR EDUCATION</small></h1>
-      <div class="content">
-        <ul class="dynamic-show clearfix" v-if="dynamicList.length>0">
-          <router-link
-            class="fl news-wow fadeInUp"
-            :data-wow-delay="(index*0.15)+'s'"
-            tag="li"
-            v-for='(item,index) in dynamicList'
-            key="item.id"
-            :to="{path:'/dynamic/0/'+item.id}">
-            <a class="ds-list-item" :title="item.title">
+      <h1 class="section-title">天星动态<br>
+        <small>STAR EDUCATION</small>
+      </h1>
+
+      <div class="content dynamic-content clearfix">
+
+        <div class="clearfix" v-if="dynamicList.length > 0">
+          <div class="dynamic-focus news-wow fadeInUp">
+            <router-link class="ds-list-item"
+                         :title="dynamicList[0].title"
+                         :to="{path:'/dynamic/0/'+dynamicList[0].id}">
               <div class="ds-list-item-img">
-                <img :src="baseUrl + item.thumb">
+                <img :src="baseUrl + dynamicList[0].thumb">
               </div>
-              <h3 :title="item.title">{{item.title}}</h3>
-              <div class="text-muted f16 clearfix">
-                <span class="fl">{{item.add_time}}</span>
-                <!--<span class="fr">{{item.dept}}</span>-->
+              <div class="ds-list-item-text" :title="dynamicList[0].title">
+                <div class="item-time" :title="dynamicList[0].add_time">
+                  <b class="year">{{dynamicList[0].add_time.substr(0,4)}}</b>
+                  <span class="date">{{dynamicList[0].add_time.substr(5)}}</span>
+                </div>
+                <h3 class="elli">{{dynamicList[0].title}}</h3>
+                <p class="elli item-desc">{{dynamicList[0].mydesc}}</p>
               </div>
-            </a>
-          </router-link>
-        </ul>
-        <div class="tc text-muted f16" v-else>暂无内容</div>
+            </router-link>
+          </div>
+
+          <ul class="dynamic-show">
+            <router-link
+              class="news-wow dynamic-item-hover fadeInUp"
+              :data-wow-delay="(index*0.15)+'s'"
+              tag="li"
+              v-for='(item,index) in dynamicList.slice(1,5)'
+              key="item.id"
+              :to="{path:'/dynamic/0/'+item.id}">
+              <a class="ds-list-item-text" :title="item.title">
+                <div class="item-time" :title="item.add_time">
+                  <b class="year">{{item.add_time.substr(0,4)}}</b>
+                  <span class="date">{{item.add_time.substr(5)}}</span>
+                </div>
+                <h3 class="elli">{{item.title}}</h3>
+                <p class="elli item-desc">{{item.mydesc}}</p>
+              </a>
+            </router-link>
+          </ul>
+        </div>
+        <div class="tc text-muted f16 p20" v-else>暂无内容</div>
       </div>
-      <div class="tr content f16 pr30 mt20" v-if="dynamicList.length>0">
-        <router-link class="text-muted" to="/dynamic">查看更多 >></router-link>
+      <div class="content tc pt30 mt30 pb30" v-if="dynamicList.length>0">
+        <router-link class="known-more-btn btn" to="/dynamic">更多</router-link>
       </div>
     </div>
 
     <!--教育出版-->
     <div class="index-section index-section-gray wow fadeInUp" data-wow-offset="200">
-      <h1 class="section-title">教育出版<br><small>EDUCATION PUBLISHING</small></h1>
-      <div class="content">
-        <p class="section-text">
-          天星教育以独到、敏锐的市场眼光，独辟蹊径地首创MOOK教辅理念，开中国教辅杂志化先河，实现了图书优势和杂志优势的完美结合，出版的《金考卷》《试题调研》等系列图书，将全国示范名校优质备考资源传递给万千学子，一时畅销大江南北。</p>
-        <div class="section-img">
-          <img src="../assets/img/index/jiaoyu_pic.png">
-        </div>
-        <div class="sub-img tc">
-          <div class="clearfix dib">
-            <img src="../assets/img/index/jiaoyu_icon.png">
+      <h1 class="section-title">教育出版<br>
+        <small>EDUCATION PUBLISHING</small>
+      </h1>
+      <div class="content jiaoyu-list">
+        <div class="jiaoyu-item"
+             v-for="(item, index) in jiaoyuList">
+          <div class="item-body"
+               :style="{'background-image':'url('+item.img+')', 'background-position': item.bgPosition}">
+            <h3>{{item.title}}</h3>
+            <p>{{item.subTitle}}</p>
+            <a :href="item.to" class="link-btn iconfont tx-icon-right1"></a>
           </div>
         </div>
-        <div class="tc mt10">
-          <router-link to="/service/jiaoyu" class="f16 text-muted">详细了解 ></router-link>
-        </div>
+      </div>
+      <div class="content tc pt30 mt30 pb30">
+        <router-link class="known-more-btn btn" to="/dynamic">更多</router-link>
       </div>
     </div>
 
     <!--综合出版-->
     <div class="index-section bg-white wow fadeInUp" data-wow-offset="200">
-      <h1 class="section-title">综合出版<br><small>COMPREHENSIVE PUBLICATION</small></h1>
-      <div class="content">
-        <p class="section-text">
-          天星教育打造的疯狂系列期刊群已成为青少年阅读拓展领军品牌，秉承激情专注之精神，怀抱出类拔萃之信念，长期执着于读写研究。彰显时代特征，吻合中、高考精神，全方位提升青少年人文素养及读写能力。使青少年在阅读中生发智慧，奠定内涵，在潜移默化中完善人格，提升能力，走向成功！</p>
-        <div class="section-img">
-          <img src="../assets/img/index/zonghe_pic.png">
-        </div>
-        <div class="sub-img tc">
-          <div class="clearfix dib">
-            <img src="../assets/img/index/zonghe_icon.png">
+      <h1 class="section-title">综合出版<br>
+        <small>COMPREHENSIVE PUBLICATION</small>
+      </h1>
+      <div class="content zonghe-list">
+        <div class="zonghe-item"
+             v-for="(item, index) in zongheList">
+          <div class="item-body">
+            <div class="item-bg"
+                 :style="{'background-image':'url('+item.img+')', 'background-position': item.bgPosition}"></div>
+            <a :href="item.to" class="link-btn iconfont tx-icon-right1"></a>
+            <h3>{{item.title}}</h3>
+            <p>{{item.subTitle}}</p>
           </div>
         </div>
-        <div class="tc mt10">
-          <router-link to="/service/zonghe" class="f16 text-muted">详细了解 ></router-link>
-        </div>
+      </div>
+      <div class="content tc pt30 mt30 pb30">
+        <router-link class="known-more-btn btn" to="/dynamic">更多</router-link>
       </div>
     </div>
 
     <!--数字出版-->
     <div class="index-section index-section-gray wow fadeInUp" data-wow-offset="200">
-      <h1 class="section-title">数字出版<br><small>DIGITAL PUBLISHING</small></h1>
+      <h1 class="section-title">数字出版<br>
+        <small>DIGITAL PUBLISHING</small>
+      </h1>
       <div class="content">
-        <p class="section-text">
-          全国首家微学习出版云平台，我们提供基于自主产权的云编辑系统，诚邀全国4000余名师协同在线开发丰富的微学习卡、微试题贴、微学杂志和微学习书， 并致力于为k-12各阶段学习者提供权威学习解决方案。</p>
-        <div class="sub-img tc">
-          <div class="clearfix dib">
-            <img src="../assets/img/index/shuzi_icon.png">
-          </div>
-        </div>
-        <div class="tc mt30">
-          <router-link to="/service/shuzi" class="f16 text-muted">详细了解 ></router-link>
-        </div>
         <div class="section-img pt30 mt10" style="margin-bottom:0;padding-bottom:0;">
           <img src="../assets/img/index/shuzi_pic.png">
         </div>
+      </div>
+      <div class="content tc pt30 mt30 pb30">
+        <router-link class="known-more-btn btn" to="/dynamic">更多</router-link>
       </div>
     </div>
 
@@ -152,7 +173,8 @@
   import Slider from '../components/common/slider'
   import WOW from '../bower_components/wow/dist/wow.min'
   import CF from '../api/index'
-  export default{
+
+  export default {
     name: 'PageIndex',
     components: {
       MyHeader,
@@ -173,9 +195,61 @@
         bannerPics: [
           require('../assets/img/banner/idx_banner_1.png')
         ],
-        clientSize: {
-        },
+        clientSize: {},
         dynamicList: [],
+        jiaoyuList: [
+          {
+            title: '试题调研',
+            subTitle: '天星教育精品图书',
+            img: require('../assets/img/index/jycb_item1.png'),
+            bgPosition: '85% 30px',
+            to: ''
+          },
+          {
+            title: '试题调研',
+            subTitle: '天星教育精品图书',
+            img: require('../assets/img/index/jycb_item2.png'),
+            bgPosition: '100% 30px',
+            to: ''
+          },
+          {
+            title: '试题调研',
+            subTitle: '天星教育精品图书',
+            img: require('../assets/img/index/jycb_item3.png'),
+            bgPosition: '96% 30px',
+            to: ''
+          },
+          {
+            title: '试题调研',
+            subTitle: '天星教育精品图书',
+            img: require('../assets/img/index/jycb_item4.png'),
+            bgPosition: '90% 30px',
+            to: ''
+          }
+        ],
+        zongheList: [
+          {
+            title: '疯狂阅读',
+            subTitle: '专注所以疯狂，激情成就梦想',
+            img: require('../assets/img/index/zhcb_item1.png'),
+            bgPosition: '50% 45px',
+            to: ''
+          },
+          {
+            title: '疯狂作文',
+            subTitle: '高考满分作文系列为高中必备工具书',
+            img: require('../assets/img/index/zhcb_item2.png'),
+            bgPosition: '50% 45px',
+            to: ''
+          },
+          {
+            title: '天星童书',
+            subTitle: '天星童书系列专为0-12岁幼儿设计',
+            img: require('../assets/img/index/zhcb_item3.png'),
+            bgPosition: '50% 45px',
+            to: ''
+          }
+        ],
         pingJiaList: [
           {
             text: '挺推荐这本的——高考复习讲义适合对象:高三一轮复习的孩子（细心的同学可以观察第一张照片里的第一排，这个系列的物理数学英语化学生物我都做过）这本书真的超级厚，但是也特别适合高三第一轮复习。重难点有划分，也有往年高考原题和创新题。',
@@ -248,23 +322,150 @@
 </script>
 <style lang="less">
   @import "../assets/css/base.less";
-  .page-index{}
+
+  .page-index {
+    /*更多按钮*/
+    .known-more-btn {
+      border-color: #e1e1e1;
+      background-color: #fff;
+      color: #9fa5ac;
+      font-size: 14px;
+      padding: 0.55em 4.5em;
+      transition: all 0.3s;
+      transform: translateZ(0);
+      &:hover {
+        color: #fff;
+        border-color: @primary;
+        background-color: @primary;
+        box-shadow: 0 6px 32px fade(#1C3C68, 20%);
+        transform: translateY(-2px);
+      }
+    }
+
+    /*教育出版*/
+    .jiaoyu-list {
+      display: flex;
+      flex-wrap: wrap;
+      .jiaoyu-item {
+        padding: 10px;
+        box-sizing: border-box;
+        width: 50%;
+        .item-body {
+          background-color: #fff;
+          background-position: 90% 45px;
+          background-repeat: no-repeat;
+          padding: 30px;
+          transform: translateZ(0);
+          transition: box-shadow .3s, background-position .3s;
+          h3 {
+            font-size: 16px;
+          }
+          p {
+            color: #9fa5ac;
+            margin-top: 6px;
+          }
+          .link-btn {
+            display: block;
+            margin-top: 25px;
+            width: 34px;
+            height: 34px;
+            line-height: 34px;
+            text-align: center;
+            border-radius: 50%;
+            border: 1px solid #eee;
+            color: #ddd;
+            font-size: 18px;
+            transition: all .3s;
+          }
+          &:hover {
+            background-position-y: 15px !important;
+            box-shadow: 0 5px 20px -5px rgba(0, 0, 0, .2);
+            .link-btn {
+              background-color: @primary;
+              border-color: @primary;
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+
+    /*综合出版*/
+    .zonghe-list {
+      display: flex;
+      .zonghe-item {
+        width: 33.333%;
+        padding: 10px;
+        .item-body {
+          position: relative;
+          padding:0 30px 26px;
+          transform: translateZ(0);
+          transition: box-shadow .3s;
+          .item-bg{
+            height:230px;
+            margin:0 -30px;
+            background-color: #f3f5f7;
+            background-position: 50% 40px;
+            background-repeat: no-repeat;
+            transform: translateZ(0);
+            transition: background-position .3s;
+          }
+          h3 {
+            margin-top: 25px;
+            font-size: 16px;
+          }
+          p {
+            color: #9fa5ac;
+            margin-top: 6px;
+          }
+          .link-btn {
+            position: absolute;
+            bottom:36px;
+            right:30px;
+            display: block;
+            margin-top: 25px;
+            width: 34px;
+            height: 34px;
+            line-height: 34px;
+            text-align: center;
+            border-radius: 50%;
+            border: 1px solid #eee;
+            color: #ddd;
+            font-size: 18px;
+            transition: all .3s;
+          }
+          &:hover {
+            .item-bg{
+              background-position-y: 20px !important;
+            }
+            box-shadow: 0 5px 20px -5px rgba(0, 0, 0, .2);
+            .link-btn {
+              background-color: @primary;
+              border-color: @primary;
+              color: #fff;
+              transform: translateY(-48px);
+            }
+          }
+        }
+      }
+    }
+  }
 
   /*平台数据*/
   .platform-data {
     position: relative;
-    height:150px;
-    margin-top:-55px;
-    .content{
-      height:100%;
+    height: 150px;
+    margin-top: -55px;
+    .content {
+      height: 100%;
       background-color: #fff;
       box-shadow: 0 10px 30px -8px fade(@primary-lighter, 20%);
       align-content: center;
     }
     .data-item {
-      height:100%;
+      height: 100%;
       box-sizing: border-box;
-      padding-top:28px;
+      padding-top: 28px;
       position: relative;
       float: left;
       width: 25%;
@@ -272,10 +473,10 @@
       .num {
         font-size: 36px;
         margin-bottom: 5px;
-        sup{
-          top:-20px;
-          font-size:14px;
-          color:#aaa;
+        sup {
+          top: -20px;
+          font-size: 14px;
+          color: #aaa;
         }
       }
       &:not(:first-child):after {
@@ -286,11 +487,11 @@
         content: '';
         width: 1px;
         height: 26px;
-        margin-top:-13px;
+        margin-top: -13px;
         background-color: #eee;
       }
-      p{
-        color:#999;
+      p {
+        color: #999;
       }
     }
   }
@@ -299,12 +500,12 @@
   .section-title {
     font-weight: 400;
     padding: 0 0 30px;
-    line-height:1.2;
+    line-height: 1.2;
     text-align: center;
     font-size: 24px;
-    small{
-      font-size:14px;
-      color:#ccc;
+    small {
+      font-size: 14px;
+      color: #ccc;
     }
   }
 
@@ -319,68 +520,166 @@
       text-align: center;
       padding-bottom: 30px;
     }
-    .section-img{
+    .section-img {
       margin-top: 20px;
       margin-bottom: 30px;
       padding-top: 30px;
       padding-bottom: 30px;
     }
-    .section-img,.sub-img{
+    .section-img, .sub-img {
       text-align: center;
       img {
-        max-width:90%;
+        max-width: 90%;
       }
     }
   }
 
   .index-section-gray {
-    background-color: #f7f7f7;
+    background-color: #f3f5f7;
   }
 
-  .dynamic-show {
-    li {
-      width: 345px;
-      height: 265px;
+  /*天星动态*/
+  .dynamic-content {
+    .dynamic-focus {
+      float: left;
+      width: 610px;
+      border-radius: 3px;
+      background-color: #f3f5f7;
+
+      .ds-list-item {
+        display: block;
+        width: 570px;
+        padding: 20px;
+        transition: box-shadow 0.3s;
+        &:hover {
+          box-shadow: 0 5px 30px -4px rgba(0, 0, 0, .2);
+        }
+      }
+      .ds-list-item-text {
+        padding-top: 18px;
+        padding-left: 65px;
+        .item-time {
+          /*padding-left: 0;*/
+        }
+      }
+      .ds-list-item-img {
+        width: 570px;
+        position: relative;
+        height: 279px;
+        overflow: hidden;
+        img {
+          max-width: 100%;
+          display: block;
+        }
+        /*&:after {*/
+        /*content: '';*/
+        /*display: block;*/
+        /*background-color: rgba(0, 51, 202, 0.12);*/
+        /*position: absolute;*/
+        /*top: 0;*/
+        /*left: 0;*/
+        /*right: 0;*/
+        /*bottom: 0;*/
+        /*z-index: 10;*/
+        /*}*/
+      }
+    }
+    .dynamic-item-hover {
+      position: relative;
+      overflow: hidden;
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background-color: @primary;
+        transform: translate3d(0, 110%, 0);
+        opacity: 0.9;
+        transition: transform 0.4s cubic-bezier(.19, 1, .22, 1);
+      }
+      &:hover {
+        &:after {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        }
+      }
+    }
+
+    .dynamic-show {
+      float: right;
+      width: 464px;
+      li {
+        box-sizing: border-box;
+        margin-bottom: 15px;
+        border-radius: 3px;
+        transition: all 0.2s;
+        background-color: #f3f5f7;
+      }
+      .ds-list-item-text {
+        position: relative;
+        z-index: 1;
+        padding: 20px 20px 20px 85px;
+        &:hover {
+          p, h3 {
+            color: #fff;
+          }
+          .item-time {
+            b, span {
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+
+    .ds-list-item-text {
+      display: block;
       box-sizing: border-box;
-      border: 1px solid #eeeeee;
-      margin: 10px;
-      transition: all 0.2s;
+      padding-left: 85px;
       img {
         width: 100%;
       }
       h3 {
-        margin-top: 5px;
+        font-size: 14px;
+        color: #7b7b7b;
         font-weight: 400;
-        height: 2.6em;
+        height: 1.3em;
         line-height: 1.3;
-        margin-bottom: 5px;
+        margin-top: 1px;
+        margin-bottom: 8px;
         text-overflow-ellipsis: ellipsis;
         overflow: hidden;
+        transition: all 0.3s;
       }
-    }
-    .ds-list-item {
-      display: block;
-      height: 265px;
-      box-sizing: border-box;
-      padding: 20px 20px 0;
-    }
-    .ds-list-item-img{
-      position: relative;
-      height: 155px;
-      overflow: hidden;
-      img{
-        display: block;
+      .item-desc {
+        height: 1.3em;
+        line-height: 1.3;
+        font-size: 13px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        color: #afafaf;
+        transition: all 0.3s;
       }
-      &:after{
-        content:'';
-        display: block;
-        background-color: rgba(0,51,202,0.12);
-        position: absolute;
-        top:0;
-        left:0;
-        right:0;
-        bottom:0;
-        z-index:10;
+      .item-time {
+        text-align: center;
+        float: left;
+        margin-left: -85px;
+        padding-left: 20px;
+        .year {
+          font-size: 16px;
+          color: #999999;
+          display: block;
+          border-bottom: 1px solid #eee;
+        }
+        .date {
+          color: #999999;
+          font-size: 13px;
+          display: block;
+        }
       }
     }
   }
@@ -404,7 +703,7 @@
       width: 50px;
       line-height: @height;
       text-align: center;
-      font-family:Simsun, sans-serif;
+      font-family: Simsun, sans-serif;
       cursor: pointer;
       .disabled {
         opacity: 0.5;
@@ -478,38 +777,41 @@
       }
     }
   }
-  @media screen and (max-width:767px) {
+
+  @media screen and (max-width: 767px) {
 
     /*平台数据*/
-    .platform-data{
+    .platform-data {
       text-align: center;
-      .data-item{
+      .data-item {
         float: none;
-        width:147px;
-        font-size:13px;
-        line-height:2.1em;
+        width: 147px;
+        font-size: 13px;
+        line-height: 2.1em;
         display: inline-block;
-        &:not(:first-child):after{
+        &:not(:first-child):after {
           display: none;
         }
       }
     }
-    .index-section{
-      padding:30px 0;
-      .section-img{
+
+    .index-section {
+      padding: 30px 0;
+      .section-img {
         margin-top: 0;
         margin-bottom: 10px;
         padding-top: 0;
         padding-bottom: 10px;
       }
-      .section-img,.sub-img{
+      .section-img, .sub-img {
         text-align: center;
         img {
-          max-width:90%;
+          max-width: 90%;
         }
       }
     }
-    .section-title{
+
+    .section-title {
       font-size: 36px;
       padding: 0 0 20px;
     }
@@ -523,7 +825,7 @@
         margin: 10px 0 0;
         transition: none;
         &:hover {
-          box-shadow:none;
+          box-shadow: none;
         }
         h3 {
           margin-top: 8px;
@@ -561,7 +863,7 @@
           .text {
             width: 60vw;
             height: @height;
-            line-height:1.5;
+            line-height: 1.5;
             font-size: 12px;
           }
         }
@@ -579,22 +881,22 @@
         position: relative;
         .map-tips {
           position: absolute;
-          top:162px;
-          left:50%;
-          margin-left:-120px;
-          font-size:12px;
-          margin-top:0;
+          top: 162px;
+          left: 50%;
+          margin-left: -120px;
+          font-size: 12px;
+          margin-top: 0;
           width: 280px;
           height: 100px;
           box-sizing: border-box;
           padding: 10px 20px 10px 30px;
           background: url(../assets/img/index/map_tips.png) 0 0 no-repeat;
-          background-size:contain;
-          p{
-            font-size:14px;
-            margin:0 0 4px;
-            &:nth-child(2){
-              font-size:12px;
+          background-size: contain;
+          p {
+            font-size: 14px;
+            margin: 0 0 4px;
+            &:nth-child(2) {
+              font-size: 12px;
             }
           }
         }
