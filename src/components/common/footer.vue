@@ -4,13 +4,15 @@
       <div class="footer-nav">
         <div class="hide-xs">
           <div class="fn-item">
-            <div class="item-tit">天星动态</div>
+            <div class="item-tit">天星动态<br>
+              <small>STAR DYNAMIC</small>
+            </div>
             <ul>
               <li>
                 <router-link to="/dynamic/0">全部新闻</router-link>
               </li>
               <li>
-                <router-link to="/dynamic/9">集团新闻</router-link>
+                <router-link to="/dynamic/9">公司新闻</router-link>
               </li>
               <li>
                 <router-link to="/dynamic/10">行业新闻</router-link>
@@ -21,7 +23,9 @@
             </ul>
           </div>
           <div class="fn-item">
-            <div class="item-tit">集团业务</div>
+            <div class="item-tit">集团业务<br>
+              <small>BUSINESS</small>
+            </div>
             <ul>
               <li>
                 <router-link to="/service/jiaoyu">教育出版</router-link>
@@ -35,13 +39,15 @@
             </ul>
           </div>
           <div class="fn-item">
-            <div class="item-tit">了解天星</div>
+            <div class="item-tit">了解天星<br>
+              <small>KNOW THE STARS</small>
+            </div>
             <ul>
               <li>
-                <router-link to="/about/jianjie">集团简介</router-link>
+                <router-link to="/about/jianjie">公司简介</router-link>
               </li>
               <li>
-                <router-link to="/about/licheng">发展历程</router-link>
+                <router-link to="/about/licheng">天星大事记</router-link>
               </li>
               <li>
                 <router-link to="/about/wenhua">天星文化</router-link>
@@ -50,12 +56,14 @@
                 <router-link to="/about/zizhi">荣誉资质</router-link>
               </li>
               <li>
-                <router-link to="/about/lianxi">联系我们</router-link>
+                <router-link to="/about/lianxi">加入我们</router-link>
               </li>
             </ul>
           </div>
           <div class="fn-item">
-            <div class="item-tit">联系我们</div>
+            <div class="item-tit">联系我们<br>
+              <small>CONTACT US</small>
+            </div>
             <ul>
               <li>地址：郑州市高新区翠竹街1号企业
                 <br>
@@ -73,7 +81,7 @@
         </div>
       </div>
       <div class="ft-copyright">
-        Copyright © 河南天星教育传媒股份有限公司 豫B2-20130009 1998-2017 All Rights Reserved.
+        Copyright © 2002 - 2018 Tesoon. All Rights Reserved  河南天星教育科技有限公司版权所有 (豫)字第00187号
       </div>
     </div>
   </footer>
@@ -89,6 +97,7 @@
 
   @import "../../assets/css/_mixins-wln.less";
 
+  @color: rgba(255, 255, 255, .6);
   .footer-wrap {
     background-color: #232c39;
     .footer {
@@ -102,14 +111,13 @@
     margin-top: 20px;
     text-align: center;
     font-size: 12px;
-    color: #6d8092;
-    border-top: 1px solid rgba(255, 255, 255, .3);
+    color: @color;
+    border-top: 1px solid rgba(255, 255, 255, .1);
   }
 
-  @color: #b7c0c9;
   .footer-nav {
+    padding-top: 60px;
     overflow: hidden;
-    padding-top: 50px;
     .fn-item {
       width: 225px;
       float: left;
@@ -117,6 +125,11 @@
         color: #fff;
         font-size: 16px;
         margin-bottom: 10px;
+        small{
+          display: block;
+          font-size:12px;
+          color:rgba(255, 255, 255, .3);
+        }
       }
       li {
         padding: 2px 0;
