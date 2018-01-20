@@ -1,0 +1,231 @@
+<template>
+  <div class="about-view">
+    <div class="about-detail content">
+      <h2 class="main-title">荣誉证书</h2>
+      <div class="detail-context">
+        <div class="pro-list-section">
+          <div class="pro-cover">
+            <b>2017</b><small>年</small>
+          </div>
+          <div class="pro-desc">
+            <p>中学教材学习讲义获奖<br>
+              天星公司向枣庄市第八中学捐赠图书<br>
+              民营书业创新人物</p>
+            <div class="rongyu-pic">
+              <div class="img-item">
+                <img src="../assets/img/zizhi/07.jpg" alt="">
+              </div>
+              <div class="img-item">
+                <img src="../assets/img/zizhi/08.jpg" alt="">
+              </div>
+              <div class="img-item">
+                <img src="../assets/img/zizhi/09.jpg" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pro-list-section">
+          <div class="pro-cover">
+            <b>2016</b><small>年</small>
+          </div>
+          <div class="pro-desc">
+            <p>中学教材学习讲义获奖<br>
+              天星公司向枣庄市第八中学捐赠图书<br>
+              民营书业创新人物</p>
+            <div class="rongyu-pic">
+              <div class="img-item">
+                <img src="../assets/img/zizhi/01.jpg" alt="">
+              </div>
+              <div class="img-item">
+                <img src="../assets/img/zizhi/02.jpg" alt="">
+              </div>
+              <div class="img-item">
+                <img src="../assets/img/zizhi/03.jpg" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pro-list-section">
+          <div class="pro-cover">
+            <b>2015</b><small>年</small>
+          </div>
+          <div class="pro-desc">
+            <p>中学教材学习讲义获奖<br>
+              天星公司向枣庄市第八中学捐赠图书<br>
+              民营书业创新人物</p>
+            <div class="rongyu-pic">
+              <div class="img-item">
+                <img src="../assets/img/zizhi/04.jpg" alt="">
+              </div>
+              <div class="img-item">
+                <img src="../assets/img/zizhi/05.jpg" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <h2 class="main-title">资质证书</h2>
+      <div class="detail-context">
+        <div class="pro-list-section">
+          <div class="pro-cover">
+            <b>2017</b><small>年</small>
+          </div>
+          <div class="pro-desc">
+            <p>中学教材学习讲义获奖<br>
+              天星公司向枣庄市第八中学捐赠图书<br>
+              民营书业创新人物</p>
+            <div class="rongyu-pic">
+              <div class="img-item">
+                <img src="../assets/img/zizhi/07.jpg" alt="">
+              </div>
+              <div class="img-item">
+                <img src="../assets/img/zizhi/08.jpg" alt="">
+              </div>
+              <div class="img-item">
+                <img src="../assets/img/zizhi/09.jpg" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pro-list-section">
+          <div class="pro-cover">
+            <b>2016</b><small>年</small>
+          </div>
+          <div class="pro-desc">
+            <p>中学教材学习讲义获奖<br>
+              天星公司向枣庄市第八中学捐赠图书<br>
+              民营书业创新人物</p>
+            <div class="rongyu-pic">
+              <div class="img-item">
+                <img src="../assets/img/zizhi/01.jpg" alt="">
+              </div>
+              <div class="img-item">
+                <img src="../assets/img/zizhi/02.jpg" alt="">
+              </div>
+              <div class="img-item">
+                <img src="../assets/img/zizhi/03.jpg" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pro-list-section">
+          <div class="pro-cover">
+            <b>2015</b><small>年</small>
+          </div>
+          <div class="pro-desc">
+            <p>中学教材学习讲义获奖<br>
+              天星公司向枣庄市第八中学捐赠图书<br>
+              民营书业创新人物</p>
+            <div class="rongyu-pic">
+              <div class="img-item">
+                <img src="../assets/img/zizhi/04.jpg" alt="">
+              </div>
+              <div class="img-item">
+                <img src="../assets/img/zizhi/05.jpg" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</template>
+<script type="text/ecmascript-6">
+  export default {
+    metaInfo () {
+      return {
+        title: '天星教育 - 教育出版'
+      }
+    }
+  }
+</script>
+<style lang="less" scoped>
+  @import "../assets/css/_mixins-wln.less";
+
+  .about-view{
+
+  }
+
+  .about-detail {
+    padding-top: 30px;
+    padding-bottom: 180px;
+    .main-title {
+      font-size: 24px;
+      line-height: 1.5;
+      margin-bottom: 30px;
+      &:after {
+        content: '';
+        float: left;
+        display: inline-block;
+        margin-top: 0.25em;
+        border-left: 4px solid @primary;
+        margin-right: 0.3em;
+        height: 1em;
+      }
+    }
+
+    .pro-list-section {
+      display: flex;
+      padding-top: 30px;
+      padding-bottom: 40px;
+      border-top: 1px solid #eee;
+      overflow: hidden;
+      .pro-cover {
+        flex:0 0 auto;
+        padding-right: 10px;
+        float: left;
+        width: 128px;
+        line-height:1.4;
+        color:#7f7f7f;
+        font-size:26px;
+        small{
+          font-size:14px;
+          margin-left: 4px;
+          vertical-align: 2px;
+        }
+        &:after{
+          content:'';
+          float: right;
+          margin-top:0.76em;
+          display: inline-block;
+          height:0;
+          border-bottom:1px solid #888;
+          width:30px;
+        }
+      }
+      .pro-desc {
+        padding-top: 7px;
+        line-height:2;
+        p {
+          font-size: 14px;
+          color: #7b7b7b;
+        }
+        .rongyu-pic{
+          display: flex;
+          padding-top: 10px;
+          .img-item{
+            max-width:168px;
+            max-height:168px;
+            margin-right:10px;
+            img{
+              display: block;
+              max-height: 100%;
+              max-width: 100%;
+              margin:0 auto;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+  }
+</style>

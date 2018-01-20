@@ -12,7 +12,7 @@
 </template>
 <script type="javascript">
   import Slider from './common/slider.vue'
-  import MyNav from '../components/myNav.vue'
+  import MyNav from './header-nav.vue'
   import $ from 'jquery'
   export default {
     data () {

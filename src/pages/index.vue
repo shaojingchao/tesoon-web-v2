@@ -254,6 +254,7 @@
       return {
         baseUrl: CF.baseUrl,
         bannerPics: [
+          require('../assets/img/banner/banner1.png'),
           require('../assets/img/banner/idx_banner_1.png')
         ],
         clientSize: {},
@@ -323,28 +324,28 @@
             id: 1,
             userName: '刘**2',
             jobTitle: '',
-            photo: require('../assets/img/index/u-pic.png'),
+            photo: require('../assets/img/index/user_photo1.png'),
             comment: '已经第6次买了吧，从第一辑开始就一直在买 给亲弟弟买的，希望能对他学习有帮助。距离高考没有多少时间了，祝他可以保持成绩，高考超常发挥！'
           },
           {
             id: 2,
             userName: '水**阿',
             jobTitle: '特级教师',
-            photo: require('../assets/img/index/u-pic.png'),
+            photo: require('../assets/img/index/user_photo2.png'),
             comment: '从第一辑买到现在，虽然有点小贵但是觉得还是有价值的。里面内容很详细，有一些小的知识点，总体来说还是可以的。支持天星教育！'
           },
           {
             id: 3,
             userName: 'p**你',
             jobTitle: '',
-            photo: require('../assets/img/index/u-pic.png'),
+            photo: require('../assets/img/index/user_photo3.png'),
             comment: '超级棒，有很大的帮助，找到了580分瓶颈的突破口，而且性价比很高，复习效率明显提高，方法也更科学高效。'
           },
           {
             id: 4,
             userName: '刘**2-1',
             jobTitle: '',
-            photo: require('../assets/img/index/u-pic.png'),
+            photo: require('../assets/img/index/user_photo2.png'),
             comment: '已经第6次买了吧，从第一辑开始就一直在买 给亲弟弟买的，希望能对他学习有帮助。距离高考没有多少时间了，祝他可以保持成绩，高考超常发挥！'
           },
           {
@@ -358,30 +359,13 @@
             id: 6,
             userName: 'p**你-1',
             jobTitle: '',
-            photo: require('../assets/img/index/u-pic.png'),
+            photo: require('../assets/img/index/u-pic_1.jpg'),
             comment: '超级棒，有很大的帮助，找到了580分瓶颈的突破口，而且性价比很高，复习效率明显提高，方法也更科学高效。'
           }
         ],
         ratingCurrentPage: 1,
         ratingTimer: null,
         ratingDuration: 6, // 秒
-        pingJiaList: [
-          {
-            text: '挺推荐这本的——高考复习讲义适合对象:高三一轮复习的孩子（细心的同学可以观察第一张照片里的第一排，这个系列的物理数学英语化学生物我都做过）这本书真的超级厚，但是也特别适合高三第一轮复习。重难点有划分，也有往年高考原题和创新题。',
-            user: '特级教师 - 王老师',
-            photo: require('../assets/img/index/u-pic_1.jpg')
-          },
-          {
-            text: '挺推荐这本的——高考复习讲义适合对象:高三一轮复习的孩子（细心的同学可以观察第一张照片里的第一排，这个系列的物理数学英语化学生物我都做过）这本书真的超级厚，但是也特别适合高三第一轮复习。重难点有划分，也有往年高考原题和创新题。',
-            user: '特级教师 - 王老师',
-            photo: require('../assets/img/index/u-pic_1.jpg')
-          },
-          {
-            text: '挺推荐这本的——高考复习讲义适合对象:高三一轮复习的孩子（细心的同学可以观察第一张照片里的第一排，这个系列的物理数学英语化学生物我都做过）这本书真的超级厚，但是也特别适合高三第一轮复习。重难点有划分，也有往年高考原题和创新题。',
-            user: '特级教师 - 王老师',
-            photo: require('../assets/img/index/u-pic_1.jpg')
-          }
-        ],
         pjCurrentIndex: 0
       }
     },
@@ -1045,7 +1029,7 @@
   .platform-data {
     position: relative;
     height: 150px;
-    margin-top: -55px;
+    margin-top: -44px;
     .content {
       height: 100%;
       background-color: #fff;
@@ -1055,7 +1039,7 @@
     .data-item {
       height: 100%;
       box-sizing: border-box;
-      padding-top: 28px;
+      padding-top: 34px;
       position: relative;
       float: left;
       width: 25%;

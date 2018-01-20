@@ -6,15 +6,20 @@ const Index = () => import('../pages/index.vue')
 const Dynamic = () => import('../pages/dynamic.vue')
 const DynamicDetail = () => import('../pages/dynamicDetail.vue')
 const Service = () => import('../pages/service.vue')
-const ServiceTab1 = () => import('../components/serviceTab1.vue')
-const ServiceTab2 = () => import('../components/serviceTab2.vue')
-const ServiceTab3 = () => import('../components/serviceTab3.vue')
+const ServiceEdu = () => import('../pages/service-jycb.vue')
+const ServiceZonghe = () => import('../pages/service-zhcb.vue')
+const ServiceShuzi = () => import('../pages/service-szcb.vue')
+const ServiceShuziTxjyw = () => import('../pages/service-szcb-txjyw.vue')
+const ServiceShuziWxxq = () => import('../pages/service-szcb-wxxq.vue')
+const ServiceShuziWln = () => import('../pages/service-szcb-wln.vue')
 const About = () => import('../pages/about.vue')
-const aboutJianjie = () => import('../components/aboutJianjie.vue')
-const aboutLicheng = () => import('../components/aboutLicheng.vue')
-const aboutWenhua = () => import('../components/aboutWenhua.vue')
-const aboutZizhi = () => import('../components/aboutZizhi.vue')
-const aboutLianxi = () => import('../components/aboutLianxi.vue')
+const aboutJianjie = () => import('../pages/about-gsjj.vue')
+const aboutHistory = () => import('../pages/about-txdsj.vue')
+const aboutWenhua = () => import('../pages/about-txwh.vue')
+const aboutZizhi = () => import('../pages/about-ryzz.vue')
+const aboutGongyi = () => import('../pages/about-shgy.vue')
+const aboutJob = () => import('../pages/about-job.vue')
+// const aboutLianxi = () => import('../components/aboutLianxi.vue')
 const ErrorPage = () => import('../pages/404.vue')
 
 Vue.use(Router)
@@ -22,9 +27,11 @@ Vue.use(Router)
 const router = new Router({
   mode: 'hash',
   linkActiveClass: 'active',
+  linkExactActiveClass: 'exact-active',
   // 仅在 mode history 可用
   scrollBehavior (to, from, savedPosition) {
-    if (to.hash) {
+    console.log(to.hash)
+    if (to.hash && to.hash !== '#') {
       return {
         selector: to.hash
       }
@@ -37,7 +44,7 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Index',
+      name: 'index',
       meta: {
         title: '天星教育官网 - 首页'
       },
@@ -51,55 +58,83 @@ const router = new Router({
       }
     },
     {
+      name: 'dynamic',
       path: '/dynamic/:tid',
-      name: 'Dynamic',
       component: Dynamic,
       meta: {
         title: '天星教育官网 - 天星动态'
-      },
-      children: [
-        {
-          path: ':id',
-          name: 'newsDetail',
-          component: DynamicDetail,
-          meta: {
-            title: '天星教育官网 - 天星动态'
-          }
-        }
-      ]
+      }
     },
     {
+      name: 'dynamicdetail',
+      path: '/dynamic/:tid/:id',
+      component: DynamicDetail,
+      meta: {
+        title: '天星教育官网 - 天星动态'
+      }
+    },
+    {
+      name: 'service',
       path: '/service',
-      name: 'Service',
+      redirect: '/service/jycb',
       component: Service,
-      redirect: '/service/jiaoyu',
       children: [
         {
-          path: 'jiaoyu',
-          component: ServiceTab1,
+          name: 'jiaoyuchuban',
+          path: 'jycb',
+          component: ServiceEdu,
           meta: {
             title: '天星教育官网 - 教育出版'
           }
         },
         {
-          path: 'zonghe',
-          component: ServiceTab2,
+          name: 'zonghechuban',
+          path: 'zhcb',
+          component: ServiceZonghe,
           meta: {
             title: '天星教育官网 - 综合出版'
           }
         },
         {
-          path: 'shuzi',
-          component: ServiceTab3,
+          name: 'shuzichuban',
+          path: 'szcb',
+          redirect: {name: 'serviceshuzichuban_tianxingjiaoyu'},
+          component: ServiceShuzi,
           meta: {
             title: '天星教育官网 - 数字出版'
-          }
+          },
+          children: [
+            {
+              name: 'serviceshuzichuban_tianxingjiaoyu',
+              path: 'txjy',
+              component: ServiceShuziTxjyw,
+              meta: {
+                title: '天星教育官网 - 数字出版 - 天星教育网'
+              }
+            },
+            {
+              name: 'serviceshuzichuban_weixuexiquan',
+              path: 'wxxq',
+              component: ServiceShuziWxxq,
+              meta: {
+                title: '天星教育官网 - 数字出版 - 微学习圈'
+              }
+            },
+            {
+              name: 'serviceshuzichuban_weilainao',
+              path: 'wln100',
+              component: ServiceShuziWln,
+              meta: {
+                title: '天星教育官网 - 数字出版 - 未来脑'
+              }
+            }
+          ]
         }
       ]
     },
     {
       path: '/about',
-      name: 'About',
+      name: 'about',
       component: About,
       redirect: '/about/jianjie',
       meta: {
@@ -115,13 +150,14 @@ const router = new Router({
         },
         {
           path: 'licheng',
-          component: aboutLicheng,
+          component: aboutHistory,
           meta: {
-            title: '天星教育官网 - 发展历程'
+            title: '天星教育官网 - 天星大事记'
           }
         },
         {
-          path: 'wenhua',
+          name: 'abouttianxingwenhua',
+          path: 'txwh',
           component: aboutWenhua,
           meta: {
             title: '天星教育官网 - 天星文化'
@@ -135,10 +171,19 @@ const router = new Router({
           }
         },
         {
-          path: 'lianxi',
-          component: aboutLianxi,
+          name: 'aboutshehuigonyi',
+          path: 'shgy',
+          component: aboutGongyi,
           meta: {
-            title: '天星教育官网 - 联系我们'
+            title: '天星教育官网 - 社会公益'
+          }
+        },
+        {
+          name: 'aboutjob',
+          path: 'job',
+          component: aboutJob,
+          meta: {
+            title: '天星教育官网 - 社会公益'
           }
         }
       ]

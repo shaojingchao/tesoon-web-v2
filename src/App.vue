@@ -8,7 +8,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import SideBar from './components/common/sideBar.vue'
+  import SideBar from './components/common/side-bar.vue'
   export default {
     name: 'app',
     data () {

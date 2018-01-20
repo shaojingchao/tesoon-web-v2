@@ -10,6 +10,7 @@ import './bower_components/animate.css/animate.min.css'
 import Loading from './components/common/loading'
 import PageHeader from './components/common/header'
 import PageFooter from './components/common/footer'
+import PageBanner from './components/common/page-banner'
 
 import MetaInfo from 'vue-meta-info'
 // require('es6-promise').polyfill()
@@ -23,6 +24,7 @@ Vue.use(MetaInfo)
 // common components
 Vue.component(PageHeader.name, PageHeader)
 Vue.component(PageFooter.name, PageFooter)
+Vue.component(PageBanner.name, PageBanner)
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
 window.$ = jQuery

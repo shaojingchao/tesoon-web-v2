@@ -7,7 +7,7 @@
   </header>
 </template>
 <script type="text/ecmascript-6">
-  import MyNav from '../myNav.vue'
+  import MyNav from '../header-nav.vue'
 
   export default {
     name: 'PageHeader',
@@ -16,3 +16,10 @@
     }
   }
 </script>
+<style lang="less">
+  .page-header{
+    position: relative;
+    z-index:100;
+    box-shadow:0 4px 15px -2px rgba(0,0,0,.2);
+  }
+</style>

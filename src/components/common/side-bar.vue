@@ -98,12 +98,13 @@
   import MyEvent from '../../util/event'
 
   export default {
+    name: 'SideBar',
     data () {
       return {
         offsetHeight: 800,
         isShowSideBar: false,
         scrollTop: null,
-        duration: 600,
+        duration: 1200,
         pageIsBackingTop: false
       }
     },
@@ -129,7 +130,7 @@
         const _step = () => {
           _time += 1000 / 60
           let _top = this.getScrollTop()
-          let process = Tween.Cubic.easeOut(_time, start, end - start, duration)
+          let process = Tween.Cubic.easeInOut(_time, start, end - start, duration)
           if (_top > 0) {
             _handler = window.requestAnimationFrame(_step)
             window.scrollTo(0, process)

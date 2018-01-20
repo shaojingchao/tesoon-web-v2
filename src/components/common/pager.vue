@@ -1,59 +1,63 @@
 <template>
   <div class="un-select pagination-wrap">
     <ul class="pagination">
-      <li :class="{disabled:currentPage === 1}" @click="goToPage(1)"><a title="首页" class="side-btn" href="javascript:"><<</a></li>
-      <li :class="{disabled:currentPage === 1}" @click="prevPage()"><a title="上一页" class="side-btn" href="javascript:"><</a></li>
+      <li :class="{disabled:currentPage === 1}" @click="goToPage(1)"><a title="首页" class="side-btn" href="javascript:"><<</a>
+      </li>
+      <li :class="{disabled:currentPage === 1}" @click="prevPage()"><a title="上一页" class="side-btn"
+                                                                       href="javascript:"><</a></li>
       <li v-for="item in pages"
           :class="{active:currentPage === item}"
           @click="goToPage(item)"><a href="javascript:">{{item}}</a></li>
-      <li :class="{disabled:currentPage === pageNum}" @click="nextPage()"><a title="下一页" class="side-btn" href="javascript:">></a></li>
-      <li :class="{disabled:currentPage === pageNum}" @click="goToPage(pageNum)"><a title="尾页" class="side-btn" href="javascript:">>></a></li>
+      <li :class="{disabled:currentPage === pageNum}" @click="nextPage()"><a title="下一页" class="side-btn"
+                                                                             href="javascript:">></a></li>
+      <li :class="{disabled:currentPage === pageNum}" @click="goToPage(pageNum)"><a title="尾页" class="side-btn"
+                                                                                    href="javascript:">>></a></li>
     </ul>
   </div>
 </template>
-<style lang="less">
-  .pagination-wrap{
-    /*text-align: right;*/
-  }
-  .pagination {
-    position: relative;
-    display: inline-block;
-  }
+<style lang="less" scoped>
+  @import "../../assets/css/_mixins-wln.less";
 
-  .pagination li {
-    display: inline-block;
-    text-align: center;
-  }
-
-  .pagination li a {
-    font-size:12px;
-    width:26px;
-    height:26px;
-    line-height:26px;
-    border-radius:2px;
-    /*padding: .5rem 1rem;*/
-    display: inline-block;
-    border: 1px solid #fff;
-    background: #fff;
-    color: #333;
-    &.side-btn{
-      /*width:4em;*/
-      font-size:1.15em;
-      line-height:26px;
-      font-weight:600;
-      font-family:Simsun, sans-serif;
+  .pagination-wrap {
+    .pagination {
+      position: relative;
+      display: inline-block;
     }
-  }
 
-  .pagination li a:hover {
-    background-color: #eee;
-    border-color:#eee;
-  }
+    .pagination li {
+      display: inline-block;
+      text-align: center;
+    }
 
-  .pagination li.active a {
-    background-color: #0E90D2;
-    border-color:#0E90D2;
-    color: #fff;
+    .pagination li a {
+      font-size: 12px;
+      width: 26px;
+      height: 26px;
+      line-height: 26px;
+      border-radius: 1px;
+      display: inline-block;
+      border: 1px solid #fff;
+      background: #fff;
+      color: #333;
+      &.side-btn {
+        /*width:4em;*/
+        font-size: 1.15em;
+        line-height: 26px;
+        font-weight: 600;
+        font-family: Simsun, sans-serif;
+      }
+    }
+
+    .pagination li a:hover {
+      background-color: #eee;
+      border-color: #eee;
+    }
+
+    .pagination li.active a {
+      background-color: @primary;
+      border-color: @primary;
+      color: #fff;
+    }
   }
 
 

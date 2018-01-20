@@ -18,15 +18,6 @@
               </div>
             </transition>
           </li>
-          <!--<li class="web-ewm-item cur-def hide-xs" @mouseenter="mouseoverEwm" @mouseleave="mouseoutEwm">-->
-          <!--<a>手机访问</a>-->
-          <!--<transition name="fadeIn-up">-->
-          <!--<div class="web-ewm-content" v-if="isShowEwm">-->
-          <!--<img src="../assets/img/ewm.png">-->
-          <!--<p>请使用微信扫描二维码</p>-->
-          <!--</div>-->
-          <!--</transition>-->
-          <!--</li>-->
         </ul>
       </transition>
     </keep-alive>
@@ -40,43 +31,43 @@
         navList: [
           {
             name: '天星动态',
-            to: '#',
+            to: {name: 'dynamic'},
             children: [
               {
                 name: '集团新闻',
-                to: '/dynamic/9'
+                to: {name: 'dynamic', params: {tid: 9}}
               },
               {
                 name: '行业新闻',
-                to: '/dynamic/10'
+                to: {name: 'dynamic', params: {tid: 10}}
               },
               {
                 name: '员工活动',
-                to: '/dynamic/11'
+                to: {name: 'dynamic', params: {tid: 11}}
               }
             ]
           },
           {
             name: '集团业务',
-            to: '#',
+            to: {name: 'service'},
             children: [
               {
                 name: '教育出版',
-                to: '/service/jiaoyu'
+                to: {name: 'jiaoyuchuban'}
               },
               {
                 name: '综合出版',
-                to: '/service/zonghe'
+                to: {name: 'zonghechuban'}
               },
               {
                 name: '数字出版',
-                to: '/service/shuzi'
+                to: {name: 'shuzichuban'}
               }
             ]
           },
           {
             name: '了解天星',
-            to: '#',
+            to: {name: 'about'},
             children: [
               {
                 name: '集团简介',
@@ -88,15 +79,19 @@
               },
               {
                 name: '天星文化',
-                to: '/about/wenhua'
+                to: {name: 'abouttianxingwenhua'}
               },
               {
                 name: '荣誉资质',
                 to: '/about/zizhi'
               },
               {
-                name: '联系我们',
-                to: '/about/lianxi'
+                name: '社会公益',
+                to: {name: 'aboutshehuigonyi'}
+              },
+              {
+                name: '加入我们',
+                to: {name: 'aboutjob'}
               }
             ]
           }
@@ -174,7 +169,7 @@
             transition: width 0.2s;
           }
         }
-        &.active, &:hover {
+        &:hover {
           & > a {
             color: @primary;
             &:after {
