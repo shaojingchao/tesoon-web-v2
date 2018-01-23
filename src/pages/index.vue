@@ -1,63 +1,63 @@
 <template>
   <div class="page-index">
     <page-header/>
-    <Slider class="slider-wrap" :bannerPics="bannerPics" :style="{height:'600px'}" :time="4"/>
-    <div class="platform-data">
+    <Slider class="slider-wrap" :bannerPics="bannerPics" :style="{height:!isMobile ? '600px' : 'auto'}" :duration="6"/>
+    <div id="platform-data">
       <div class="content clearfix">
         <div class="data-item wow fadeInUp" data-wow-duration="0.6s" data-wow-delay="0.3s">
-          <div class="num hide-xs">5000<sup>+</sup></div>
+          <div class="num">5000<sup>+</sup></div>
           <p>5000余位特优级教师加盟</p>
         </div>
         <div class="data-item wow fadeInUp" data-wow-duration="0.7s" data-wow-delay="0.5s">
-          <div class="num hide-xs">7</div>
+          <div class="num">7</div>
           <p>开创7大教辅品牌</p>
         </div>
         <div class="data-item wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.7s">
-          <div class="num hide-xs">26</div>
+          <div class="num">26</div>
           <p>推出26大畅销系列</p>
         </div>
         <div class="data-item wow fadeInUp" data-wow-duration="0.9s" data-wow-delay="0.9s">
-          <div class="num hide-xs">2000<sup>+</sup></div>
+          <div class="num">2000<sup>+</sup></div>
           <p>单品研发2000余册</p>
         </div>
       </div>
     </div>
 
     <!--天星动态-->
-    <div class="index-section bg-white wow fadeInUp" data-wow-offset="100">
+    <div id="dynamic" class="index-section bg-white wow fadeInUp" data-wow-offset="100">
       <h1 class="section-title">天星动态<br>
         <small>STAR EDUCATION</small>
       </h1>
 
-      <div class="content dynamic-content clearfix">
+      <div class="content clearfix">
 
         <div class="clearfix" v-if="dynamicList.length > 0">
           <div class="dynamic-focus news-wow fadeInUp">
             <router-link class="ds-list-item"
-                         :title="dynamicList[0].title"
-                         :to="{path:'/dynamic/0/'+dynamicList[0].id}">
+                         :title="focusDynamic.title"
+                         :to="{name:'dynamicdetail',params:{tid: focusDynamic.tid, id: focusDynamic.id}}">
               <div class="ds-list-item-img">
-                <img :src="baseUrl + dynamicList[0].thumb">
+                <img v-lazy="baseUrl + focusDynamic.thumb">
               </div>
-              <div class="ds-list-item-text" :title="dynamicList[0].title">
-                <div class="item-time" :title="dynamicList[0].add_time">
-                  <b class="year">{{dynamicList[0].add_time.substr(0,4)}}</b>
-                  <span class="date">{{dynamicList[0].add_time.substr(5)}}</span>
+              <div class="ds-list-item-text" :title="focusDynamic.title">
+                <div class="item-time" :title="focusDynamic.add_time">
+                  <b class="year">{{focusDynamic.add_time.substr(0,4)}}</b>
+                  <span class="date">{{focusDynamic.add_time.substr(5)}}</span>
                 </div>
-                <h3 class="elli">{{dynamicList[0].title}}</h3>
-                <p class="elli item-desc">{{dynamicList[0].mydesc}}</p>
+                <h3 class="elli">{{focusDynamic.title}}</h3>
+                <p class="elli item-desc">{{focusDynamic.mydesc}}</p>
               </div>
             </router-link>
           </div>
 
           <ul class="dynamic-show">
             <router-link
+              v-for='(item,index) in dynamicList.slice(1,5)'
+              tag="li"
               class="news-wow dynamic-item-hover fadeInUp"
               :data-wow-delay="(index*0.15)+'s'"
-              tag="li"
-              v-for='(item,index) in dynamicList.slice(1,5)'
               key="item.id"
-              :to="{path:'/dynamic/0/'+item.id}">
+              :to="{name:'dynamicdetail',params:{tid: item.tid, id: item.id}}">
               <a class="ds-list-item-text" :title="item.title">
                 <div class="item-time" :title="item.add_time">
                   <b class="year">{{item.add_time.substr(0,4)}}</b>
@@ -69,53 +69,59 @@
             </router-link>
           </ul>
         </div>
-        <div class="tc text-muted f16 p20" v-else>暂无内容</div>
+        <part-loading v-else/>
       </div>
-      <div class="content tc pt30 mt30 pb30" v-if="dynamicList.length>0">
-        <router-link class="known-more-btn btn" to="/dynamic">更多</router-link>
+      <div class="known-more-wrap" v-if="dynamicList.length>0">
+        <router-link class="known-more-btn btn" :to="{name: 'dynamic'}">更多</router-link>
       </div>
     </div>
 
     <!--教育出版-->
-    <div class="index-section index-section-gray wow fadeInUp" data-wow-offset="200">
+    <div id="jiaoyu" class="index-section index-section-gray wow fadeInUp" data-wow-offset="200">
       <h1 class="section-title">教育出版<br>
         <small>EDUCATION PUBLISHING</small>
       </h1>
       <div class="content jiaoyu-list">
-        <div class="jiaoyu-item"
-             v-for="(item, index) in jiaoyuList">
+        <router-link class="jiaoyu-item"
+                     v-for="(item, index) in jiaoyuList"
+                     :key="index"
+                     :to="item.to">
           <div class="item-body"
-               :style="{'background-image':'url('+item.img+')', 'background-position': item.bgPosition}">
+               v-lazy:background-image="item.img"
+               :style="{'background-position': item.bgPosition}">
             <h3>{{item.title}}</h3>
             <p>{{item.subTitle}}</p>
-            <a :href="item.to" class="link-btn iconfont tx-icon-right1"></a>
+            <span class="link-btn iconfont tx-icon-right1"></span>
           </div>
-        </div>
+        </router-link>
       </div>
-      <div class="content tc pt30 mt30 pb30">
-        <router-link class="known-more-btn btn" to="/dynamic">更多</router-link>
+      <div class="known-more-wrap">
+        <router-link class="known-more-btn btn" :to="{name: 'jiaoyuchuban'}">更多</router-link>
       </div>
     </div>
 
     <!--综合出版-->
-    <div class="index-section bg-white wow fadeInUp" data-wow-offset="200">
+    <div id="zonghe" class="index-section bg-white wow fadeInUp" data-wow-offset="200">
       <h1 class="section-title">综合出版<br>
         <small>COMPREHENSIVE PUBLICATION</small>
       </h1>
       <div class="content zonghe-list">
-        <div class="zonghe-item"
-             v-for="(item, index) in zongheList">
+        <router-link class="zonghe-item"
+                     v-for="(item, index) in zongheList"
+                     :key="index"
+                     :to="item.to">
           <div class="item-body">
             <div class="item-bg"
-                 :style="{'background-image':'url('+item.img+')', 'background-position': item.bgPosition}"></div>
-            <a :href="item.to" class="link-btn iconfont tx-icon-right1"></a>
+                 v-lazy:background-image="item.img"
+                 :style="{'background-position': item.bgPosition}"></div>
+            <span class="link-btn iconfont tx-icon-right1"></span>
             <h3>{{item.title}}</h3>
             <p>{{item.subTitle}}</p>
           </div>
-        </div>
+        </router-link>
       </div>
-      <div class="content tc pt30 mt30 pb30">
-        <router-link class="known-more-btn btn" to="/dynamic">更多</router-link>
+      <div class="known-more-wrap">
+        <router-link class="known-more-btn btn" :to="{name: 'zonghechuban'}">更多</router-link>
       </div>
     </div>
 
@@ -125,17 +131,18 @@
         <small>DIGITAL PUBLISHING</small>
       </h1>
       <div class="content website-list">
-        <div class="screen-shot"
-             :class="{'is-active': siteScreenshotActiveIndex === index}"
-             v-for="(site,index) in websiteList"
-             @mouseenter="siteScreenshotActive(index)"
-             @mouseleave="siteScreenshotActiveIndex = siteScreenshotDefIndex"
-             :key="index">
-          <img :src="site">
-        </div>
+        <router-link class="screen-shot"
+                     :class="{'is-active': siteScreenshotActiveIndex === index}"
+                     v-for="(site,index) in websiteList"
+                     :to="site.to"
+                     @mouseenter.native="siteScreenshotActive(index)"
+                     @mouseleave.native="siteScreenshotActiveIndex = siteScreenshotDefIndex"
+                     :key="index">
+          <img v-lazy="site.src">
+        </router-link>
       </div>
-      <div class="content tc pt30 mt30 pb30">
-        <router-link class="known-more-btn btn" to="/dynamic">更多</router-link>
+      <div class="known-more-wrap">
+        <router-link class="known-more-btn btn" :to="{name: 'shuzichuban'}">更多</router-link>
       </div>
     </div>
 
@@ -148,7 +155,9 @@
         <div class="context">
           天星教育是一家致力于教育图书出版及提供教育信息服务的文化教育机构，自1998年成立以来，已发展成为河南民营书业的旗舰品牌。公司坐落于历史文化源远流长的中原大地，秉承着中原儿女自强不息、上下求索的民族精神，积极投身于文化产业发展的大潮中，为了民族教育的振兴和发展，贡献着自己的智慧和热忱。
         </div>
-        <div class="tc mt30"><a href="" class="text-muted">更多</a></div>
+        <div class="tc mt30">
+          <router-link class="text-muted" :to="{name: 'aboutgongsijianjie'}">更多</router-link>
+        </div>
       </div>
       <div class="bg-content">
         <div class="content">
@@ -179,7 +188,8 @@
         <small>USER RATING</small>
       </h1>
       <div class="rating-list-wrap content">
-        <div :style="{transform: 'translateY('+(-313 * (ratingCurrentPage - 1))+'px)'}" class="rating-list">
+        <div :style="{transform: !isMobile ? 'translateY('+(-313 * (ratingCurrentPage - 1))+'px)' : ''}"
+             class="rating-list">
           <div class="rating-item rating-list-effect"
                v-on="{mouseenter: ratingMouseenter, mouseleave: ratingNextAutoPlay}"
                v-for="(item, index) in userRatingList"
@@ -192,12 +202,12 @@
                 <p>{{item.comment}}</p>
               </div>
               <div class="item-photo"
-                   :style="{'background-image':'url('+item.photo+')'}"></div>
+                   v-lazy:background-image="item.photo"></div>
             </div>
           </div>
         </div>
       </div>
-      <div class="slide-pointer">
+      <div class="slide-pointer" v-if="!isMobile">
         <span :class="{current: ratingCurrentPage === pointerItem}"
               v-for="(pointerItem,index) in Math.ceil(userRatingList.length / 3)"
               v-on="{mouseenter: ratingMouseenter, mouseleave: ratingNextAutoPlay}"
@@ -207,7 +217,7 @@
 
     <!--联系我们-->
 
-    <div id="contact" class="wow fadeInUp" data-wow-offset="200">
+    <div id="contact">
       <div class="content contact-content">
         <div class="position-tips" role="位置标记"></div>
         <div class="content address-info">
@@ -265,28 +275,28 @@
             subTitle: '天星教育精品图书',
             img: require('../assets/img/index/jycb_item1.png'),
             bgPosition: '85% 30px',
-            to: ''
+            to: {name: 'jiaoyuchuban', hash: '#stdy'}
           },
           {
-            title: '试题调研',
+            title: '金考卷',
             subTitle: '天星教育精品图书',
             img: require('../assets/img/index/jycb_item2.png'),
             bgPosition: '100% 30px',
-            to: ''
+            to: {name: 'jiaoyuchuban', hash: '#jkj'}
           },
           {
-            title: '试题调研',
+            title: '教材帮',
             subTitle: '天星教育精品图书',
             img: require('../assets/img/index/jycb_item3.png'),
             bgPosition: '96% 30px',
-            to: ''
+            to: {name: 'jiaoyuchuban', hash: '#jcb'}
           },
           {
-            title: '试题调研',
+            title: '一遍过',
             subTitle: '天星教育精品图书',
             img: require('../assets/img/index/jycb_item4.png'),
             bgPosition: '90% 30px',
-            to: ''
+            to: {name: 'jiaoyuchuban', hash: '#ybg'}
           }
         ],
         zongheList: [
@@ -295,27 +305,36 @@
             subTitle: '专注所以疯狂，激情成就梦想',
             img: require('../assets/img/index/zhcb_item1.png'),
             bgPosition: '50% 45px',
-            to: ''
+            to: {name: 'zonghechuban', hash: '#fkyd'}
           },
           {
             title: '疯狂作文',
             subTitle: '高考满分作文系列为高中必备工具书',
             img: require('../assets/img/index/zhcb_item2.png'),
             bgPosition: '50% 45px',
-            to: ''
+            to: {name: 'zonghechuban', hash: '#fkzw'}
           },
           {
             title: '天星童书',
             subTitle: '天星童书系列专为0-12岁幼儿设计',
             img: require('../assets/img/index/zhcb_item3.png'),
             bgPosition: '50% 45px',
-            to: ''
+            to: {name: 'zonghechuban', hash: '#qqjx'}
           }
         ],
         websiteList: [
-          require('../assets/img/index/szcb_item2.png'),
-          require('../assets/img/index/szcb_item2.png'),
-          require('../assets/img/index/szcb_item2.png')
+          {
+            src: require('../assets/img/index/szcb_item1.jpg'),
+            to: {name: 'shuzichuban_tianxingjiaoyu', query: {top: 1}}
+          },
+          {
+            src: require('../assets/img/index/szcb_item2.jpg'),
+            to: {name: 'shuzichuban_weixuexiquan', query: {top: 1}}
+          },
+          {
+            src: require('../assets/img/index/szcb_item3.jpg'),
+            to: {name: 'shuzichuban_weilainao', query: {top: 1}}
+          }
         ],
         siteScreenshotDefIndex: 1,
         siteScreenshotActiveIndex: 1,
@@ -331,7 +350,7 @@
             id: 2,
             userName: '水**阿',
             jobTitle: '特级教师',
-            photo: require('../assets/img/index/user_photo2.png'),
+            photo: require('../assets/img/index/user_photo2.jpg'),
             comment: '从第一辑买到现在，虽然有点小贵但是觉得还是有价值的。里面内容很详细，有一些小的知识点，总体来说还是可以的。支持天星教育！'
           },
           {
@@ -345,14 +364,14 @@
             id: 4,
             userName: '刘**2-1',
             jobTitle: '',
-            photo: require('../assets/img/index/user_photo2.png'),
+            photo: require('../assets/img/index/user_photo2.jpg'),
             comment: '已经第6次买了吧，从第一辑开始就一直在买 给亲弟弟买的，希望能对他学习有帮助。距离高考没有多少时间了，祝他可以保持成绩，高考超常发挥！'
           },
           {
             id: 5,
             userName: '水**阿-1',
             jobTitle: '特级教师',
-            photo: require('../assets/img/index/u-pic.png'),
+            photo: require('../assets/img/index/u-pic.jpg'),
             comment: '从第一辑买到现在，虽然有点小贵但是觉得还是有价值的。里面内容很详细，有一些小的知识点，总体来说还是可以的。支持天星教育！'
           },
           {
@@ -371,25 +390,26 @@
     },
     computed: {
       isMobile () {
-        return document.body.clientWidth <= 767
+        return this.$store.state.isMobile
       },
-      mobileWidth () {
-        return document.body.clientWidth
-      },
-      computedWidth () {
-        return this.isMobile ? this.mobileWidth * 0.78 : 1000
+      focusDynamic () {
+        if (this.dynamicList.length > 0) {
+          return this.dynamicList[0]
+        }
+        return false
       }
     },
     mounted () {
-      this.initWOW('wow').init()
+      this.$nextTick(() => {
+        this.initWOW('wow')
+      })
       this.$http.get(CF.getDynamicsList + '?pagesize=' + 6).then(res => {
-        console.log(res)
         if (!res.data.data) {
           return false
         }
         this.dynamicList = res.data.data
         this.$nextTick(() => {
-          this.initWOW('news-wow').init()
+          this.initWOW('news-wow')
         })
       })
       /* 用户评价 自动循环 */
@@ -402,20 +422,22 @@
           animateClass: 'animated',
           offset: 0,
           mobile: false,
-          live: true
-        })
+          live: false
+        }).init()
       },
       siteScreenshotActive (i) {
-        console.log('4232434')
+        if (this.isMobile) return false
         this.siteScreenshotActiveIndex = i
       },
       ratingNextPage (i) { /* 用户评价 */
         this.ratingCurrentPage = i
       },
       ratingMouseenter () {
+        if (this.isMobile) return false
         clearInterval(this.ratingTimer)
       },
       ratingNextAutoPlay () {
+        if (this.isMobile) return false
         clearInterval(this.ratingTimer)
         this.ratingTimer = setInterval(() => {
           if (this.ratingCurrentPage < Math.ceil(this.userRatingList.length / 3)) {
@@ -424,19 +446,6 @@
             this.ratingCurrentPage = 1
           }
         }, this.ratingDuration * 1000)
-      },
-      scrollPingJia (i) {
-        if (i < 0 || i > this.pingJiaList.length - 1) {
-          return false
-        } else {
-          this.pjCurrentIndex = i
-        }
-      },
-      scrollPingJiaRight () {
-        this.scrollPingJia(this.pjCurrentIndex + 1)
-      },
-      scrollPingJiaLeft () {
-        this.scrollPingJia(this.pjCurrentIndex - 1)
       }
     }
   }
@@ -447,7 +456,35 @@
   @effectFunc: cubic-bezier(0.19, 1, 0.22, 1);
 
   .page-index {
+    /*section*/
+    .section-title {
+      font-weight: 400;
+      padding: 0 0 30px;
+      line-height: 1.2;
+      text-align: center;
+      font-size: 24px;
+      small {
+        font-size: 14px;
+        color: #ccc;
+      }
+    }
+
+    .index-section {
+      padding: 60px 0;
+      background-color: #fff;
+    }
+
+    .index-section-gray {
+      background-color: #f3f5f7;
+    }
+
     /*更多按钮*/
+    .known-more-wrap {
+      padding: 40px;
+      margin: 0 auto;
+      text-align: center;
+      padding-bottom: 0;
+    }
     .known-more-btn {
       border-color: #e1e1e1;
       background-color: #fff;
@@ -461,163 +498,57 @@
         border-color: @primary;
         background-color: @primary;
         box-shadow: 0 6px 32px fade(#1C3C68, 20%);
-        transform: translateY(-2px);
       }
     }
+  }
 
-    /*教育出版*/
-    .jiaoyu-list {
-      display: flex;
-      flex-wrap: wrap;
-      .jiaoyu-item {
-        padding: 10px;
-        box-sizing: border-box;
-        width: 50%;
-        .item-body {
-          background-color: #fff;
-          background-position: 90% 45px;
-          background-repeat: no-repeat;
-          padding: 30px;
-          transform: translateZ(0);
-          transition: box-shadow .3s, background-position .3s;
-          h3 {
-            font-size: 16px;
-          }
-          p {
-            color: #9fa5ac;
-            margin-top: 6px;
-          }
-          .link-btn {
-            display: block;
-            margin-top: 25px;
-            width: 34px;
-            height: 34px;
-            line-height: 34px;
-            text-align: center;
-            border-radius: 50%;
-            border: 1px solid #eee;
-            color: #ddd;
-            font-size: 18px;
-            transition: all .3s;
-          }
-          &:hover {
-            background-position-y: 15px !important;
-            box-shadow: 0 5px 20px -5px rgba(0, 0, 0, .2);
-            .link-btn {
-              background-color: @primary;
-              border-color: @primary;
-              color: #fff;
-            }
-          }
+  /*平台数据*/
+  #platform-data {
+    position: relative;
+    height: 150px;
+    margin-top: -44px;
+    .content {
+      height: 100%;
+      background-color: #fff;
+      box-shadow: 0 10px 30px -8px fade(@primary-lighter, 20%);
+      align-content: center;
+    }
+    .data-item {
+      height: 100%;
+      box-sizing: border-box;
+      padding-top: 34px;
+      position: relative;
+      float: left;
+      width: 25%;
+      text-align: center;
+      .num {
+        font-size: 36px;
+        margin-bottom: 5px;
+        sup {
+          top: -20px;
+          font-size: 14px;
+          color: #aaa;
         }
       }
-    }
-
-    /*综合出版*/
-    .zonghe-list {
-      display: flex;
-      .zonghe-item {
-        width: 33.333%;
-        padding: 10px;
-        .item-body {
-          position: relative;
-          padding: 0 30px 26px;
-          transform: translateZ(0);
-          transition: box-shadow .3s;
-          .item-bg {
-            height: 230px;
-            margin: 0 -30px;
-            background-color: #f3f5f7;
-            background-position: 50% 40px;
-            background-repeat: no-repeat;
-            transform: translateZ(0);
-            transition: background-position .3s;
-          }
-          h3 {
-            margin-top: 25px;
-            font-size: 16px;
-          }
-          p {
-            color: #9fa5ac;
-            margin-top: 6px;
-          }
-          .link-btn {
-            position: absolute;
-            bottom: 36px;
-            right: 30px;
-            display: block;
-            margin-top: 25px;
-            width: 34px;
-            height: 34px;
-            line-height: 34px;
-            text-align: center;
-            border-radius: 50%;
-            border: 1px solid #eee;
-            color: #ddd;
-            font-size: 18px;
-            transition: all .3s;
-          }
-          &:hover {
-            .item-bg {
-              background-position-y: 20px !important;
-            }
-            box-shadow: 0 5px 20px -5px rgba(0, 0, 0, .2);
-            .link-btn {
-              background-color: @primary;
-              border-color: @primary;
-              color: #fff;
-              transform: translateY(-48px);
-            }
-          }
-        }
+      &:not(:first-child):after {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        display: block;
+        content: '';
+        width: 1px;
+        height: 26px;
+        margin-top: -13px;
+        background-color: #eee;
+      }
+      p {
+        color: #999;
       }
     }
-  }
-
-  /*section*/
-  .section-title {
-    font-weight: 400;
-    padding: 0 0 30px;
-    line-height: 1.2;
-    text-align: center;
-    font-size: 24px;
-    small {
-      font-size: 14px;
-      color: #ccc;
-    }
-  }
-
-  .index-section {
-    padding: 60px 0;
-    background-color: #fff;
-    .section-text {
-      width: 75%;
-      margin: 0 auto;
-      font-size: 16px;
-      color: #666;
-      text-align: center;
-      padding-bottom: 30px;
-    }
-    .section-img {
-      margin-top: 20px;
-      margin-bottom: 30px;
-      padding-top: 30px;
-      padding-bottom: 30px;
-    }
-    .section-img, .sub-img {
-      text-align: center;
-      img {
-        max-width: 90%;
-      }
-    }
-  }
-
-  .index-section-gray {
-    background-color: #f3f5f7;
   }
 
   /*天星动态*/
-  .dynamic-content {
+  #dynamic {
     .dynamic-focus {
       float: left;
       width: 610px;
@@ -651,6 +582,7 @@
         }
       }
     }
+
     .dynamic-item-hover {
       position: relative;
       overflow: hidden;
@@ -751,18 +683,133 @@
     }
   }
 
+  /*教育出版*/
+  #jiaoyu {
+    .jiaoyu-list {
+      display: flex;
+      flex-wrap: wrap;
+      .jiaoyu-item {
+        display: block;
+        padding: 10px;
+        box-sizing: border-box;
+        width: 50%;
+        .item-body {
+          background-color: #fff;
+          background-position: 90% 45px;
+          background-repeat: no-repeat;
+          padding: 30px;
+          transform: translateZ(0);
+          transition: box-shadow .3s, background-position .3s;
+          h3 {
+            font-size: 16px;
+          }
+          p {
+            color: #9fa5ac;
+            margin-top: 6px;
+          }
+          .link-btn {
+            display: block;
+            margin-top: 25px;
+            width: 34px;
+            height: 34px;
+            line-height: 34px;
+            text-align: center;
+            border-radius: 50%;
+            border: 1px solid #eee;
+            color: #ddd;
+            font-size: 18px;
+            transition: all .3s;
+          }
+          &:hover {
+            background-position-y: 15px !important;
+            box-shadow: 0 5px 20px -5px rgba(0, 0, 0, .2);
+            .link-btn {
+              background-color: @primary;
+              border-color: @primary;
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /*综合出版*/
+  #zonghe {
+    .zonghe-list {
+      display: flex;
+      .zonghe-item {
+        display: block;
+        width: 33.333%;
+        padding: 10px;
+        .item-body {
+          position: relative;
+          padding: 0 30px 26px;
+          transform: translateZ(0);
+          transition: box-shadow .3s;
+          .item-bg {
+            height: 230px;
+            margin: 0 -30px;
+            background-color: #f3f5f7;
+            background-position: 50% 40px;
+            background-repeat: no-repeat;
+            transform: translateZ(0);
+            transition: background-position .3s;
+          }
+          h3 {
+            margin-top: 25px;
+            font-size: 16px;
+          }
+          p {
+            color: #9fa5ac;
+            margin-top: 6px;
+          }
+          .link-btn {
+            position: absolute;
+            bottom: 36px;
+            right: 30px;
+            display: block;
+            margin-top: 25px;
+            width: 34px;
+            height: 34px;
+            line-height: 34px;
+            text-align: center;
+            border-radius: 50%;
+            border: 1px solid #eee;
+            color: #ddd;
+            font-size: 18px;
+            transition: all .3s;
+          }
+          &:hover {
+            .item-bg {
+              background-position-y: 20px !important;
+            }
+            box-shadow: 0 5px 20px -5px rgba(0, 0, 0, .2);
+            .link-btn {
+              background-color: @primary;
+              border-color: @primary;
+              color: #fff;
+              transform: translateY(-48px);
+            }
+          }
+        }
+      }
+    }
+  }
+
   /*了解天星*/
   #know-us {
+    padding-top: 0;
     .text-content {
       position: relative;
       z-index: 1;
-      margin-bottom: -148px;
       max-width: 1020px;
       box-sizing: border-box;
       padding: 50px 50px 40px;
+      margin-bottom: -148px;
       border-radius: 6px;
       background-color: #fff;
-      box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+      box-shadow: 0 0 10px rgba(0, 0, 0, .1);
       .context {
         color: #9fa5ac;
         line-height: 1.7;
@@ -972,133 +1019,30 @@
     }
   }
 
-  /*rating-list-transition*/
-  .rating-list-effect {
-    transition: opacity 0.3s;
-  }
-
-  .rating-list-effect-enter, .rating-list-effect-leave-to {
-    opacity: 0;
-  }
-
-  .rating-list-effect-enter-to, .rating-list-effect-leave {
-    opacity: 1;
-  }
-
-  /*icon-animation*/
-  @perspective: 70px;
-  @startAngle: 20deg;
-  @endAngle: 360deg;
-  @keyframes iconEffect1 {
-    0% {
-      transform: perspective(@perspective) translateZ(0);
-    }
-    30% {
-      transform: perspective(@perspective) rotateY(@startAngle);
-    }
-    100% {
-      transform: perspective(@perspective) rotateY(@endAngle);
-    }
-  }
-
-  @keyframes iconEffect2 {
-    0% {
-      transform: perspective(@perspective) translateZ(0);
-    }
-    30% {
-      transform: perspective(@perspective) rotate3d(-1, -1, 0, @startAngle);
-    }
-    100% {
-      transform: perspective(@perspective) rotate3d(-1, -1, 0, @endAngle);
-    }
-  }
-
-  @keyframes iconEffect3 {
-    0% {
-      transform: perspective(@perspective) translateZ(0);
-    }
-    30% {
-      transform: perspective(@perspective) rotate3d(1, -1, 0, @startAngle);
-    }
-    100% {
-      transform: perspective(@perspective) rotate3d(1, -1, 0, @endAngle);
-    }
-  }
-
-  /*平台数据*/
-  .platform-data {
-    position: relative;
-    height: 150px;
-    margin-top: -44px;
-    .content {
-      height: 100%;
-      background-color: #fff;
-      box-shadow: 0 10px 30px -8px fade(@primary-lighter, 20%);
-      align-content: center;
-    }
-    .data-item {
-      height: 100%;
-      box-sizing: border-box;
-      padding-top: 34px;
-      position: relative;
-      float: left;
-      width: 25%;
-      text-align: center;
-      .num {
-        font-size: 36px;
-        margin-bottom: 5px;
-        sup {
-          top: -20px;
-          font-size: 14px;
-          color: #aaa;
-        }
-      }
-      &:not(:first-child):after {
-        position: absolute;
-        top: 50%;
-        left: 0;
-        display: block;
-        content: '';
-        width: 1px;
-        height: 26px;
-        margin-top: -13px;
-        background-color: #eee;
-      }
-      p {
-        color: #999;
-      }
-    }
-  }
-
   /*数字出版*/
-  #website{
-    .website-list{
+  #website {
+    .website-list {
       display: flex;
       flex-wrap: nowrap;
       justify-content: space-around;
-      padding:45px 0;
-      .screen-shot{
+      padding: 45px 0;
+      .screen-shot {
+        display: block;
         position: relative;
-        width:33.33%;
-        box-shadow:0 3px 10px -2px rgba(0,0,0,.2);
+        width: 33.33%;
+        box-shadow: 0 3px 10px -2px rgba(0, 0, 0, .2);
         transform: scale(0.93);
         transition: transform 0.8s @effectFunc;
-        &.is-active{
+        &.is-active {
           z-index: 1;
           transform: scale(1.23);
-          box-shadow:0 10px 30px -8px rgba(0,0,0,.2);
+          box-shadow: 0 10px 30px -8px rgba(0, 0, 0, .2);
         }
-        img{
+        img {
           max-width: 100%;
         }
       }
     }
-  }
-
-  /*用户评价*/
-  .user-pingjia {
-    background-color: @primary-darken;
-    color: #fff;
   }
 
   /*地址*/
@@ -1153,7 +1097,7 @@
         position: absolute;
         top: 50%;
         left: -@angleSize + 5px;
-        margin-top:-@angleSize;
+        margin-top: -@angleSize;
         content: '';
         display: block;
         width: 0;
@@ -1194,14 +1138,17 @@
           .iconfont {
             display: inline-block;
             width: 30px;
+            margin-left: -30px;
             text-align: center;
             font-size: 20px;
             color: rgba(255, 255, 255, .7);
           }
           p {
             font-size: 16px;
-            line-height: 2.1;
             color: #fff;
+            padding-left: 30px;
+            padding-top: 5px;
+            padding-bottom: 5px;
             &:nth-child(1) {
               .iconfont {
                 font-size: 20px;
@@ -1223,6 +1170,62 @@
     }
   }
 
+  /* 动画 */
+
+  /*rating-list-transition*/
+  .rating-list-effect {
+    transition: opacity 0.3s;
+  }
+
+  .rating-list-effect-enter, .rating-list-effect-leave-to {
+    opacity: 0;
+  }
+
+  .rating-list-effect-enter-to, .rating-list-effect-leave {
+    opacity: 1;
+  }
+
+  /*icon-animation*/
+  @perspective: 70px;
+  @startAngle: 20deg;
+  @endAngle: -360deg;
+  @keyframes iconEffect1 {
+    0% {
+      transform: perspective(@perspective) translateZ(0);
+    }
+    20% {
+      transform: perspective(@perspective) rotateY(@startAngle);
+    }
+    100% {
+      transform: perspective(@perspective) rotateY(@endAngle);
+    }
+  }
+
+  @keyframes iconEffect2 {
+    0% {
+      transform: perspective(@perspective) translateZ(0);
+    }
+    20% {
+      transform: perspective(@perspective) rotate3d(-1, -1, 0, @startAngle);
+    }
+    100% {
+      transform: perspective(@perspective) rotate3d(-1, -1, 0, @endAngle);
+    }
+  }
+
+  @keyframes iconEffect3 {
+    0% {
+      transform: perspective(@perspective) translateZ(0);
+    }
+    20% {
+      transform: perspective(@perspective) rotate3d(1, -1, 0, @startAngle);
+    }
+    100% {
+      transform: perspective(@perspective) rotate3d(1, -1, 0, @endAngle);
+    }
+  }
+
+  /* 公司位置提示动画 */
   @keyframes position-tips-effect {
     0% {
       opacity: 1;
@@ -1236,130 +1239,336 @@
       opacity: 0;
       transform: translate3d(-50%, -50%, 0) scale(1.2);
     }
-
   }
 
   @media screen and (max-width: 767px) {
+    .page-index {
+      .known-more-wrap {
+        padding: 20px;
+        padding-bottom: 0;
+      }
+
+      /*section*/
+      .section-title {
+        padding: 0 0 20px;
+        small {
+          font-weight: 300;
+        }
+      }
+
+      .index-section {
+        padding: 30px 0;
+      }
+    }
 
     /*平台数据*/
-    .platform-data {
-      text-align: center;
+    #platform-data {
+      /*position: relative;*/
+      height: auto;
+      margin-top: 0;
+      .content {
+        padding: 30px 10px;
+        /*height: 100%;*/
+        background-color: #fff;
+        box-shadow: 0 10px 30px -8px fade(@bg-body, 90%);
+        align-content: center;
+      }
       .data-item {
-        float: none;
-        width: 147px;
-        font-size: 13px;
-        line-height: 2.1em;
-        display: inline-block;
-        &:not(:first-child):after {
-          display: none;
-        }
-      }
-    }
-
-    .index-section {
-      padding: 30px 0;
-      .section-img {
-        margin-top: 0;
-        margin-bottom: 10px;
-        padding-top: 0;
-        padding-bottom: 10px;
-      }
-      .section-img, .sub-img {
-        text-align: center;
-        img {
-          max-width: 90%;
-        }
-      }
-    }
-
-    .section-title {
-      font-size: 36px;
-      padding: 0 0 20px;
-    }
-
-    /*新闻动态*/
-    .dynamic-show {
-      li {
-        display: block;
-        width: 100%;
         height: auto;
-        margin: 10px 0 0;
-        transition: none;
-        &:hover {
-          box-shadow: none;
+        padding: 5px 0 10px;
+        box-sizing: border-box;
+        float: left;
+        width: 50%;
+        text-align: center;
+        .num {
+          font-size: 26px;
+          margin-bottom: 0;
+          sup {
+            top: -20px;
+            font-size: 12px;
+            color: #aaa;
+          }
         }
-        h3 {
-          margin-top: 8px;
+        &:not(:first-child):after, &:nth-child(4):before {
+          display: block;
+          content: '';
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          top: 0;
+          left: 0;
+          margin-top: 0;
+          background-color: #eee;
+        }
+        &:nth-child(2):after {
+          bottom: 0;
+          height: 100%;
+        }
+        &:nth-child(3):after {
+          width: 100%;
+          top: 0;
+          height: 1px;
+        }
+        &:nth-child(4):before {
+          width: 100%;
+        }
+        &:nth-child(4):after {
+          height: 100%;
+        }
+        p {
+          font-size: 12px;
+          color: #999;
+        }
+      }
+    }
+
+    /*天星动态*/
+    #dynamic {
+      @itemPdLeft: 70px;
+      .dynamic-focus {
+        float: none;
+        width: auto;
+        .ds-list-item {
+          width: auto;
+          padding: 10px;
+          &:hover {
+            box-shadow: none;
+          }
+        }
+        .ds-list-item-text {
+          padding-top: 10px;
+          padding-left: @itemPdLeft - 10px;
+        }
+        .ds-list-item-img {
+          width: auto;
           height: auto;
         }
       }
-      .ds-list-item {
-        height: auto;
-        padding: 10px 10px 6px;
+
+      .dynamic-show {
+        float: none;
+        width: auto;
+        margin-top: 10px;
+        li {
+          margin-bottom: 10px;
+        }
+        .ds-list-item-text {
+          padding: 10px 10px 10px @itemPdLeft;
+        }
+      }
+
+      .ds-list-item-text {
+        padding-left: @itemPdLeft;
+        .item-time {
+          margin-left: -@itemPdLeft;
+          padding-left: 15px;
+        }
       }
     }
 
-    @height: 180px;
-    /*评价内容-滑动效果*/
-    .slide-scroll-wrap {
-      padding: 30px 0;
-      .slide-btn {
-        display: block;
-        font-size: 30px;
-        height: @height;
-        width: 11vw;
-        line-height: @height;
-      }
-      .slide-scroll-content {
-        width: 78vw;
-        height: @height;
-        .slide-item {
-          width: 78vw;
-          padding: 0 1vw;
-          .u-pic {
-            width: 12vw;
-            height: 12vw;
-            margin-top: 20px;
+    /*教育出版*/
+    #jiaoyu {
+      .jiaoyu-list {
+        .jiaoyu-item {
+          padding: 6px 5px;
+          width: 100%;
+          .item-body {
+            background-size: 50%;
+            padding: 15px;
+            h3 {
+              font-weight: 700;
+            }
           }
-          .text {
-            width: 60vw;
-            height: @height;
-            line-height: 1.5;
-            font-size: 12px;
+        }
+      }
+    }
+
+    /*综合出版*/
+    #zonghe {
+      .zonghe-list {
+        flex-wrap: wrap;
+        .zonghe-item {
+          width: 100%;
+          padding: 6px 5px;
+          .item-body {
+            padding: 0 15px 14px;
+            border: 1px solid #f3f5f7;
+            .item-bg {
+              height: 140px;
+              margin: 0 -15px;
+              background-position: 50% 20px !important;
+              background-size: 70%;
+            }
+            h3 {
+              font-weight: 700;
+              margin-top: 15px;
+            }
+            .link-btn {
+              right: 15px;
+              bottom: 23px;
+            }
+            &:hover {
+              box-shadow: none;
+              .item-bg {
+                background-position: 50% 10px !important;
+              }
+              .link-btn {
+                transform: translateY(-39px);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    /*数字出版*/
+    #website {
+      .website-list {
+        flex-wrap: wrap;
+        padding: 0 15px;
+        margin-bottom: 8px;
+        .screen-shot {
+          width: 100%;
+          margin: 8px 0;
+          box-shadow: 0 1px 10px -1px rgba(0, 0, 0, .2);
+          transform: scale(1);
+          &.is-active {
+            transform: scale(1);
+            box-shadow: 0 1px 10px -1px rgba(0, 0, 0, .2);
+          }
+          img {
+            display: block;
+            max-width: 100%;
+          }
+        }
+      }
+    }
+
+    /*了解天星*/
+    #know-us {
+      padding-top: 0;
+      padding-bottom: 0;
+      .text-content {
+        padding: 30px 30px 20px;
+        margin: 0 12px -150px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+      }
+      .bg-content {
+        padding-top: 220px;
+        .ku-icon {
+          padding: 20px 0;
+          .ku-item {
+            .icon {
+              @iconSize: 90px;
+              width: @iconSize;
+              height: @iconSize;
+              line-height: @iconSize;
+            }
+            .title {
+              padding-top: 20px;
+            }
+            .desc {
+              margin-top: 4px;
+              font-size: 11px;
+            }
+          }
+        }
+      }
+    }
+
+    /*用户评价*/
+    #user-rating {
+      .rating-list-wrap {
+        height: auto;
+      }
+      .rating-list {
+        position: static;
+        width: 100%;
+        .rating-item {
+          width: 100%;
+          padding: 0 3px 30px;
+          .item-body {
+            .item-context {
+              &:after {
+                bottom: -3px;
+              }
+              h3 {
+                font-weight: 700;
+              }
+            }
+            .item-photo {
+              margin-top: 20px;
+            }
+            &:hover {
+              .item-context {
+                transform: translateY(-6px);
+                &:after {
+                  bottom: -10px;
+                }
+              }
+              .item-photo {
+                background-size: 100%;
+                box-shadow: none;
+              }
+            }
+          }
+        }
+      }
+
+      /*slider-pointer*/
+      .slide-pointer {
+        padding-top: 30px;
+        text-align: center;
+        font-size: 0;
+        span {
+          display: inline-block;
+          width: 8px;
+          height: 8px;
+          margin: 0 5px;
+          border-radius: 50%;
+          border: 1px solid #cececf;
+          background-color: #fff;
+          transition: all 0.3s;
+          cursor: pointer;
+          &.current {
+            cursor: default;
+            background-color: @primary;
+            border-color: @primary;
+          }
+          &:hover {
+            border-color: @primary;
           }
         }
       }
     }
 
     /*地址*/
-    .address-wrap {
-      font-weight: 400;
+    #contact {
       height: 400px;
-      background-size: 1420px;
-      background-position: -690px 0;
-      .address {
-        padding-top: 10px;
-        position: relative;
+      background-size: cover;
+      .contact-content {
+        width: 300px;
+        height: 400px;
+      }
+
+      .position-tips {
+        left: 11.89%;
+        transform: scale(.6) translate3d(-50%, -50%, 0);
+        transform-origin: top left;
+      }
+      .address-info {
+        left: 66.9%;
+        width: 100%;
+        transform: scale(0.6) translate3d(-50%, -50%, 0);
+        transform-origin: top left;
+        &:after {
+          @angleSize: 137px;
+          left: -@angleSize + 10px;
+          margin-top: -@angleSize;
+          border-width: @angleSize @angleSize @angleSize 0;
+        }
         .map-tips {
-          position: absolute;
-          top: 162px;
-          left: 50%;
-          margin-left: -120px;
-          font-size: 12px;
-          margin-top: 0;
-          width: 280px;
-          height: 100px;
-          box-sizing: border-box;
-          padding: 10px 20px 10px 30px;
-          background: url(../assets/img/index/map_tips.png) 0 0 no-repeat;
-          background-size: contain;
-          p {
-            font-size: 14px;
-            margin: 0 0 4px;
-            &:nth-child(2) {
-              font-size: 12px;
-            }
-          }
+          max-width: 100%;
         }
       }
     }

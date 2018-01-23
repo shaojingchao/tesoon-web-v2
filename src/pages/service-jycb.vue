@@ -4,16 +4,16 @@
       <h2 class="main-title">教育出版</h2>
       <div class="detail-context">
         <div class="main-section">
-          <img class="fr" src="../assets/img/jy/pro_01.png">
+          <img class="fr" v-lazy="require('../assets/img/jy/pro_01.png')">
           <p>
             天星教育以独到、敏锐的市场眼光，独辟蹊径地首创MOOK教辅理念，开中国教辅杂志化先河，实现了图书优势和杂志优势的完美结合，出版的《金考卷》《试题调研》等系列图书，将全国示范名校优质备考资源传递给万千学子，一时畅销大江南北。</p>
           <p>永不止步的天星人，又迅速切入初高中同步和高考总复习等主流市场，开发了《讲义》系列图书，实现了公司产品从侧翼市场到核心市场的战略过渡。</p>
           <p>
             《金考卷》《试题调研》《讲义》三大品牌成三足鼎立之势，奠定了天星教育的品牌根基。2015年，根据新高考改革精神创新设计，全国百所名校特高级教师联手打造，天星教育重磅推出《教材帮》、《一遍过》。更多产品信息欢迎登陆http://www.tesoon.com/了解</p>
         </div>
-        <div class="pro-list-section">
+        <div class="pro-list-section" id="jkj">
           <div class="pro-cover">
-            <img src="../assets/img/jy/pro_02.png">
+            <img v-lazy="require('../assets/img/jy/pro_02.png')">
           </div>
           <div class="pro-desc">
             <h3>金考卷 —— 金考卷，试卷专家</h3>
@@ -22,9 +22,9 @@
           </div>
         </div>
 
-        <div class="pro-list-section">
+        <div class="pro-list-section" id="stdy">
           <div class="pro-cover">
-            <img src="../assets/img/jy/pro_03.png">
+            <img v-lazy="require('../assets/img/jy/pro_03.png')">
           </div>
           <div class="pro-desc">
             <h3>试题调研 —— 中国高考意见领袖</h3>
@@ -34,9 +34,9 @@
           </div>
         </div>
 
-        <div class="pro-list-section">
+        <div class="pro-list-section" id="jcb">
           <div class="pro-cover">
-            <img src="../assets/img/jy/pro_04.png">
+            <img v-lazy="require('../assets/img/jy/pro_04.png')">
           </div>
           <div class="pro-desc">
             <h3>教材帮 —— 同步到高考 名师一帮到底</h3>
@@ -45,9 +45,9 @@
           </div>
         </div>
 
-        <div class="pro-list-section">
+        <div class="pro-list-section" id="ybg">
           <div class="pro-cover">
-            <img src="../assets/img/jy/pro_05.png">
+            <img v-lazy="require('../assets/img/jy/pro_05.png')">
           </div>
           <div class="pro-desc">
             <h3>一遍过 —— 一遍解决所有学习难题</h3>
@@ -143,5 +143,24 @@
   }
 
   @media screen and (max-width: 767px) {
+    .service-detail {
+      .detail-context {
+        line-height: 1.5;
+        .main-section {
+          img{
+            float: none;
+            display: block;
+            max-width:100%;
+            margin:0 auto;
+          }
+        }
+        .pro-list-section {
+          .pro-cover {
+            width: 100px;
+            padding-right: 15px;
+          }
+        }
+      }
+    }
   }
 </style>

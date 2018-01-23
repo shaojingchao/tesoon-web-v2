@@ -201,6 +201,7 @@
         }
       }
       .pro-desc {
+        flex: 1 1 auto;
         padding-top: 7px;
         line-height:2;
         p {
@@ -208,16 +209,16 @@
           color: #7b7b7b;
         }
         .rongyu-pic{
-          display: flex;
           padding-top: 10px;
+          overflow: hidden;
           .img-item{
+            float: left;
             max-width:168px;
-            max-height:168px;
             margin-right:10px;
             img{
               display: block;
-              max-height: 100%;
               max-width: 100%;
+              max-height:168px;
               margin:0 auto;
             }
           }

@@ -2,61 +2,14 @@
   <footer class="footer-wrap">
     <div class="footer">
       <div class="footer-nav">
-        <div class="hide-xs">
-          <div class="fn-item">
-            <div class="item-tit">天星动态<br>
-              <small>STAR DYNAMIC</small>
+        <div class="nav-item-wrap">
+          <div class="fn-item" v-for="(item,index) in navList">
+            <div class="item-tit">{{item.name}}<br>
+              <small>{{item.subName}}</small>
             </div>
-            <ul>
-              <li>
-                <router-link to="/dynamic/0">全部新闻</router-link>
-              </li>
-              <li>
-                <router-link to="/dynamic/9">公司新闻</router-link>
-              </li>
-              <li>
-                <router-link to="/dynamic/10">行业新闻</router-link>
-              </li>
-              <li>
-                <router-link to="/dynamic/11">员工新闻</router-link>
-              </li>
-            </ul>
-          </div>
-          <div class="fn-item">
-            <div class="item-tit">集团业务<br>
-              <small>BUSINESS</small>
-            </div>
-            <ul>
-              <li>
-                <router-link to="/service/jiaoyu">教育出版</router-link>
-              </li>
-              <li>
-                <router-link to="/service/zonghe">综合出版</router-link>
-              </li>
-              <li>
-                <router-link to="/service/shuzi">数字出版</router-link>
-              </li>
-            </ul>
-          </div>
-          <div class="fn-item">
-            <div class="item-tit">了解天星<br>
-              <small>KNOW THE STARS</small>
-            </div>
-            <ul>
-              <li>
-                <router-link to="/about/jianjie">公司简介</router-link>
-              </li>
-              <li>
-                <router-link to="/about/licheng">天星大事记</router-link>
-              </li>
-              <li>
-                <router-link to="/about/wenhua">天星文化</router-link>
-              </li>
-              <li>
-                <router-link to="/about/zizhi">荣誉资质</router-link>
-              </li>
-              <li>
-                <router-link to="/about/lianxi">加入我们</router-link>
+            <ul v-if="item.children && item.children.length > 0">
+              <li v-for="(subItem,subIndex) in item.children" :key="subIndex">
+                <router-link :to="subItem.to">{{subItem.name}}</router-link>
               </li>
             </ul>
           </div>
@@ -65,11 +18,12 @@
               <small>CONTACT US</small>
             </div>
             <ul>
-              <li>地址：郑州市高新区翠竹街1号企业
+              <li>地址：河南省郑州市高新区翠竹街1号
                 <br>
-                总部基地51-52栋
+                企业总部基地51-52栋
               </li>
-              <li>电话：0371-68698</li>
+              <li>电话：0371-68698036</li>
+              <li>邮箱：tianxing@163.com</li>
             </ul>
           </div>
         </div>
@@ -81,15 +35,22 @@
         </div>
       </div>
       <div class="ft-copyright">
-        Copyright © 2002 - 2018 Tesoon. All Rights Reserved  河南天星教育科技有限公司版权所有 (豫)字第00187号
+        Copyright © 1998-2018 All Rights Reserved  河南天星教育传媒股份有限公司 豫B2-20130009
       </div>
     </div>
   </footer>
 </template>
 
 <script>
+  import {NavList} from '../../store/index'
+
   export default {
-    name: 'PageFooter'
+    name: 'PageFooter',
+    data () {
+      return {
+        navList: NavList
+      }
+    }
   }
 </script>
 
@@ -106,18 +67,10 @@
     }
   }
 
-  .ft-copyright {
-    padding: 30px 0;
-    margin-top: 20px;
-    text-align: center;
-    font-size: 12px;
-    color: @color;
-    border-top: 1px solid rgba(255, 255, 255, .1);
-  }
-
   .footer-nav {
     padding-top: 60px;
     overflow: hidden;
+
     .fn-item {
       width: 225px;
       float: left;
@@ -157,22 +110,40 @@
       }
     }
   }
+  .ft-copyright {
+    padding: 30px 0;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 12px;
+    color: @color;
+    border-top: 1px solid rgba(255, 255, 255, .1);
+  }
 
   @media screen and (max-width: 767px) {
     .footer-nav {
       padding-top: 30px;
-      .fn-item-ewm {
-        float: none;
+      padding-left:25px;
+      padding-right:25px;
+      .nav-item-wrap{
+        overflow: hidden;
+      }
+      .fn-item{
+        width:50%;
+        padding-bottom: 20px;
+        .item-tit{
+          font-weight:700;
+        }
       }
       .fn-item-ewm {
         float: none;
+        padding-top: 20px;
+        padding-bottom: 20px;
         padding-right: 0;
         p {
           line-height: 1.4;
         }
       }
     }
-
     .ft-copyright {
       margin-top: 15px;
       padding: 10px;

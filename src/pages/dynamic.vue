@@ -13,7 +13,7 @@
             <router-link
               :class="{current:currentNav === item.tid}"
               v-for="(item,index) in navList"
-              key="{{item.id}}"
+              :key="item.id"
               tag="li"
               :to="{path:'/dynamic/'+item.tid}"><a class="db">{{item.name}}</a></router-link>
           </ul>
@@ -22,21 +22,25 @@
 
       <div class="dynamic-list-content" v-if="newList.length>0">
         <dynamic-list :list="newList"/>
-        <Pager class="pt30 mt10"
+        <pager class="pt30 mt10"
                @goToPage="goToPage"
                :pageNum="pages.pageNum"
                :currentPage="pages.currentPage"
                :totalCount="pages.totalCount"
                v-if="pages.pageNum > 1"/>
       </div>
+     <part-loading v-if="isLoading"/>
     </div>
     <page-footer/>
+    <img :src="Loading" alt="">
   </div>
 </template>
 <script type="text/ecmascript-6">
   import DynamicList from '../components/dynamic-list.vue'
   import Pager from '../components/common/pager.vue'
   import CF from '../api/index'
+  import Loading from 'loading-svg/loading-bars.svg'
+  console.log(Loading)
 
   export default {
     components: {
@@ -48,10 +52,21 @@
         title: '天星教育 - 天星动态'
       }
     },
+    computed: {
+      isMobile () {
+        return this.$store.state.isMobile
+      },
+      pageBanner () {
+        return this.isMobile ? this.pageBannerMobile : this.pageBannerNormal
+      }
+    },
     data () {
       return {
+        Loading: Loading,
+        isLoading: false,
         baseUrl: CF.baseUrl,
-        pageBanner: require('../assets/img/banner/dynamic_banner.png'),
+        pageBannerNormal: require('../assets/img/banner/dynamic_banner.png'),
+        pageBannerMobile: require('../assets/img/banner/mobile_dynamic_banner.jpg'),
         navList: [
           {
             tid: '0',
@@ -94,7 +109,6 @@
     },
     methods: {
       routeFunc (to) {
-        console.log('beforeRouteUpdate')
         let params = {
           tid: 0,
           page: 1
@@ -107,6 +121,7 @@
           params.page = to.query.page
         }
         this.getNewList(params, (res) => {
+          this.isLoading = false
           this.newList = res.data.data
           this.pages.pageNum = parseInt(res.data.pages.pageNum)
           this.pages.totalCount = parseInt(res.data.pages.totalCount)
@@ -120,6 +135,8 @@
       // 获取列表数据
       getNewList (p, cb) {
         let _paramStr = '?tid=' + p.tid + '&page=' + p.page
+        this.newList = []
+        this.isLoading = true
         this.$http.get(CF.getDynamicsList + _paramStr).then((res, rev) => {
           cb && cb(res)
         })
@@ -203,107 +220,43 @@
             }
           }
         }
-        .cate-ewm {
-          text-align: center;
-          padding: 15px 0;
-          border-bottom: 2px solid #eee;
-        }
-        .cate-ewm-img {
-          display: block;
-          width: 137px;
-          margin: 0 auto;
-        }
       }
     }
   }
 
   @media screen and (max-width: 767px) {
-    //天星动态
-    .dynamic-page {
-      padding-bottom: 40px;
-      .page-body {
-        float: none;
-        width: auto;
-        padding-top: 5px;
-      }
 
-      .dynamic-nav {
-        width: auto;
-        float: none;
-        text-align: left;
-        .rn-item-title {
-          display: none;
+    .page-dynamic {
+      .dynamic-page {
+        padding-top: 20px;
+        padding-bottom: 100px;
+        .dynamic-list-content {
+          float: none;
+          width: auto;
+          margin-top: 20px;
         }
-        .nav-list {
-          white-space: nowrap;
-          overflow: scroll;
-          border-bottom: 1px solid #eee;
-          li {
-            display: inline-block;
-            font-size: 15px;
-            line-height: 46px;
-            height: 46px;
-            box-sizing: border-box;
-            margin-right: 4px;
-            padding: 0 2px;
-            border-bottom: none;
-            transition: all 0.3s;
-            &:hover {
-              background-color: #fff;
+        .dynamic-cate {
+          width: auto;
+          float: none;
+          padding: 10px;
+          .split-line {
+            margin: 10px -10px 10px;
+          }
+          .cate-item-title {
+            font-size: 16px;
+            small {
+              font-weight: 300;
+              font-size: 11px;
+              padding-top: 2px;
             }
           }
-          .router-link-exact-active {
-            color: @primary;
-            border-bottom: 2px solid @primary;
+          .cate-list {
+            li {
+              line-height: 40px;
+            }
           }
         }
       }
-    }
-
-    /*新闻列表*/
-    .news-list {
-      .nl-item {
-        padding: 10px 0;
-        border: none;
-        border-bottom: 1px solid #eeeeee;
-        margin-bottom: 0;
-        &:hover {
-          box-shadow: none;
-        }
-      }
-      .item-context {
-        width: auto;
-        float: none;
-        .title {
-          font-size: 15px;
-          white-space: normal;
-          word-break: break-all;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-        .context {
-          display: none;
-        }
-        .info-item {
-          font-size: 14px;
-          margin-right: 10px;
-          &:last-child {
-            margin-right: 0;
-          }
-        }
-      }
-      .nl-item-img {
-        width: 120px;
-        height: 80px;
-        margin-right: 10px;
-      }
-    }
-
-    .pagination-wrap {
-      text-align: center;
-      margin-top: 20px;
     }
   }
 

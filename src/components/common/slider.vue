@@ -1,13 +1,11 @@
 <!--vue slider components-->
-
 <template>
   <div class="wln-slider">
-    <div class="hd">
+    <div class="hd" v-if="bannerPics && bannerPics.length>1">
       <div class="nav-bar">
         <span
-          v-if="bannerPics && bannerPics.length>1"
           v-for="(item,index) in bannerPics.length"
-          :class="{on:(index === currentIndex)}"
+          :class="{'active':(index === currentIndex)}"
           @click="showThisBanner(index)"
           @mouseover="hoverThisBannerBar"
           @mouseout="bannerAutoPlay"
@@ -22,8 +20,8 @@
               'background-size': 'cover',
               visibilty:(currentIndex===index?'visible':'hidden'),
               opacity:(currentIndex===index?'1':'0')}">
-          <div class="banner-words" v-if="index === 1"/>
-          <Sky v-if="index === 1"/>
+          <!--<div class="banner-words" v-if="index === 1"/>-->
+          <!--<Sky v-if="index === 1"/>-->
         </li>
       </ul>
     </div>
@@ -32,7 +30,7 @@
 
 <script type="text/javascript">
   import Sky from './sky.vue'
-  import $ from 'jquery'
+  // import $ from 'jquery'
 
   export default {
     props: {
@@ -59,10 +57,11 @@
     },
     mounted () {
       this.bannerAutoPlay()
-      $('.banner-words').addClass('in')
+      // $('.banner-words').addClass('in')
     },
     methods: {
       bannerAutoPlay () {
+        if (this.bannerPics > 2) return false
         clearInterval(this.timer)
         this.timer = setInterval(() => {
           if (this.currentIndex < this.bannerPics.length - 1) {
@@ -131,26 +130,30 @@
       text-align: center;
       z-index: 1;
       .nav-bar {
+        height:10px;
         cursor: default;
-      }
-      span {
-        width: 14px;
-        height: 14px;
-        font-size:0;
-        display: inline-block;
-        margin: 0 5px;
-        background: url(../../assets/img/banner/circlebutton.png) -3px -25px no-repeat;
-        cursor: pointer;
-        &.on {
-          background-position: -3px -3px;
-          cursor: default;
+        span {
+          width: 10px;
+          height: 10px;
+          font-size: 0;
+          border-radius: 50%;
+          display: inline-block;
+          margin: 0 5px;
+          cursor: pointer;
+          opacity: 0.5;
+          background-color: #fff;
+          box-shadow: 0 1px 4px -1px rgba(0,0,0,.4);
+          &.active {
+            cursor: default;
+            opacity: 1;
+          }
         }
       }
     }
   }
 
   @media screen and (max-width: 767px) {
-    @height: 500px;
+    @height: (600 / 1200) * 100vw; //图片大小 1080 * 600
     .banner-wrap {
       height: @height;
     }
@@ -174,7 +177,13 @@
       }
       .hd {
         width: 100%;
+        bottom:10px;
         margin-left: -50vw;
+        .nav-bar {
+          span {
+            transform: scale(0.9);
+          }
+        }
       }
     }
   }

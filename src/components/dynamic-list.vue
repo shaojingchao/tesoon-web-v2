@@ -15,12 +15,12 @@
       <div class="item-context">
         <div class="title elli" :title="item.title">{{item.title}}</div>
         <div class="context">
-          {{item.mydesc.slice(0,110)}}
+          {{item.mydesc}}
         </div>
       </div>
 
       <div class="item-other">
-        <span class="info-item" :title="item.add_time">{{item.add_time.substr(5)}}</span>
+        <span class="info-item" :title="item.add_time">{{isMobile ? item.add_time : item.add_time.substr(5)}}</span>
       </div>
     </router-link>
   </div>
@@ -36,17 +36,22 @@
         baseUrl: CF.baseUrl
       }
     },
+    computed: {
+      isMobile () {
+        return this.$store.state.isMobile
+      }
+    },
     props: {
       list: Array
-    },
-    beforeRouteEnter (to, from, next) {
-      next()
     }
   }
 </script>
 
 <style lang="less" scoped>
   @import "../assets/css/_mixins-wln.less";
+
+  // 图片宽高比
+  @listItemImgRate: 180px / 120px;
 
   /*新闻列表*/
   .news-list {
@@ -62,10 +67,10 @@
       &:hover {
         box-shadow: 0 8px 20px -1px rgba(0, 0, 0, .12);
         border-bottom-color: transparent;
-        .nl-item-img{
+        .nl-item-img {
           transform: translateX(30px);
         }
-        .item-context{
+        .item-context {
           transform: translateX(30px);
         }
       }
@@ -74,16 +79,16 @@
       position: relative;
       float: left;
       width: 180px;
-      height: 120px;
+      height: 180px / @listItemImgRate;
       margin-right: 20px;
       background-color: @bg-body;
       overflow: hidden;
-      transition:transform .3s;
+      transition: transform .3s;
       img {
         position: absolute;
-        top:50%;
-        left:50%;
-        transform: translate(-50%,-50%);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         display: block;
         max-width: 100%;
         margin: 0 auto;
@@ -93,7 +98,7 @@
       float: left;
       width: 508px;
       padding-top: 18px;
-      transition:transform .3s;
+      transition: transform .3s;
       .title {
         font-size: 16px;
         color: #444;
@@ -136,11 +141,23 @@
         margin-bottom: 0;
         &:hover {
           box-shadow: none;
+          .nl-item-img {
+            transform: translateX(0);
+          }
+          .item-context {
+            transform: translateX(0);
+          }
         }
+      }
+      .nl-item-img {
+        width: 120px;
+        height: 120px / @listItemImgRate;
+        margin-right: 10px;
       }
       .item-context {
         width: auto;
         float: none;
+        padding-top: 0;
         .title {
           font-size: 15px;
           white-space: normal;
@@ -161,10 +178,14 @@
           }
         }
       }
-      .nl-item-img {
-        width: 120px;
-        height: 80px;
-        margin-right: 10px;
+      .item-other {
+        float: none;
+         width: auto;
+        padding-top: 0;
+        margin-top: 15px;
+        text-align: left;
+        font-weight: 500;
+        font-size: 14px;
       }
     }
   }

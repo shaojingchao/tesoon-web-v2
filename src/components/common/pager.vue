@@ -43,7 +43,7 @@
         /*width:4em;*/
         font-size: 1.15em;
         line-height: 26px;
-        font-weight: 600;
+        font-weight: 400;
         font-family: Simsun, sans-serif;
       }
     }
@@ -60,10 +60,18 @@
     }
   }
 
+  @media screen and (max-width: 767px) {
+    .pagination-wrap {
+      text-align: center;
+      margin-top: 20px;
+    }
+  }
+
 
 </style>
 <script type="text/ecmascript-6">
   export default {
+    name: 'pager',
     data () {
       return {
         showItem: 5

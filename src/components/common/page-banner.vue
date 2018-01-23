@@ -7,8 +7,7 @@
   export default {
     name: 'PageBanner',
     data () {
-      return {
-      }
+      return {}
     },
     props: {
       picture: String
@@ -18,16 +17,25 @@
 
 <style lang="less" scoped>
   //页面通用banner
-  .page-header-banner{
+  .page-header-banner {
     position: relative;
-    width:100%;
-    height:200px;
-    img{
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    img {
       position: absolute;
-      left:50%;
-      top:50%;
+      left: 50%;
+      top: 50%;
       display: block;
-      transform:translate(-50%,-50%);
+      max-height: 100%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    @bannerHeight: (360 / 1080 ) * 100vw; // 图片大小 1080 * 360
+    .page-header-banner {
+      height: @bannerHeight;
     }
   }
 

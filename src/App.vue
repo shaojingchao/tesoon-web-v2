@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <div class="g-components-view">
-      <side-bar></side-bar>
-    </div>
+    <side-bar></side-bar>
+    <!--<div class="g-components-view">-->
+    <!--</div>-->
     <router-view class="view-content"></router-view>
   </div>
 </template>

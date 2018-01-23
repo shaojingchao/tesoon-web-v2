@@ -1,0 +1,14 @@
+{
+  "name": "css-layout",
+  "homepage": "https://github.com/shaojingchao/css-layout",
+  "_release": "d77be7d406",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "d77be7d4065c26e9517597638b87fdbd10dd91fe"
+  },
+  "_source": "git://github.com/shaojingchao/css-layout.git",
+  "_target": "*",
+  "_originalSource": "shaojingchao/css-layout",
+  "_direct": true
+}

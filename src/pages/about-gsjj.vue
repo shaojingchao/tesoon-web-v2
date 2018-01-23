@@ -1,7 +1,7 @@
 <template>
   <div class="about-view">
     <div class="about-detail content">
-      <h2 class="main-title">天星文化</h2>
+      <h2 class="main-title">公司简介</h2>
 
       <div class="main-section">
         <p>

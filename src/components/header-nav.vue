@@ -2,17 +2,19 @@
   <div class="nav-menu" :class="{'nav-open':isShowNavMenu}">
     <span class="menu-toggle show-xs" @click="showNavMenu"><b></b></span>
     <keep-alive>
-      <transition name="fadeIn-up">
+      <transition name="fadeIn-down">
         <ul class="nav" v-show="isShowNavMenu || !isMobile">
           <router-link tag="li" to="/" v-if="$route.path !== '/'"><a>首页</a></router-link>
           <li v-for="(item,index) in navList"
-              @mouseenter="navItemVisible = index"
-              @mouseleave="navItemVisible = false">
-            <router-link :to="item.to">{{item.name}} <i class="iconfont tx-icon-down"></i></router-link>
-            <transition name="fadeIn-up">
+              @mouseenter="() => {!isMobile ? navItemVisible = index : ''}"
+              @mouseleave="() => {!isMobile ? navItemVisible = false : ''}"
+              @click="() => {isMobile ? navItemVisible !== index ? navItemVisible = index : navItemVisible = false : ''}">
+            <a>{{item.name}} <i class="iconfont tx-icon-down" :class="{'icon-open': navItemVisible === index}"></i></a>
+            <transition :name="!isMobile ? 'fadeIn-up' : ''">
               <div class="nav-item-menu" v-if="item.children && navItemVisible === index">
                 <router-link v-for="(subItem,index) in item.children"
                              :to="subItem.to"
+                             @click.native="showNavMenu"
                              :key="index">{{subItem.name}}
                 </router-link>
               </div>
@@ -25,77 +27,12 @@
   </div>
 </template>
 <script type="text/ecmascript-6">
+  import {NavList} from '../store/index'
+
   export default {
     data () {
       return {
-        navList: [
-          {
-            name: '天星动态',
-            to: {name: 'dynamic'},
-            children: [
-              {
-                name: '集团新闻',
-                to: {name: 'dynamic', params: {tid: 9}}
-              },
-              {
-                name: '行业新闻',
-                to: {name: 'dynamic', params: {tid: 10}}
-              },
-              {
-                name: '员工活动',
-                to: {name: 'dynamic', params: {tid: 11}}
-              }
-            ]
-          },
-          {
-            name: '集团业务',
-            to: {name: 'service'},
-            children: [
-              {
-                name: '教育出版',
-                to: {name: 'jiaoyuchuban'}
-              },
-              {
-                name: '综合出版',
-                to: {name: 'zonghechuban'}
-              },
-              {
-                name: '数字出版',
-                to: {name: 'shuzichuban'}
-              }
-            ]
-          },
-          {
-            name: '了解天星',
-            to: {name: 'about'},
-            children: [
-              {
-                name: '集团简介',
-                to: '/about/jianjie'
-              },
-              {
-                name: '发展历程',
-                to: '/about/licheng'
-              },
-              {
-                name: '天星文化',
-                to: {name: 'abouttianxingwenhua'}
-              },
-              {
-                name: '荣誉资质',
-                to: '/about/zizhi'
-              },
-              {
-                name: '社会公益',
-                to: {name: 'aboutshehuigonyi'}
-              },
-              {
-                name: '加入我们',
-                to: {name: 'aboutjob'}
-              }
-            ]
-          }
-        ],
+        navList: NavList,
         navItemVisible: false,
         isShowEwm: false,
         isShowNavMenu: false
@@ -103,22 +40,10 @@
     },
     computed: {
       isMobile () {
-        return document.body.clientWidth <= 767
+        return this.$store.state.isMobile
       }
     },
     methods: {
-      navItemMouseenter (item) {
-        this.navItemVisible = item
-      },
-      navItemMouseleave (hide) {
-        this.navItemVisible = hide
-      },
-      mouseoverEwm () {
-        this.isShowEwm = true
-      },
-      mouseoutEwm () {
-        this.isShowEwm = false
-      },
       showNavMenu () {
         this.isShowNavMenu = !this.isShowNavMenu
       }
@@ -126,16 +51,12 @@
   }
 
 </script>
-<style lang="less">
+<style lang="less" scoped>
   @import "../assets/css/_mixins-wln.less";
 
-  .header {
-    .logo {
-      float: left;
-      width: 146px;
-      height: 80px;
-      background: url(../assets/img/logo-2.png) 50% 50% no-repeat;
-      background-size: 100% !important;
+  .page-header {
+    .nav-menu {
+      float: right;
     }
     .nav {
       li {
@@ -152,6 +73,11 @@
         }
         .iconfont {
           font-size: 14px;
+          display: inline-block;
+          transition: transform 0.3s;
+          &.icon-open {
+            transform: rotateZ(180deg);
+          }
         }
         & > a {
           position: relative;
@@ -175,12 +101,6 @@
             &:after {
               width: 100%;
             }
-          }
-        }
-        &.web-ewm-item {
-          z-index: 100;
-          &:hover {
-            border-bottom: none;
           }
         }
         .nav-item-menu {
@@ -211,87 +131,53 @@
     }
   }
 
-  .nav-menu {
-    float: right;
-    .menu-toggle {
-      position: absolute;
-      right: 14px;
-      top: 15px;
-      b, &:after, &:before {
-        display: block;
-        width: 22px;
-        height: 2px;
-        background-color: rgba(255, 255, 255, .3);
-        border-radius: 2px;
-      }
-      &:after, &:before {
-        content: '';
-      }
-      b, &:after {
-        margin-top: 6px;
-      }
-    }
-  }
-
-  // 二维码
-  .web-ewm-item {
-    position: relative;
-  }
-
-  .web-ewm-content {
-    position: absolute;
-    box-sizing: border-box;
-    top: 80px;
-    left: 50%;
-    width: 180px;
-    height: 208px;
-    margin-left: -90px;
-    border: 1px solid #f6f6f6;
-    border-radius: 3px;
-    background-color: #fff;
-    box-shadow: 0 3px 20px 1px rgba(0, 0, 0, .2);
-    &:after, &:before {
-      content: '';
-      display: block;
-      position: absolute;
-      top: -20px;
-      left: 50%;
-      margin-left: -7px;
-      border-width: 10px 7px 10px 7px;
-      border-style: solid;
-      border-color: transparent transparent #fff transparent;
-    }
-    &:before {
-      top: -21px;
-      border-color: transparent transparent #ddd transparent;
-    }
-    img {
-      width: 151px;
-      display: block;
-      margin: 0 auto;
-      margin-top: 13px;
-    }
-    p {
-      font-size: 13px;
-      text-align: center;
-      margin-top: 5px;
-      line-height: 1.4;
-    }
-  }
-
   @media screen and (max-width: 767px) {
 
     //header
-    .header {
-      .logo {
-        width: 100px;
-        height: 48px;
-        background-size: contain;
-      }
+    .page-header {
       .nav-menu {
+        float: right;
         .menu-toggle {
+          position: absolute;
+          right: 14px;
+          top: 15px;
           b, &:after, &:before {
-            background-color: rgba(255, 255, 255, .3);
+            display: block;
+            width: 22px;
+            height: 2px;
+            background-color: #2f509c;
+            border-radius: 2px;
+          }
+          &:after, &:before {
+            content: '';
+            transition: transform 0.3s;
+          }
+          &:before {
+            transform-origin: 0 4px;
+          }
+          &:after {
+            transform-origin: 12px -3px;
+          }
+          b {
+            transform-origin: 0 0;
+            transition: transform 0.3s, opacity 0.3s;
+          }
+          b, &:after {
+            margin-top: 6px;
+          }
+        }
+        &.nav-open {
+          .menu-toggle {
+            &:after {
+              transform: rotate(135deg);
+            }
+            &:before {
+              transform: rotate(45deg);
+            }
+            b {
+              transform: rotate(90deg);
+              opacity: 0;
+            }
           }
         }
       }
@@ -302,16 +188,15 @@
         left: 0;
         right: 0;
         padding: 10px 0;
-        background-color: #103356;
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, .1);
+        box-shadow: 0 4px 10px -2px rgba(0, 0, 0, .1);
+        background-color: #fff;
         li {
           display: block;
-          height: 50px;
+          height: auto;
           line-height: 50px;
           padding: 0;
           margin: 0;
-          border-top: 1px solid rgba(255, 255, 255, .02);
+          border-top: 1px solid #f7f7f7;
           a {
             padding: 0 20px;
           }
@@ -322,72 +207,40 @@
           &:not(:visited):first-child {
             border-top: none;
           }
-        }
-      }
-    }
-
-    .nav-menu {
-      float: right;
-      .menu-toggle {
-        position: absolute;
-        right: 14px;
-        top: 15px;
-        b, &:after, &:before {
-          display: block;
-          width: 22px;
-          height: 2px;
-          background-color: rgba(255, 255, 255, .3);
-          border-radius: 2px;
-        }
-        &:after, &:before {
-          content: '';
-          transition: transform 0.3s;
-        }
-        &:before {
-          transform-origin: 0 4px;
-        }
-        &:after {
-          transform-origin: 12px -3px;
-        }
-        b {
-          transform-origin: 0 0;
-          transition: transform 0.3s, opacity 0.3s;
-        }
-        b, &:after {
-          margin-top: 6px;
-        }
-      }
-      &.nav-open {
-        .menu-toggle {
-          &:after {
-            transform: rotate(135deg);
-          }
-          &:before {
-            transform: rotate(45deg);
+          & > a {
+            position: relative;
+            display: block;
+            transition: color .3s;
+            &:after {
+              display: none;
+            }
           }
 
-          b {
-            transform: rotate(90deg);
-            opacity: 0;
+          .nav-item-menu {
+            position: static;
+            padding-top: 0;
+            margin-left: 0;
+            width: auto;
+            box-shadow: none;
+            a {
+              display: block;
+              line-height: 40px;
+              color: #999;
+              text-align: left;
+              transition: all 0.3s;
+              background-color: #fff;
+              border-top: 1px solid #f7f7f7;
+              border-bottom: none;
+              &:last-child {
+                position: relative;
+                z-index: 10;
+              }
+              &:hover {
+                color: #333;
+                background-color: #f5f5f5;
+              }
+            }
           }
-        }
-      }
-    }
-
-    .page-header {
-      border-bottom: 1px solid #e8ecef;
-      .nav-menu {
-        .menu-toggle {
-          b, &:after, &:before {
-            background-color: #484aa2;
-          }
-        }
-      }
-      .nav {
-        background-color: #fff;
-        border-top: 1px solid #eee;
-        li {
-          border-top: 1px solid #f7f7f7;
         }
       }
     }

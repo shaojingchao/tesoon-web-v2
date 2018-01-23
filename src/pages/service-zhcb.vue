@@ -11,7 +11,7 @@
           <p>少儿读物出版领域以国外优秀绘本引进为主，同时积极开发原创优秀读物，力争为中国少年儿童提供有益、有趣、独特的阅读内容和体验。</p>
         </div>
 
-        <div class="pro-list-section">
+        <div class="pro-list-section" id="fkzw">
           <div class="pro-cover">
             <img src="../assets/img/zhcb_pro_02.png">
           </div>
@@ -27,7 +27,7 @@
           </div>
         </div>
 
-        <div class="pro-list-section">
+        <div class="pro-list-section" id="fkyd">
           <div class="pro-cover">
             <img src="../assets/img/zhcb_pro_03.png">
           </div>
@@ -38,7 +38,7 @@
           </div>
         </div>
 
-        <div class="pro-list-section">
+        <div class="pro-list-section" id="wyd">
           <div class="pro-cover">
             <img src="../assets/img/zhcb_pro_04.png">
           </div>
@@ -48,7 +48,7 @@
           </div>
         </div>
 
-        <div class="pro-list-section">
+        <div class="pro-list-section" id="gllsk">
           <div class="pro-cover">
             <img src="../assets/img/zhcb_pro_05.png">
           </div>
@@ -58,7 +58,7 @@
           </div>
         </div>
 
-        <div class="pro-list-section">
+        <div class="pro-list-section" id="zwtj">
           <div class="pro-cover">
             <img src="../assets/img/zhcb_pro_06.png">
           </div>
@@ -68,7 +68,7 @@
           </div>
         </div>
 
-        <div class="pro-list-section">
+        <div class="pro-list-section" id="yzsc">
           <div class="pro-cover">
             <img src="../assets/img/zhcb_pro_07.png">
           </div>
@@ -78,7 +78,7 @@
           </div>
         </div>
 
-        <div class="pro-list-section">
+        <div class="pro-list-section" id="qqjx">
           <div class="pro-cover">
             <img src="../assets/img/zhcb_pro_08.png">
           </div>
@@ -93,7 +93,7 @@
           </div>
         </div>
 
-        <div class="pro-list-section">
+        <div class="pro-list-section" id="bhxxl">
           <div class="pro-cover">
             <img src="../assets/img/zhcb_pro_09.png">
           </div>
@@ -207,5 +207,24 @@
   }
 
   @media screen and (max-width: 767px) {
+    .service-detail {
+      .detail-context {
+        line-height: 1.5;
+        .main-section {
+          img{
+            float: none;
+            display: block;
+            margin:0 auto;
+            max-width: 100%;
+          }
+        }
+        .pro-list-section {
+          .pro-cover {
+            width: 100px;
+            padding-right: 12px;
+          }
+        }
+      }
+    }
   }
 </style>
