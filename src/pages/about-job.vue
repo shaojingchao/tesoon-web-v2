@@ -3,7 +3,7 @@
     <div class="about-detail content">
       <h2 class="main-title">加入我们</h2>
 
-      <div class="job-list-table">
+      <div class="job-list-table" v-if="list.length">
         <table class="table">
           <thead>
           <tr>
@@ -15,31 +15,26 @@
           </tr>
           </thead>
           <tbody>
-          <template v-for="(item,index) in jobList">
+          <template v-for="(item,index) in list">
             <tr class="job-item" :class="{'active': jobListShowMap[index] === true}"
                 @click="showItem(index)">
-              <td>课外阅读产品经理</td>
-              <td class="un-select tc">4000-8000元/月</td>
-              <td class="un-select tc">郑州</td>
-              <td class="un-select tc">2017-12-16</td>
-              <td class="un-select tc">{{jobListShowMap[index] === true ? '-' : '+'}}</td>
+              <td>{{item.title}}</td>
+              <td class="un-select tc">{{item.salary_range}}</td>
+              <td class="un-select tc">{{item.city}}</td>
+              <td class="un-select tc">{{item.add_time * 1000 | formatTime}}</td>
+              <td class="un-select tc"><i class="handle iconfont tx-icon-down"
+                                          :class="{'is-open': jobListShowMap[index] === true}"></i></td>
             </tr>
             <transition name="fadeIn-down">
               <tr class="job-desc-tr" v-show="jobListShowMap[index] === true">
                 <td colspan="5">
                   <div class="job-desc-content">
-                    岗位职责：<br>
-                    将学科知识趣味化、故事化，扩大中学生知识面，提高中学生学生学科素养，帮助学生培养学习兴趣。能胜任选题策划等编辑出版工作，负责杂志及图书栏目、内容的策划及稿件的把控等。
+                    <p v-if="item.description" v-html="'岗位职责：<br>' + item.description"></p>
                     <br>
-                    <br>
-                    任职要求：<br>
-                    1、专业不限，了解中学生阅读喜好，有良好的文字功底及语言表达能力；<br>
-                    2、视野开阔、思维灵活，善于发现和策划新的图书选题；<br>
-                    3、文字功底扎实、有较强的信息和文字处理能力，文案能力强；<br>
-                    4、有教育、出版相关工作经验优先。
+                    <p v-if="item.requirements" v-html="'任职要求：<br>' + item.requirements"></p>
                   </div>
                   <div class="pt20">
-                    <a href="" class="apply-btn btn btn-primary">投递简历</a>
+                    <a :href="item.url" target="_blank" class="apply-btn btn btn-primary">投递简历</a>
                   </div>
                 </td>
               </tr>
@@ -48,24 +43,32 @@
           </tbody>
         </table>
       </div>
+      <part-loading v-if="isLoading"/>
     </div>
   </div>
 </template>
 <script type="text/ecmascript-6">
+  import CF from '../api/index'
+  import {formatTime} from '../util/formatTime'
+
   export default {
     data () {
       return {
         pageBanner: require('../assets/img/banner/product_banner.png'),
         jobList: 10,
         jobListShowMap: [],
+        isLoading: false,
         isLoadDone: false,
         list: []
       }
     },
     metaInfo () {
       return {
-        title: '天星教育 - 教育出版'
+        title: '天星教育 - 加入我们'
       }
+    },
+    filters: {
+      formatTime: formatTime
     },
     computed: {
       isMobile () {
@@ -73,13 +76,18 @@
       }
     },
     mounted () {
-      this.$set(this.jobListShowMap, 0, 0)
-      if (this.isMobile) {
-        for (let i = 0; i < this.jobList; i++) {
-          console.log(i, i)
-          this.$set(this.jobListShowMap, i, true)
+      this.isLoading = true
+      this.$http.get(CF.getJobs).then(res => {
+        if (res.data) {
+          this.list = res.data
+          this.list.sort((a, b) => Math.max(a.add_time, a.update_time) < Math.max(b.add_time, b.update_time)) // 按时间排序
+          this.isLoading = false
         }
-      }
+        // 默认展开第一个职位
+        if (this.list.length > 0) {
+          this.$set(this.jobListShowMap, 0, true)
+        }
+      })
     },
     methods: {
       showItem (i) {
@@ -149,6 +157,13 @@
           &.active {
             background-color: fade(@bg-body, 80%);
           }
+          .handle {
+            display: inline-block;
+            transition: transform .3s;
+            &.is-open {
+              transform: rotateZ(180deg);
+            }
+          }
         }
         tr.job-desc-tr {
           td {
@@ -199,7 +214,7 @@
           }
           tr.job-item {
             cursor: pointer;
-            font-weight:700;
+            font-weight: 700;
           }
           tr.job-desc-tr {
             td {

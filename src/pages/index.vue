@@ -1,7 +1,7 @@
 <template>
   <div class="page-index">
     <page-header/>
-    <Slider class="slider-wrap" :bannerPics="bannerPics" :style="{height:!isMobile ? '600px' : 'auto'}" :duration="6"/>
+    <Slider class="slider-wrap" :bannerPic="bannerPic" :style="{height:!isMobile ? '600px' : 'auto'}" :duration="6"/>
     <div id="platform-data">
       <div class="content clearfix">
         <div class="data-item wow fadeInUp" data-wow-duration="0.6s" data-wow-delay="0.3s">
@@ -159,11 +159,11 @@
           <router-link class="text-muted" :to="{name: 'aboutgongsijianjie'}">更多</router-link>
         </div>
       </div>
-      <div class="bg-content">
+      <div class="bg-content" v-lazy:background-image="require('../assets/img/index/about_us_bg.png')">
         <div class="content">
           <div class="ku-icon">
             <div class="ku-item">
-              <div class="icon" style="animation-name: iconEffect2"><i class="iconfont tx-icon-mingpian"></i></div>
+              <div class="icon"><i class="iconfont tx-icon-mingpian"></i></div>
               <div class="title">公司员工</div>
               <div class="desc">公司现已拥有900+员工</div>
             </div>
@@ -196,18 +196,19 @@
                :key="item.id">
             <div class="item-body">
               <div class="item-context">
-                <h3>{{item.userName}}
-                  <small>{{item.jobTitle}}</small>
+                <h3>{{item.username}}
+                  <small>{{item.honor}}</small>
                 </h3>
-                <p>{{item.comment}}</p>
+                <p v-html="item.content"></p>
               </div>
-              <div class="item-photo"
-                   v-lazy:background-image="item.photo"></div>
+              <div class="item-photo">
+                <img v-lazy="baseUrl + item.icon">
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="slide-pointer" v-if="!isMobile">
+      <div class="slide-pointer" v-if="!isMobile && userRatingList.length > 3">
         <span :class="{current: ratingCurrentPage === pointerItem}"
               v-for="(pointerItem,index) in Math.ceil(userRatingList.length / 3)"
               v-on="{mouseenter: ratingMouseenter, mouseleave: ratingNextAutoPlay}"
@@ -217,7 +218,7 @@
 
     <!--联系我们-->
 
-    <div id="contact">
+    <div id="contact" v-lazy:background-image="require('../assets/img/index/address_map.png')">
       <div class="content contact-content">
         <div class="position-tips" role="位置标记"></div>
         <div class="content address-info">
@@ -240,15 +241,16 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import MyHeader from '../components/indexHeader'
   import Slider from '../components/common/slider'
   import WOW from '../bower_components/wow/dist/wow.min'
+  import {supportWebp} from '../util/isSupportWebp'
   import CF from '../api/index'
+
+  const isSupportWebp = supportWebp()
 
   export default {
     name: 'PageIndex',
     components: {
-      MyHeader,
       Slider
     },
     metaInfo () {
@@ -263,38 +265,39 @@
     data () {
       return {
         baseUrl: CF.baseUrl,
-        bannerPics: [
-          require('../assets/img/banner/banner1.png'),
-          require('../assets/img/banner/idx_banner_1.png')
+        bannerPicNormal: [
+          require('../assets/img/banner/banner1.png')
         ],
-        clientSize: {},
+        bannerPicWebp: [
+          require('../assets/img/banner/webp/banner1.webp')
+        ],
         dynamicList: [],
         jiaoyuList: [
           {
             title: '试题调研',
             subTitle: '天星教育精品图书',
-            img: require('../assets/img/index/jycb_item1.png'),
+            img: isSupportWebp ? require('../assets/img/index/webp/jycb_item1.webp') : require('../assets/img/index/jycb_item1.png'),
             bgPosition: '85% 30px',
             to: {name: 'jiaoyuchuban', hash: '#stdy'}
           },
           {
             title: '金考卷',
             subTitle: '天星教育精品图书',
-            img: require('../assets/img/index/jycb_item2.png'),
+            img: isSupportWebp ? require('../assets/img/index/webp/jycb_item2.webp') : require('../assets/img/index/jycb_item2.png'),
             bgPosition: '100% 30px',
             to: {name: 'jiaoyuchuban', hash: '#jkj'}
           },
           {
             title: '教材帮',
             subTitle: '天星教育精品图书',
-            img: require('../assets/img/index/jycb_item3.png'),
+            img: isSupportWebp ? require('../assets/img/index/webp/jycb_item3.webp') : require('../assets/img/index/jycb_item3.png'),
             bgPosition: '96% 30px',
             to: {name: 'jiaoyuchuban', hash: '#jcb'}
           },
           {
             title: '一遍过',
             subTitle: '天星教育精品图书',
-            img: require('../assets/img/index/jycb_item4.png'),
+            img: isSupportWebp ? require('../assets/img/index/webp/jycb_item4.webp') : require('../assets/img/index/jycb_item4.png'),
             bgPosition: '90% 30px',
             to: {name: 'jiaoyuchuban', hash: '#ybg'}
           }
@@ -303,85 +306,42 @@
           {
             title: '疯狂阅读',
             subTitle: '专注所以疯狂，激情成就梦想',
-            img: require('../assets/img/index/zhcb_item1.png'),
+            img: isSupportWebp ? require('../assets/img/index/webp/zhcb_item1.webp') : require('../assets/img/index/zhcb_item1.png'),
             bgPosition: '50% 45px',
             to: {name: 'zonghechuban', hash: '#fkyd'}
           },
           {
             title: '疯狂作文',
             subTitle: '高考满分作文系列为高中必备工具书',
-            img: require('../assets/img/index/zhcb_item2.png'),
+            img: isSupportWebp ? require('../assets/img/index/webp/zhcb_item2.webp') : require('../assets/img/index/zhcb_item2.png'),
             bgPosition: '50% 45px',
             to: {name: 'zonghechuban', hash: '#fkzw'}
           },
           {
             title: '天星童书',
             subTitle: '天星童书系列专为0-12岁幼儿设计',
-            img: require('../assets/img/index/zhcb_item3.png'),
+            img: isSupportWebp ? require('../assets/img/index/webp/zhcb_item3.webp') : require('../assets/img/index/zhcb_item3.png'),
             bgPosition: '50% 45px',
             to: {name: 'zonghechuban', hash: '#qqjx'}
           }
         ],
         websiteList: [
           {
-            src: require('../assets/img/index/szcb_item1.jpg'),
+            src: isSupportWebp ? require('../assets/img/index/webp/szcb_item1.webp') : require('../assets/img/index/szcb_item1.jpg'),
             to: {name: 'shuzichuban_tianxingjiaoyu', query: {top: 1}}
           },
           {
-            src: require('../assets/img/index/szcb_item2.jpg'),
+            src: isSupportWebp ? require('../assets/img/index/webp/szcb_item2.webp') : require('../assets/img/index/szcb_item2.jpg'),
             to: {name: 'shuzichuban_weixuexiquan', query: {top: 1}}
           },
           {
-            src: require('../assets/img/index/szcb_item3.jpg'),
+            src: isSupportWebp ? require('../assets/img/index/webp/szcb_item3.webp') : require('../assets/img/index/szcb_item3.jpg'),
             to: {name: 'shuzichuban_weilainao', query: {top: 1}}
           }
         ],
         siteScreenshotDefIndex: 1,
         siteScreenshotActiveIndex: 1,
-        userRatingList: [
-          {
-            id: 1,
-            userName: '刘**2',
-            jobTitle: '',
-            photo: require('../assets/img/index/user_photo1.png'),
-            comment: '已经第6次买了吧，从第一辑开始就一直在买 给亲弟弟买的，希望能对他学习有帮助。距离高考没有多少时间了，祝他可以保持成绩，高考超常发挥！'
-          },
-          {
-            id: 2,
-            userName: '水**阿',
-            jobTitle: '特级教师',
-            photo: require('../assets/img/index/user_photo2.jpg'),
-            comment: '从第一辑买到现在，虽然有点小贵但是觉得还是有价值的。里面内容很详细，有一些小的知识点，总体来说还是可以的。支持天星教育！'
-          },
-          {
-            id: 3,
-            userName: 'p**你',
-            jobTitle: '',
-            photo: require('../assets/img/index/user_photo3.png'),
-            comment: '超级棒，有很大的帮助，找到了580分瓶颈的突破口，而且性价比很高，复习效率明显提高，方法也更科学高效。'
-          },
-          {
-            id: 4,
-            userName: '刘**2-1',
-            jobTitle: '',
-            photo: require('../assets/img/index/user_photo2.jpg'),
-            comment: '已经第6次买了吧，从第一辑开始就一直在买 给亲弟弟买的，希望能对他学习有帮助。距离高考没有多少时间了，祝他可以保持成绩，高考超常发挥！'
-          },
-          {
-            id: 5,
-            userName: '水**阿-1',
-            jobTitle: '特级教师',
-            photo: require('../assets/img/index/u-pic.jpg'),
-            comment: '从第一辑买到现在，虽然有点小贵但是觉得还是有价值的。里面内容很详细，有一些小的知识点，总体来说还是可以的。支持天星教育！'
-          },
-          {
-            id: 6,
-            userName: 'p**你-1',
-            jobTitle: '',
-            photo: require('../assets/img/index/u-pic_1.jpg'),
-            comment: '超级棒，有很大的帮助，找到了580分瓶颈的突破口，而且性价比很高，复习效率明显提高，方法也更科学高效。'
-          }
-        ],
+        userRatingList: [],
         ratingCurrentPage: 1,
         ratingTimer: null,
         ratingDuration: 6, // 秒
@@ -397,6 +357,9 @@
           return this.dynamicList[0]
         }
         return false
+      },
+      bannerPic () {
+        return isSupportWebp ? this.bannerPicWebp : this.bannerPicNormal
       }
     },
     mounted () {
@@ -411,6 +374,11 @@
         this.$nextTick(() => {
           this.initWOW('news-wow')
         })
+      })
+      this.$http.get(CF.getReviews).then(res => {
+        if (res.data) {
+          this.userRatingList = res.data
+        }
       })
       /* 用户评价 自动循环 */
       this.ratingNextAutoPlay()
@@ -819,7 +787,8 @@
       box-sizing: border-box;
       height: 500px;
       padding-top: 200px;
-      background: #fff url(../assets/img/index/about_us_bg.png) 50% 0 no-repeat;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
       .ku-icon {
         display: flex;
         flex-wrap: nowrap;
@@ -958,10 +927,15 @@
             height: 70px;
             margin-top: 30px;
             border-radius: 50%;
-            background-position: 50% 50%;
             transform: translateZ(0);
-            transition: background-size .3s, box-shadow .3s;
-            background-size: 100% 100%;
+            transition: box-shadow .3s;
+            overflow: hidden;
+            img{
+              display: block;
+              width:100%;
+              height:100%;
+              transition: transform .3s;
+            }
           }
           &:hover {
             .item-context {
@@ -984,8 +958,10 @@
               }
             }
             .item-photo {
-              background-size: 115% 115%;
               box-shadow: 0 5px 30px -5px rgba(0, 0, 0, .2);
+              img{
+                transform: scale(1.2);
+              }
             }
           }
         }
@@ -1048,7 +1024,8 @@
   /*地址*/
   #contact {
     height: 652px;
-    background: #fff url(../assets/img/index/address_map.png) 50% 0 no-repeat;
+    background-position: 50% 0;
+    background-repeat: no-repeat;
     font-weight: 400;
     .contact-content {
       height: 652px;

@@ -3,7 +3,7 @@
     <span class="menu-toggle show-xs" @click="showNavMenu"><b></b></span>
     <keep-alive>
       <transition name="fadeIn-down">
-        <ul class="nav" v-show="isShowNavMenu || !isMobile">
+        <ul class="nav" v-show="isShowNavMenu || !isMobile" v-if="navList && navList.length">
           <router-link tag="li" to="/" v-if="$route.path !== '/'"><a>首页</a></router-link>
           <li v-for="(item,index) in navList"
               @mouseenter="() => {!isMobile ? navItemVisible = index : ''}"
@@ -27,18 +27,20 @@
   </div>
 </template>
 <script type="text/ecmascript-6">
-  import {NavList} from '../store/index'
+  import {mapState} from 'vuex'
 
   export default {
     data () {
       return {
-        navList: NavList,
         navItemVisible: false,
         isShowEwm: false,
         isShowNavMenu: false
       }
     },
     computed: {
+      ...mapState({
+        navList: 'pageNav'
+      }),
       isMobile () {
         return this.$store.state.isMobile
       }

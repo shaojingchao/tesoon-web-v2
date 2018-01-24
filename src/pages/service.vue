@@ -2,9 +2,7 @@
   <div class="page-service">
     <page-header/>
     <page-banner :picture="pageBanner"/>
-    <transition name="fadeIn-down" :duration="{ enter: 500, leave: 0 }" mode="out-in">
-      <router-view></router-view>
-    </transition>
+    <router-view></router-view>
     <page-footer/>
   </div>
 </template>

@@ -8,7 +8,7 @@
 
       <!--配图-->
       <div class="nl-item-img">
-        <img :src="baseUrl + item.thumb">
+        <img v-lazy="baseUrl + item.thumb">
       </div>
 
       <!--内容-->

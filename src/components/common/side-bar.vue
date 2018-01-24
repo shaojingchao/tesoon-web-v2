@@ -1,16 +1,25 @@
 <template>
-  <div class="side-bar-wrap">
-    <div class="content pos-r auto">
-      <transition name="fadeIn-up">
-        <div class="side-bar" v-if="isShowSideBar">
-          <a class="iconfont tx-icon-weixin"></a>
-          <a class="iconfont tx-icon-tubiao215"></a>
-          <a class="iconfont tx-icon-shoujiduan"></a>
-          <a class="go-top" :class="{'is-show': isShow}" @click="backTop" title="返回顶部">
-            <i class="iconfont tx-icon-down" :class="{clicked: pageIsBackingTop}"></i>
-          </a>
+  <div>
+    <div class="mask-layer" v-if="weixinIsVisible" @click="weixinIsVisible = false">
+      <transition name="fadeIn-up" appear>
+        <div class="ewm-wrap">
+          <img src="../../assets/img/ewm.png">
         </div>
       </transition>
+    </div>
+    <div class="side-bar-wrap">
+      <div class="content pos-r auto">
+        <transition name="fadeIn-up">
+          <div class="side-bar" v-if="isShowSideBar">
+            <a class="iconfont tx-icon-weixin" @click="weixinIsVisible = true"></a>
+            <!--<a class="iconfont tx-icon-tubiao215"></a>-->
+            <!--<a class="iconfont tx-icon-shoujiduan"></a>-->
+            <a class="go-top" :class="{'is-show': isShow}" @click="backTop" title="返回顶部">
+              <i class="iconfont tx-icon-down" :class="{clicked: pageIsBackingTop}"></i>
+            </a>
+          </div>
+        </transition>
+      </div>
     </div>
   </div>
 </template>
@@ -25,6 +34,7 @@
     name: 'SideBar',
     data () {
       return {
+        weixinIsVisible: false,
         offsetHeight: 800,
         isShowSideBar: false,
         scrollTop: null,
@@ -86,6 +96,42 @@
   }
 </script>
 
+
+
+<style lang="less" scoped>
+  .mask-layer {
+    z-index: 10001;
+    position: fixed;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,.5);
+  }
+  .ewm-wrap{
+    position: absolute;
+    top:50%;
+    left:50%;
+    width:150px;
+    height:150px;
+    margin-top:-75px;
+    margin-left:-75px;
+    img{
+      display: block;
+      max-height: 100%;
+      max-width:100%;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .ewm-wrap{
+      width:120px;
+      height:120px;
+      margin-top:-60px;
+      margin-left:-60px;
+    }
+  }
+</style>
 
 <style lang="less" rel="stylesheet/less" scoped>
   .side-bar-wrap {

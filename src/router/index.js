@@ -210,14 +210,13 @@ const router = new Router({
 })
 
 // 路由钩子
-router.afterEach((to) => {
+router.afterEach((to, from) => {
+  console.log()
   $(document).ready(() => {
-    console.log(to)
-    if (to.hash && to.hash.length > 1) {
-      let currentY = document.documentElement.getBoundingClientRect().y
+    if (to.hash && to.hash !== '#') {
       let el = document.querySelector(to.hash)
       if (el) {
-        scrollTo(0, el.getBoundingClientRect().y - currentY)
+        scrollTo(0, el.offsetTop)
       }
       // 完成导航后滚动到页面顶部
     } else if (to.meta.scrollToTop === undefined || to.meta.scrollToTop === true || to.query.top === 1) {

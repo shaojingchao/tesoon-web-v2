@@ -3,19 +3,19 @@
     <page-header/>
     <page-banner :picture="pageBanner"/>
     <div class="dynamic-page content clearfix">
-      <div class="dynamic-cate">
+      <div class="dynamic-cate" v-if="dynamicNav && dynamicNav.children.length">
         <div class="cate-item">
-          <h3 class="cate-item-title">天星动态<br>
-            <small>STAR DYNAMIC</small>
+          <h3 class="cate-item-title">{{dynamicNav.name}}<br>
+            <small>{{dynamicNav.subName}}</small>
           </h3>
           <div class="split-line"></div>
           <ul class="cate-list">
             <router-link
               :class="{current:currentNav === item.tid}"
-              v-for="(item,index) in navList"
-              :key="item.id"
+              v-for="(item,index) in dynamicNav.children"
+              :key="item.tid"
               tag="li"
-              :to="{path:'/dynamic/'+item.tid}"><a class="db">{{item.name}}</a></router-link>
+              :to="item.to"><a class="db">{{item.name}}</a></router-link>
           </ul>
         </div>
       </div>
@@ -29,18 +29,16 @@
                :totalCount="pages.totalCount"
                v-if="pages.pageNum > 1"/>
       </div>
-     <part-loading v-if="isLoading"/>
+      <part-loading v-if="isLoading"/>
     </div>
     <page-footer/>
-    <img :src="Loading" alt="">
   </div>
 </template>
 <script type="text/ecmascript-6">
+  import {mapGetters} from 'vuex'
   import DynamicList from '../components/dynamic-list.vue'
   import Pager from '../components/common/pager.vue'
   import CF from '../api/index'
-  import Loading from 'loading-svg/loading-bars.svg'
-  console.log(Loading)
 
   export default {
     components: {
@@ -53,6 +51,9 @@
       }
     },
     computed: {
+      ...mapGetters([
+        'dynamicNav'
+      ]),
       isMobile () {
         return this.$store.state.isMobile
       },
@@ -62,33 +63,10 @@
     },
     data () {
       return {
-        Loading: Loading,
         isLoading: false,
         baseUrl: CF.baseUrl,
         pageBannerNormal: require('../assets/img/banner/dynamic_banner.png'),
         pageBannerMobile: require('../assets/img/banner/mobile_dynamic_banner.jpg'),
-        navList: [
-          {
-            tid: '0',
-            cate: 'all',
-            name: '全部'
-          },
-          {
-            tid: '9',
-            cate: 'jt',
-            name: '集团新闻'
-          },
-          {
-            tid: '10',
-            cate: 'hy',
-            name: '行业新闻'
-          },
-          {
-            tid: '11',
-            cate: 'yg',
-            name: '员工活动'
-          }
-        ],
         navItemTag: ['0', '9', '10', '11'],
         currentNav: '',
         newList: [],
@@ -106,6 +84,8 @@
     beforeRouteUpdate (to, from, next) {
       this.routeFunc(to)
       next()
+    },
+    mounted () {
     },
     methods: {
       routeFunc (to) {

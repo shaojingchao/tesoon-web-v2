@@ -1,14 +1,13 @@
 <template>
   <div id="app">
-    <side-bar></side-bar>
-    <!--<div class="g-components-view">-->
-    <!--</div>-->
+    <side-bar/>
     <router-view class="view-content"></router-view>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import SideBar from './components/common/side-bar.vue'
+  import SideBarWeixin from './components/common/side-bar-weixin.vue'
   export default {
     name: 'app',
     data () {
@@ -17,15 +16,8 @@
       }
     },
     components: {
-      SideBar
-    },
-    beforeRouteUpdate (to, from, next) {
-      alert('ds')
-      console.log('sdfsdfdsddfssdfsd')
-      console.log(to, from, next)
-      // 在渲染该组件的对应路由被 confirm 前调用
-      // 不！能！获取组件实例 `this`
-      // 因为当守卫执行前，组件实例还没被创建
+      SideBar,
+      SideBarWeixin
     },
     mounted () {
       setTimeout(() => {

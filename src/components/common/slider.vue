@@ -1,10 +1,10 @@
 <!--vue slider components-->
 <template>
   <div class="wln-slider">
-    <div class="hd" v-if="bannerPics && bannerPics.length>1">
+    <div class="hd" v-if="bannerPic && bannerPic.length>1">
       <div class="nav-bar">
         <span
-          v-for="(item,index) in bannerPics.length"
+          v-for="(item,index) in bannerPic.length"
           :class="{'active':(index === currentIndex)}"
           @click="showThisBanner(index)"
           @mouseover="hoverThisBannerBar"
@@ -15,11 +15,9 @@
     </div>
     <div class="bd">
       <ul>
-        <li v-for="(item,index) in bannerPics"
-            :style="{background: 'url('+item+') 50% 50% no-repeat',
-              'background-size': 'cover',
-              visibilty:(currentIndex===index?'visible':'hidden'),
-              opacity:(currentIndex===index?'1':'0')}">
+        <li v-for="(item,index) in bannerPic"
+            :class="{active: currentIndex===index}"
+            v-lazy:background-image="item">
           <!--<div class="banner-words" v-if="index === 1"/>-->
           <!--<Sky v-if="index === 1"/>-->
         </li>
@@ -38,7 +36,7 @@
         type: Number,
         default: 5
       },
-      bannerPics: {
+      bannerPic: {
         type: Array,
         required: true,
         validator: function (len) {
@@ -61,10 +59,10 @@
     },
     methods: {
       bannerAutoPlay () {
-        if (this.bannerPics > 2) return false
+        if (this.bannerPic > 2) return false
         clearInterval(this.timer)
         this.timer = setInterval(() => {
-          if (this.currentIndex < this.bannerPics.length - 1) {
+          if (this.currentIndex < this.bannerPic.length - 1) {
             this.currentIndex++
           } else {
             this.currentIndex = 0
@@ -110,14 +108,28 @@
       ul {
         position: relative;
         height: 100%;
-        width: 100% !important;
+        width: 100%;
         li {
-          width: 100% !important;
-          height: 100%;
           position: absolute;
           left: 0;
           top: 0;
-          transition: opacity .9s;
+          width: 100%;
+          height: 100%;
+          background-position: center center !important;
+          background-repeat: no-repeat;
+          background-size: cover !important;
+          visibility: hidden;
+          opacity: 0;
+          transition: opacity 0.9s, visibility 0.9s;
+          &[lazy=loading]{ // 重要！懒加载适用
+            display: none;
+          }
+          &.active {
+            display: block;
+            visibility: visible;
+            opacity: 1;
+            left: 0;
+          }
         }
       }
     }
@@ -130,7 +142,7 @@
       text-align: center;
       z-index: 1;
       .nav-bar {
-        height:10px;
+        height: 10px;
         cursor: default;
         span {
           width: 10px;
@@ -142,7 +154,7 @@
           cursor: pointer;
           opacity: 0.5;
           background-color: #fff;
-          box-shadow: 0 1px 4px -1px rgba(0,0,0,.4);
+          box-shadow: 0 1px 4px -1px rgba(0, 0, 0, .4);
           &.active {
             cursor: default;
             opacity: 1;
@@ -170,14 +182,12 @@
           height: @height;
           li {
             height: @height;
-            background-position: center center !important;
-            background-size: cover !important;
           }
         }
       }
       .hd {
         width: 100%;
-        bottom:10px;
+        bottom: 10px;
         margin-left: -50vw;
         .nav-bar {
           span {

@@ -1,28 +1,34 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
+import CF from '../api/index'
+
 Vue.use(Vuex)
-export const NavList = [
+Vuex.Store.prototype.$http = axios
+
+console.log(Vuex)
+let pageNav = [
   {
     name: '天星动态',
     subName: 'STAR DYNAMIC',
     to: {name: 'dynamic'},
     children: [
       {
-        name: '集团新闻',
-        to: {name: 'dynamictype', params: {tid: 9}}
+        name: '公司新闻',
+        to: {name: 'dynamictype'}
       },
       {
         name: '行业新闻',
-        to: {name: 'dynamictype', params: {tid: 10}}
+        to: {name: 'dynamictype'}
       },
       {
         name: '员工活动',
-        to: {name: 'dynamictype', params: {tid: 11}}
+        to: {name: 'dynamictype'}
       }
     ]
   },
   {
-    name: '集团业务',
+    name: '公司业务',
     subName: 'BUSINESS',
     to: {name: 'service'},
     children: [
@@ -76,13 +82,51 @@ export const NavList = [
 const store = new Vuex.Store({
   state: {
     isMobile: false,
-    mobileWidth: 767
+    mobileWidth: 767,
+    pageNav
+  },
+  getters: {
+    dynamicNav (state) {
+      return state.pageNav[0]
+    }
   },
   mutations: {
     resize (state) {
       state.isMobile = document.body.clientWidth <= state.mobileWidth
+    },
+    updateMainNav (state, list) {
+      state.pageNav[0].children = list.map(item => {
+        return {
+          tid: item.tid,
+          name: item.name,
+          to: {name: 'dynamictype', params: {tid: item.tid}}
+        }
+      })
+    }
+  },
+  actions: {
+    getDynamicType () {
+      // 获取新闻分类
+      this.$http.get(CF.getDynamicsType).then((res, rev) => {
+        let _data = res.data
+        let _list = [
+          {
+            tid: '0',
+            name: '全部'
+          }
+        ]
+        Object.keys(_data).forEach((item, i) => {
+          _list.push({
+            tid: item,
+            name: _data[item]
+          })
+        })
+        this.commit('updateMainNav', _list)
+      })
     }
   }
 })
+
+store.dispatch('getDynamicType')
 
 export default store

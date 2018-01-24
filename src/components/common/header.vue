@@ -23,9 +23,9 @@
     box-shadow:0 4px 15px -2px rgba(0,0,0,.2);
     .logo {
       float: left;
-      width: 146px;
+      width: 131px;
       height: 80px;
-      background: url(../../assets/img/logo-2.png) 50% 50% no-repeat;
+      background: url(../../assets/img/logo_normal.png) 50% 50% no-repeat;
     }
   }
   @media screen and (max-width: 767px) {

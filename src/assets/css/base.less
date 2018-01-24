@@ -54,7 +54,7 @@
   }
 }
 
-//集团业务
+//公司业务
 .service-page{
   padding-bottom: 80px;
   .sp-content{
@@ -82,6 +82,19 @@
   }
 }
 
+//lazyload
+img[lazy]{
+transition: opacity 1s;
+}
+img[lazy=loading] {
+  opacity: 0;
+}
+img[lazy=error] {
+  /*your style here*/
+}
+img[lazy=loaded] {
+  opacity: 1;
+}
 @media screen and (max-width: 767px) {
   .page-nav-tab{
     white-space: nowrap;
