@@ -45,6 +45,9 @@
         return this.$store.state.isMobile
       }
     },
+    mounted () {
+      console.log(this.navList)
+    },
     methods: {
       showNavMenu () {
         this.isShowNavMenu = !this.isShowNavMenu

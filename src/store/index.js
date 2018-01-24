@@ -5,8 +5,6 @@ import CF from '../api/index'
 
 Vue.use(Vuex)
 Vuex.Store.prototype.$http = axios
-
-console.log(Vuex)
 let pageNav = [
   {
     name: '天星动态',
@@ -112,7 +110,7 @@ const store = new Vuex.Store({
         let _list = [
           {
             tid: '0',
-            name: '全部'
+            name: '全部动态'
           }
         ]
         Object.keys(_data).forEach((item, i) => {

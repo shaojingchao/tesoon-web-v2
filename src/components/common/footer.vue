@@ -2,16 +2,16 @@
   <footer class="footer-wrap">
     <div class="footer">
       <div class="footer-nav">
-        <div class="nav-item-wrap">
-          <div class="fn-item" v-for="(item,index) in navList">
-            <div class="item-tit">{{item.name}}<br>
-              <small>{{item.subName}}</small>
-            </div>
-            <ul v-if="item.children && item.children.length > 0">
-              <li v-for="(subItem,subIndex) in item.children" :key="subIndex">
-                <router-link :to="subItem.to">{{subItem.name}}</router-link>
-              </li>
-            </ul>
+        <div class="nav-item-wrap" v-if="pageNav && pageNav.length">
+          <div class="fn-item" v-for="(item,index) in pageNav">
+          <div class="item-tit">{{item.name}}<br>
+          <small>{{item.subName}}</small>
+          </div>
+          <ul v-if="item.children && item.children.length > 0">
+          <li v-for="(subItem,subIndex) in item.children" :key="subIndex">
+          <router-link :to="subItem.to">{{subItem.name}}</router-link>
+          </li>
+          </ul>
           </div>
           <div class="fn-item">
             <div class="item-tit">联系我们<br>
@@ -35,21 +35,25 @@
         </div>
       </div>
       <div class="ft-copyright">
-        Copyright © 1998-2018 All Rights Reserved  河南天星教育传媒股份有限公司 豫B2-20130009
+        Copyright © 1998-2018 All Rights Reserved 河南天星教育传媒股份有限公司 豫B2-20130009
       </div>
     </div>
   </footer>
 </template>
 
 <script>
-  import {NavList} from '../../store/index'
+  import {mapState} from 'vuex'
+  console.log(mapState)
 
   export default {
     name: 'PageFooter',
     data () {
-      return {
-        navList: NavList
-      }
+      return {}
+    },
+    computed: mapState(['pageNav']),
+    mounted () {
+      console.log(this.pageNav)
+      // console.log(this.navList)
     }
   }
 </script>
@@ -78,10 +82,10 @@
         color: #fff;
         font-size: 16px;
         margin-bottom: 10px;
-        small{
+        small {
           display: block;
-          font-size:12px;
-          color:rgba(255, 255, 255, .3);
+          font-size: 12px;
+          color: rgba(255, 255, 255, .3);
         }
       }
       li {
@@ -110,6 +114,7 @@
       }
     }
   }
+
   .ft-copyright {
     padding: 30px 0;
     margin-top: 20px;
@@ -122,16 +127,16 @@
   @media screen and (max-width: 767px) {
     .footer-nav {
       padding-top: 30px;
-      padding-left:25px;
-      padding-right:25px;
-      .nav-item-wrap{
+      padding-left: 25px;
+      padding-right: 25px;
+      .nav-item-wrap {
         overflow: hidden;
       }
-      .fn-item{
-        width:50%;
+      .fn-item {
+        width: 50%;
         padding-bottom: 20px;
-        .item-tit{
-          font-weight:700;
+        .item-tit {
+          font-weight: 700;
         }
       }
       .fn-item-ewm {
@@ -144,6 +149,7 @@
         }
       }
     }
+
     .ft-copyright {
       margin-top: 15px;
       padding: 10px;
