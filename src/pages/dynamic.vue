@@ -51,17 +51,13 @@
       ]),
       isMobile () {
         return this.$store.state.isMobile
-      },
-      pageBanner () {
-        return this.isMobile ? this.pageBannerMobile : this.pageBannerNormal
       }
     },
     data () {
       return {
         isLoading: false,
         baseUrl: CF.baseUrl,
-        pageBannerNormal: require('../assets/img/banner/dynamic_banner.png'),
-        pageBannerMobile: require('../assets/img/banner/mobile_dynamic_banner.jpg'),
+        pageBanner: require('../assets/img/banner/dynamic_banner.png'),
         navItemTag: ['0', '9', '10', '11'],
         currentNav: '',
         newList: [],
