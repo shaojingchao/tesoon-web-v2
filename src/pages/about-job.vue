@@ -16,17 +16,19 @@
           </thead>
           <tbody>
           <template v-for="(item,index) in list">
-            <tr class="job-item" :class="{'active': jobListShowMap[index] === true}"
+            <tr class="job-item" :class="{'active': jobListShowMap[index]}"
                 @click="showItem(index)">
               <td>{{item.title}}</td>
               <td class="un-select tc">{{item.salary_range}}</td>
               <td class="un-select tc">{{item.city}}</td>
-              <td class="un-select tc">{{item.add_time * 1000 | formatTime}}</td>
+              <td class="un-select tc">{{(item.add_time > item.update_time ? item.add_time : item.update_time) * 1000 |
+                formatTime}}
+              </td>
               <td class="un-select tc"><i class="handle iconfont tx-icon-down"
-                                          :class="{'is-open': jobListShowMap[index] === true}"></i></td>
+                                          :class="{'is-open': jobListShowMap[index]}"></i></td>
             </tr>
             <transition name="fadeIn-down">
-              <tr class="job-desc-tr" v-show="jobListShowMap[index] === true">
+              <tr class="job-desc-tr" v-show="jobListShowMap[index]">
                 <td colspan="5">
                   <div class="job-desc-content">
                     <p v-if="item.description" v-html="'岗位职责：<br>' + item.description"></p>
@@ -43,7 +45,18 @@
           </tbody>
         </table>
       </div>
-      <part-loading v-if="isLoading"/>
+      <div class="tc pt30" style="height:40px;" v-if="!isLoaded">
+        <part-loading style="padding:0; height:40px;" v-if="isLoading"/>
+        <!--<span v-else-if="isLoaded" class="grayc">没有更多招聘信息~</span>-->
+        <a href="javascript:" class="btn btn-primary" @click="loadMore" v-else>加载更多</a>
+      </div>
+
+      <div class="tc text-muted f16 mt30">
+        <a href="http://company.zhaopin.com/%E9%83%91%E5%B7%9E%E5%A4%A9%E6%98%9F%E6%95%99%E8%82%B2%E5%9B%BE%E4%B9%A6%E7%AD%96%E5%88%92%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8_CC153971215.htm"
+           target="_blank"
+           class="btn btn-link">查看全部招聘信息 <small>（智联招聘）</small></a>
+      </div>
+
     </div>
   </div>
 </template>
@@ -55,16 +68,14 @@
     data () {
       return {
         pageBanner: require('../assets/img/banner/product_banner.png'),
-        jobList: 10,
-        jobListShowMap: [],
+        jobListShowMap: [], // 默认展开全部职位
         isLoading: false,
-        isLoadDone: false,
+        pages: {
+          page: 0,
+          pageNum: null,
+          totalCount: null
+        },
         list: []
-      }
-    },
-    metaInfo () {
-      return {
-        title: '天星教育 - 加入我们'
       }
     },
     filters: {
@@ -73,25 +84,41 @@
     computed: {
       isMobile () {
         return this.$store.state.isMobile
+      },
+      isLoaded () {
+        return this.pages.page === parseInt(this.pages.pageNum)
       }
     },
     mounted () {
-      this.isLoading = true
-      this.$http.get(CF.getJobs).then(res => {
-        if (res.data) {
-          this.list = res.data
-          this.list.sort((a, b) => Math.max(a.add_time, a.update_time) < Math.max(b.add_time, b.update_time)) // 按时间排序
-          this.isLoading = false
-        }
-        // 默认展开第一个职位
-        if (this.list.length > 0) {
-          this.$set(this.jobListShowMap, 0, true)
-        }
+      this.getJobData(() => {
+        this.$set(this.jobListShowMap, 0, true)
       })
     },
     methods: {
+      getJobData (cb) {
+        if (this.isLoaded) return false
+        this.pages.page += 1
+        this.isLoading = true
+        this.$http.get(CF.getJobs, {
+          params: {
+            page: this.pages.page,
+            pagesize: 15 // 请求 5 条数据
+          }
+        }).then(res => {
+          if (res.data.data) {
+            this.list = this.list.concat(res.data.data)
+            this.pages.pageNum = res.data.pages.pageNum
+            this.pages.pageCount = res.data.pages.pageCount
+            this.isLoading = false
+            cb && cb()
+          }
+        })
+      },
       showItem (i) {
         this.$set(this.jobListShowMap, i, !this.jobListShowMap[i])
+      },
+      loadMore () {
+        this.getJobData()
       }
     }
   }

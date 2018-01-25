@@ -15,11 +15,6 @@
       return {
         pageBanner: require('../assets/img/banner/about_banner.png')
       }
-    },
-    metaInfo () {
-      return {
-        title: '天星教育 - 了解天星'
-      }
     }
   }
 </script>

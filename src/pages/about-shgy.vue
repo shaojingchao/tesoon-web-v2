@@ -91,11 +91,6 @@
           }
         ]
       }
-    },
-    metaInfo () {
-      return {
-        title: '天星教育 - 教育出版'
-      }
     }
   }
 </script>

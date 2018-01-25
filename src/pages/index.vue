@@ -130,16 +130,26 @@
       <h1 class="section-title">数字出版<br>
         <small>DIGITAL PUBLISHING</small>
       </h1>
-      <div class="content website-list">
-        <router-link class="screen-shot"
-                     :class="{'is-active': siteScreenshotActiveIndex === index}"
-                     v-for="(site,index) in websiteList"
-                     :to="site.to"
-                     @mouseenter.native="siteScreenshotActive(index)"
-                     @mouseleave.native="siteScreenshotActiveIndex = siteScreenshotDefIndex"
-                     :key="index">
-          <img v-lazy="site.src">
-        </router-link>
+      <div class="website-list-scroll-wrap">
+        <span class="scroll-to-left" :class="{'disabled':webCurrentPage === 0}" @click="webGoLeft" v-if="isMobile">
+          <i class="iconfont tx-icon-down"></i>
+        </span>
+        <span class="scroll-to-right" :class="{'disabled':webCurrentPage === 2}" @click="webGoRight" v-if="isMobile">
+          <i class="iconfont tx-icon-down"></i>
+        </span>
+        <div class="website-list-scroll">
+          <div :style="{transform: 'translate(-'+(33.333 * webCurrentPage)+'%,0)'}" :title="webCurrentPage" class="content website-list">
+            <router-link class="screen-shot"
+                         :class="{'is-active': siteScreenshotActiveIndex === index}"
+                         v-for="(site,index) in websiteList"
+                         :to="site.to"
+                         @mouseenter.native="siteScreenshotActive(index)"
+                         @mouseleave.native="siteScreenshotActiveIndex = siteScreenshotDefIndex"
+                         :key="index">
+              <img v-lazy="site.src">
+            </router-link>
+          </div>
+        </div>
       </div>
       <div class="known-more-wrap">
         <router-link class="known-more-btn btn" :to="{name: 'shuzichuban'}">更多</router-link>
@@ -194,7 +204,7 @@
                v-on="{mouseenter: ratingMouseenter, mouseleave: ratingNextAutoPlay}"
                v-for="(item, index) in userRatingList"
                :key="item.id">
-            <div class="item-body">
+            <div class="item-body" :class="{'active': userRatingListActive === index}">
               <div class="item-context">
                 <h3>{{item.username}}
                   <small>{{item.honor}}</small>
@@ -255,7 +265,6 @@
     },
     metaInfo () {
       return {
-        title: '天星教育 - 首页',
         meta: [{
           name: '河南天星教育传媒股份有限公司',
           content: '天星教育是一家致力于教育图书出版及提供教育信息服务的文化教育机构，自1998年成立以来，已发展成为河南民营书业的旗舰品牌。公司坐落于历史文化源远流长的中原大地，秉承着中原儿女自强不息、上下求索的民族精神，积极投身于文化产业发展的大潮中，为了民族教育的振兴和发展，贡献着自己的智慧和热忱。'
@@ -341,7 +350,9 @@
         ],
         siteScreenshotDefIndex: 1,
         siteScreenshotActiveIndex: 1,
+        webCurrentPage: 0,
         userRatingList: [],
+        userRatingListActive: 0,
         ratingCurrentPage: 1,
         ratingTimer: null,
         ratingDuration: 6, // 秒
@@ -397,10 +408,23 @@
         if (this.isMobile) return false
         this.siteScreenshotActiveIndex = i
       },
+      webGoRight () { // 数字出版滑动效果
+        if (!this.isMobile) return false
+        if (this.webCurrentPage < 2) {
+          this.webCurrentPage++
+        }
+      },
+      webGoLeft () { // 数字出版滑动效果
+        if (!this.isMobile) return false
+        if (this.webCurrentPage > 0) {
+          this.webCurrentPage--
+        }
+      },
       ratingNextPage (i) { /* 用户评价 */
         this.ratingCurrentPage = i
       },
       ratingMouseenter () {
+        this.userRatingListActive = false
         if (this.isMobile) return false
         clearInterval(this.ratingTimer)
       },
@@ -451,7 +475,7 @@
       padding: 40px;
       margin: 0 auto;
       text-align: center;
-      padding-bottom: 0;
+      padding-bottom: 2px;
     }
     .known-more-btn {
       border-color: #e1e1e1;
@@ -930,14 +954,14 @@
             transform: translateZ(0);
             transition: box-shadow .3s;
             overflow: hidden;
-            img{
+            img {
               display: block;
-              width:100%;
-              height:100%;
+              width: 100%;
+              height: 100%;
               transition: transform .3s;
             }
           }
-          &:hover {
+          &:hover, &.active {
             .item-context {
               background-color: @primary;
               transform: translateY(-8px);
@@ -959,7 +983,7 @@
             }
             .item-photo {
               box-shadow: 0 5px 30px -5px rgba(0, 0, 0, .2);
-              img{
+              img {
                 transform: scale(1.2);
               }
             }
@@ -1222,7 +1246,7 @@
     .page-index {
       .known-more-wrap {
         padding: 20px;
-        padding-bottom: 0;
+        padding-bottom: 2px;
       }
 
       /*section*/
@@ -1400,13 +1424,53 @@
 
     /*数字出版*/
     #website {
+      .website-list-scroll-wrap{
+        position: relative;
+        .scroll-to-left,.scroll-to-right{
+          height:50px;
+          line-height:50px;
+          width:50px;
+          position: absolute;
+          top:50%;
+          color:#888;
+          margin-top:-25px;
+          text-align: center;
+          .iconfont{
+            font-size:30px;
+            display: inline-block;
+          }
+          &:active{
+            color:#666;
+          }
+          &.disabled{
+            opacity: 0.6;
+          }
+        }
+        .scroll-to-left{
+          transform: rotateZ(90deg);
+          left:0;
+        }
+        .scroll-to-right{
+          right:0;
+          transform: rotateZ(-90deg);
+        }
+      }
+      .website-list-scroll {
+        width: auto;
+        overflow: hidden;
+        box-sizing: border-box;
+        margin: 0 40px;
+      }
       .website-list {
-        flex-wrap: wrap;
-        padding: 0 15px;
+        width: 300%;
+        flex-wrap: nowrap;
         margin-bottom: 8px;
+        padding:15px 0;
+        transition: transform 1.2s @effectFunc;
         .screen-shot {
-          width: 100%;
-          margin: 8px 0;
+          width: 98%;
+          box-sizing: border-box;
+          margin: 8px 1%;
           box-shadow: 0 1px 10px -1px rgba(0, 0, 0, .2);
           transform: scale(1);
           &.is-active {

@@ -11,6 +11,17 @@
           <p>少儿读物出版领域以国外优秀绘本引进为主，同时积极开发原创优秀读物，力争为中国少年儿童提供有益、有趣、独特的阅读内容和体验。</p>
         </div>
 
+        <div class="pro-list-section" id="fkyd">
+          <div class="pro-cover">
+            <img src="../assets/img/zhcb_pro_03.png">
+          </div>
+          <div class="pro-desc">
+            <h3>《疯狂阅读  英语时空》 <small class="text-muted">品异域风情，学地道英语！</small></h3>
+            <p>内容特色：时尚、地道、丰富、好用。<br>
+              核心版块：环球、光影、风尚、美文、潮玩、酷学、乐读、英派。</p>
+          </div>
+        </div>
+
         <div class="pro-list-section" id="fkzw">
           <div class="pro-cover">
             <img src="../assets/img/zhcb_pro_02.png">
@@ -27,63 +38,52 @@
           </div>
         </div>
 
-        <div class="pro-list-section" id="fkyd">
-          <div class="pro-cover">
-            <img src="../assets/img/zhcb_pro_03.png">
-          </div>
-          <div class="pro-desc">
-            <h3>《疯狂阅读  英语时空》 <small class="text-muted">品异域风情，学地道英语！</small></h3>
-            <p>内容特色：时尚、地道、丰富、好用。<br>
-              核心版块：环球、光影、风尚、美文、潮玩、酷学、乐读、英派。</p>
-          </div>
-        </div>
+        <!--<div class="pro-list-section" id="wyd">-->
+          <!--<div class="pro-cover">-->
+            <!--<img src="../assets/img/zhcb_pro_04.png">-->
+          <!--</div>-->
+          <!--<div class="pro-desc">-->
+            <!--<h3>微悦读书系列</h3>-->
+            <!--<p>桌斗伙伴、枕边书，可作素材、可以爆笑、可以思考。</p>-->
+          <!--</div>-->
+        <!--</div>-->
 
-        <div class="pro-list-section" id="wyd">
-          <div class="pro-cover">
-            <img src="../assets/img/zhcb_pro_04.png">
-          </div>
-          <div class="pro-desc">
-            <h3>微悦读书系列</h3>
-            <p>桌斗伙伴、枕边书，可作素材、可以爆笑、可以思考。</p>
-          </div>
-        </div>
+        <!--<div class="pro-list-section" id="gllsk">-->
+          <!--<div class="pro-cover">-->
+            <!--<img src="../assets/img/zhcb_pro_05.png">-->
+          <!--</div>-->
+          <!--<div class="pro-desc">-->
+            <!--<h3>《鬼脸历史课》</h3>-->
+            <!--<p>国内首部小说化教辅，可以用来考试的课外书！</p>-->
+          <!--</div>-->
+        <!--</div>-->
 
-        <div class="pro-list-section" id="gllsk">
-          <div class="pro-cover">
-            <img src="../assets/img/zhcb_pro_05.png">
-          </div>
-          <div class="pro-desc">
-            <h3>《鬼脸历史课》</h3>
-            <p>国内首部小说化教辅，可以用来考试的课外书！</p>
-          </div>
-        </div>
+        <!--<div class="pro-list-section" id="zwtj">-->
+          <!--<div class="pro-cover">-->
+            <!--<img src="../assets/img/zhcb_pro_06.png">-->
+          <!--</div>-->
+          <!--<div class="pro-desc">-->
+            <!--<h3>作文中高考特辑</h3>-->
+            <!--<p>三位一体，中高考写作完全解决方案。</p>-->
+          <!--</div>-->
+        <!--</div>-->
 
-        <div class="pro-list-section" id="zwtj">
-          <div class="pro-cover">
-            <img src="../assets/img/zhcb_pro_06.png">
-          </div>
-          <div class="pro-desc">
-            <h3>作文中高考特辑</h3>
-            <p>三位一体，中高考写作完全解决方案。</p>
-          </div>
-        </div>
-
-        <div class="pro-list-section" id="yzsc">
-          <div class="pro-cover">
-            <img src="../assets/img/zhcb_pro_07.png">
-          </div>
-          <div class="pro-desc">
-            <h3>赢在素材</h3>
-            <p>素材解读3.0开创者，攒材、析材、用材，一站解决！</p>
-          </div>
-        </div>
+        <!--<div class="pro-list-section" id="yzsc">-->
+          <!--<div class="pro-cover">-->
+            <!--<img src="../assets/img/zhcb_pro_07.png">-->
+          <!--</div>-->
+          <!--<div class="pro-desc">-->
+            <!--<h3>赢在素材</h3>-->
+            <!--<p>素材解读3.0开创者，攒材、析材、用材，一站解决！</p>-->
+          <!--</div>-->
+        <!--</div>-->
 
         <div class="pro-list-section" id="qqjx">
           <div class="pro-cover">
             <img src="../assets/img/zhcb_pro_08.png">
           </div>
           <div class="pro-desc">
-            <h3>全球精选第1辑——《我的小影子》</h3>
+            <h3>天星童书系列——《我的小影子》</h3>
             <p>适读年龄：2-6岁<br>
               内容简介：<br>
               本书是畅销经典名著《金银岛》作者——英国文坛巨匠罗伯特·路易斯·史蒂文森的经典儿童作品。<br>
@@ -93,26 +93,26 @@
           </div>
         </div>
 
-        <div class="pro-list-section" id="bhxxl">
-          <div class="pro-cover">
-            <img src="../assets/img/zhcb_pro_09.png">
-          </div>
-          <div class="pro-desc">
-            <h3>保护想象力系列——《去上学的路上》</h3>
-            <p>适读年龄：2-6岁<br>
-              内容简介：<br>
-              莉薇已经学会很多东西了，她不像去上学。所以在去上学的路上她一直磨蹭个不停。她一会幻想自己是一个海盗船长，哼！谁把战利品藏起来了？一会幻想自己是一只袋鼠，蹦蹦跳跳往前走：一会又变身为一位电影明星，在镜头前摆姿势... ...可是，莉薇就是不想去上学。不过等莉薇到了学校之后，开始读绘本、学算术、上体育课... ...她度过了非常愉快的一天！<br>
-              编辑推荐：<br>
-              美国儿童图书委员会年度好书<br>
-              美国班克街教育学院年度好书<br>
-              美国儿童俱乐部推荐童书<br>
-              《纽约时报书评》书架选择奖<br>
-              《哈利·波特》原出版社Bloomsbury畅销本<br>
-              著名作家、翻译家、阅读推广人彭懿倾情翻译、推荐<br>
-              孙莉莉、彭懿、粲然、柚子爸、《出版者周刊》、《学校图书馆期刊》、《科克斯书评》等一致好评
-            </p>
-          </div>
-        </div>
+        <!--<div class="pro-list-section" id="bhxxl">-->
+          <!--<div class="pro-cover">-->
+            <!--<img src="../assets/img/zhcb_pro_09.png">-->
+          <!--</div>-->
+          <!--<div class="pro-desc">-->
+            <!--<h3>保护想象力系列——《去上学的路上》</h3>-->
+            <!--<p>适读年龄：2-6岁<br>-->
+              <!--内容简介：<br>-->
+              <!--莉薇已经学会很多东西了，她不像去上学。所以在去上学的路上她一直磨蹭个不停。她一会幻想自己是一个海盗船长，哼！谁把战利品藏起来了？一会幻想自己是一只袋鼠，蹦蹦跳跳往前走：一会又变身为一位电影明星，在镜头前摆姿势... ...可是，莉薇就是不想去上学。不过等莉薇到了学校之后，开始读绘本、学算术、上体育课... ...她度过了非常愉快的一天！<br>-->
+              <!--编辑推荐：<br>-->
+              <!--美国儿童图书委员会年度好书<br>-->
+              <!--美国班克街教育学院年度好书<br>-->
+              <!--美国儿童俱乐部推荐童书<br>-->
+              <!--《纽约时报书评》书架选择奖<br>-->
+              <!--《哈利·波特》原出版社Bloomsbury畅销本<br>-->
+              <!--著名作家、翻译家、阅读推广人彭懿倾情翻译、推荐<br>-->
+              <!--孙莉莉、彭懿、粲然、柚子爸、《出版者周刊》、《学校图书馆期刊》、《科克斯书评》等一致好评-->
+            <!--</p>-->
+          <!--</div>-->
+        <!--</div>-->
       </div>
     </div>
   </div>
@@ -123,11 +123,6 @@
     data () {
       return {
         pageBanner: require('../assets/img/banner/product_banner.png')
-      }
-    },
-    metaInfo () {
-      return {
-        title: '天星教育 - 综合出版'
       }
     }
   }

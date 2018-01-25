@@ -16,7 +16,7 @@
     }
   }
 </script>
-<style lang="less">
+<style lang="less" scoped>
   .page-header{
     position: relative;
     z-index:100;
@@ -34,6 +34,7 @@
         width: 100px;
         height: 48px;
         background-size: contain;
+        background-image: url(../../assets/img/logo_2x.jpg);
       }
     }
   }

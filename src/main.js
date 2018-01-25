@@ -16,12 +16,9 @@ import PageBanner from './components/common/page-banner'
 import PartLoading from './components/common/part-loading'
 
 import MetaInfo from 'vue-meta-info'
-// require('es6-promise').polyfill()
 import promise from 'es6-promise'
-promise.polyfill()
 import axios from 'axios'
 
-Vue.use(Loading)
 Vue.use(MetaInfo)
 Vue.use(VueLazyload, {
   preLoad: 1.3,
@@ -29,15 +26,17 @@ Vue.use(VueLazyload, {
   // loading: 'static/img/loading.gif',
   attempt: 1
 })
+promise.polyfill()
+Vue.prototype.$http = axios
+Vue.config.productionTip = false
+window.$ = jQuery
 
 // common components
+Vue.component(Loading.name, Loading)
 Vue.component(PageHeader.name, PageHeader)
 Vue.component(PageFooter.name, PageFooter)
 Vue.component(PageBanner.name, PageBanner)
 Vue.component(PartLoading.name, PartLoading)
-Vue.prototype.$http = axios
-Vue.config.productionTip = false
-window.$ = jQuery
 
 router.beforeEach((to, from, next) => {
   /* globals Pace */

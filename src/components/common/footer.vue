@@ -4,14 +4,14 @@
       <div class="footer-nav">
         <div class="nav-item-wrap" v-if="pageNav && pageNav.length">
           <div class="fn-item" v-for="(item,index) in pageNav">
-          <div class="item-tit">{{item.name}}<br>
-          <small>{{item.subName}}</small>
-          </div>
-          <ul v-if="item.children && item.children.length > 0">
-          <li v-for="(subItem,subIndex) in item.children" :key="subIndex">
-          <router-link :to="subItem.to">{{subItem.name}}</router-link>
-          </li>
-          </ul>
+            <div class="item-tit">{{item.name}}<br>
+              <small>{{item.subName}}</small>
+            </div>
+            <ul v-if="item.children && item.children.length > 0">
+              <li v-for="(subItem,subIndex) in item.children" :key="subIndex">
+                <router-link :to="subItem.to">{{subItem.name}}</router-link>
+              </li>
+            </ul>
           </div>
           <div class="fn-item">
             <div class="item-tit">联系我们<br>
@@ -43,7 +43,6 @@
 
 <script>
   import {mapState} from 'vuex'
-  console.log(mapState)
 
   export default {
     name: 'PageFooter',
@@ -52,8 +51,6 @@
     },
     computed: mapState(['pageNav']),
     mounted () {
-      console.log(this.pageNav)
-      // console.log(this.navList)
     }
   }
 </script>
@@ -74,9 +71,14 @@
   .footer-nav {
     padding-top: 60px;
     overflow: hidden;
-
+    .nav-item-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      width:75%;
+      float: left;
+    }
     .fn-item {
-      width: 225px;
+      width: 25%;
       float: left;
       .item-tit {
         color: #fff;
@@ -130,6 +132,8 @@
       padding-left: 25px;
       padding-right: 25px;
       .nav-item-wrap {
+        float: none;
+        width:auto;
         overflow: hidden;
       }
       .fn-item {

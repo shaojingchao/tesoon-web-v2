@@ -65,11 +65,6 @@
           }
         ]
       }
-    },
-    metaInfo () {
-      return {
-        title: '天星教育 - 数字出版'
-      }
     }
   }
 </script>

@@ -45,11 +45,6 @@
       DynamicList,
       Pager
     },
-    metaInfo () {
-      return {
-        title: '天星教育 - 天星动态'
-      }
-    },
     computed: {
       ...mapGetters([
         'dynamicNav'

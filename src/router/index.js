@@ -48,7 +48,7 @@ const router = new Router({
       path: '/',
       name: 'index',
       meta: {
-        title: '天星教育官网 - 首页'
+        title: '天星教育官方网站'
       },
       component: Index
     },
@@ -58,7 +58,7 @@ const router = new Router({
       redirect: '/dynamic/0',
       component: Dynamic,
       meta: {
-        title: '天星教育官网 - 天星动态'
+        title: '天星教育 - 天星动态'
       }
     },
     {
@@ -66,7 +66,7 @@ const router = new Router({
       path: '/dynamic/:tid',
       component: Dynamic,
       meta: {
-        title: '天星教育官网 - 天星动态'
+        title: '天星教育 - 天星动态'
       }
     },
     {
@@ -74,7 +74,7 @@ const router = new Router({
       path: '/dynamic/:tid/:id',
       component: DynamicDetail,
       meta: {
-        title: '天星教育官网 - 天星动态'
+        title: '天星教育 - 天星动态'
       }
     },
     {
@@ -88,7 +88,7 @@ const router = new Router({
           path: 'jycb',
           component: ServiceEdu,
           meta: {
-            title: '天星教育官网 - 教育出版'
+            title: '天星教育 - 教育出版'
           }
         },
         {
@@ -96,7 +96,7 @@ const router = new Router({
           path: 'zhcb',
           component: ServiceZonghe,
           meta: {
-            title: '天星教育官网 - 综合出版'
+            title: '天星教育 - 综合出版'
           }
         },
         {
@@ -105,7 +105,7 @@ const router = new Router({
           redirect: {name: 'shuzichuban_tianxingjiaoyu'},
           component: ServiceShuzi,
           meta: {
-            title: '天星教育官网 - 数字出版'
+            title: '天星教育 - 数字出版'
           },
           children: [
             {
@@ -114,7 +114,7 @@ const router = new Router({
               component: ServiceShuziTxjyw,
               meta: {
                 scrollToTop: false,
-                title: '天星教育官网 - 数字出版 - 天星教育网'
+                title: '天星教育 - 数字出版 - 天星教育网'
               }
             },
             {
@@ -123,7 +123,7 @@ const router = new Router({
               component: ServiceShuziWxxq,
               meta: {
                 scrollToTop: false,
-                title: '天星教育官网 - 数字出版 - 微学习圈'
+                title: '天星教育 - 数字出版 - 微学习圈'
               }
             },
             {
@@ -132,7 +132,7 @@ const router = new Router({
               component: ServiceShuziWln,
               meta: {
                 scrollToTop: false,
-                title: '天星教育官网 - 数字出版 - 未来脑'
+                title: '天星教育 - 数字出版 - 未来脑'
               }
             }
           ]
@@ -145,7 +145,7 @@ const router = new Router({
       component: About,
       redirect: '/about/intro',
       meta: {
-        title: '天星教育官网 - 了解天星'
+        title: '天星教育 - 了解天星'
       },
       children: [
         {
@@ -153,7 +153,7 @@ const router = new Router({
           path: 'intro',
           component: aboutJianjie,
           meta: {
-            title: '天星教育官网 - 公司简介'
+            title: '天星教育 - 公司简介'
           }
         },
         {
@@ -161,7 +161,7 @@ const router = new Router({
           path: 'history',
           component: aboutHistory,
           meta: {
-            title: '天星教育官网 - 天星大事记'
+            title: '天星教育 - 天星大事记'
           }
         },
         {
@@ -169,7 +169,7 @@ const router = new Router({
           path: 'culture',
           component: aboutWenhua,
           meta: {
-            title: '天星教育官网 - 天星文化'
+            title: '天星教育 - 天星文化'
           }
         },
         {
@@ -177,7 +177,7 @@ const router = new Router({
           path: 'honor',
           component: aboutZizhi,
           meta: {
-            title: '天星教育官网 - 荣誉资质'
+            title: '天星教育 - 荣誉资质'
           }
         },
         {
@@ -185,7 +185,7 @@ const router = new Router({
           path: 'gongyi',
           component: aboutGongyi,
           meta: {
-            title: '天星教育官网 - 社会公益'
+            title: '天星教育 - 社会公益'
           }
         },
         {
@@ -193,7 +193,7 @@ const router = new Router({
           path: 'job',
           component: aboutJob,
           meta: {
-            title: '天星教育官网 - 加入我们'
+            title: '天星教育 - 加入我们'
           }
         }
       ]
@@ -203,7 +203,7 @@ const router = new Router({
       name: 'error',
       component: ErrorPage,
       meta: {
-        title: '天星教育官网 - 页面未找到'
+        title: '页面未找到'
       }
     }
   ]
@@ -211,7 +211,9 @@ const router = new Router({
 
 // 路由钩子
 router.afterEach((to, from) => {
-  console.log()
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
   $(document).ready(() => {
     if (to.hash && to.hash !== '#') {
       let el = document.querySelector(to.hash)

@@ -67,11 +67,6 @@
       return {
         pageBanner: require('../assets/img/banner/product_banner.png')
       }
-    },
-    metaInfo () {
-      return {
-        title: '天星教育 - 教育出版'
-      }
     }
   }
 </script>

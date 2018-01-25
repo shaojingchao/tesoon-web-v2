@@ -46,7 +46,6 @@
       }
     },
     mounted () {
-      console.log(this.navList)
     },
     methods: {
       showNavMenu () {
@@ -73,6 +72,7 @@
         margin: 0 14px;
         height: 80px;
         line-height: 40px;
+        cursor: pointer;
         &:last-child {
           margin-right: 0;
         }
@@ -112,12 +112,13 @@
           position: absolute;
           top: 70px;
           padding-top: 10px;
+          padding-bottom: 10px;
           left: 50%;
           z-index: 100;
           margin-left: -80px;
           width: 160px;
           background-color: #fff;
-          box-shadow: 0 3px 18px -2px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 7px 15px 0 rgba(0, 0, 0, 0.15);
           a {
             display: block;
             line-height: 40px;
@@ -129,6 +130,9 @@
             &:hover {
               color: #333;
               background-color: #f5f5f5;
+            }
+            &:last-child{
+              border:none;
             }
           }
         }

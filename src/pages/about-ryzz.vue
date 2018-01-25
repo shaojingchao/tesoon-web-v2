@@ -28,11 +28,6 @@
   import CF from '../api/index'
 
   export default {
-    metaInfo () {
-      return {
-        title: '天星教育 - 教育出版'
-      }
-    },
     data () {
       return {
         baseUrl: CF.baseUrl,

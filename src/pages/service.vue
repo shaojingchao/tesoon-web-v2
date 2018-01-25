@@ -13,11 +13,6 @@
       return {
         pageBanner: require('../assets/img/banner/product_banner.png')
       }
-    },
-    metaInfo () {
-      return {
-        title: '天星教育 - 公司业务'
-      }
     }
   }
 </script>

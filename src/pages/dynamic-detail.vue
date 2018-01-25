@@ -27,26 +27,26 @@
     data () {
       return {
         content: {},
-        isLoading: true
-      }
-    },
-    metaInfo () {
-      return {
-        title: '天星教育 - 天星动态'
+        isLoading: false
       }
     },
     created () {
-      console.log(this)
+      this.isLoading = true
       this.$http(CF.getDynamicsInfo + '?article_id=' + this.$route.params.id).then(res => {
-        this.isLoading = false
         this.content = res.data
-        this.$metaInfo.title = this.$metaInfo.title + ' - ' + this.content.title
+        document.title = this.content.title + ' - ' + document.title
+        this.isLoading = false
       })
     }
   }
 </script>
-<style lang="less">
+<style lang="less" scoped>
   @import "../assets/css/_mixins-wln.less";
+  .page-dynamic-detail{
+    .page-header{
+      box-shadow: 0 1px 0 rgba(0,0,0,.1);
+    }
+  }
 
   .dynamic-detail {
     padding-top: 30px;

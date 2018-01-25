@@ -97,38 +97,38 @@
 </script>
 
 
-
 <style lang="less" scoped>
   .mask-layer {
     z-index: 10001;
     position: fixed;
-    top:0;
+    top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(0,0,0,.5);
+    background-color: rgba(0, 0, 0, .5);
   }
-  .ewm-wrap{
+
+  .ewm-wrap {
     position: absolute;
-    top:50%;
-    left:50%;
-    width:150px;
-    height:150px;
-    margin-top:-75px;
-    margin-left:-75px;
-    img{
+    top: 50%;
+    left: 50%;
+    width: 150px;
+    height: 150px;
+    margin-top: -75px;
+    margin-left: -75px;
+    img {
       display: block;
       max-height: 100%;
-      max-width:100%;
+      max-width: 100%;
     }
   }
 
   @media screen and (max-width: 767px) {
-    .ewm-wrap{
-      width:120px;
-      height:120px;
-      margin-top:-60px;
-      margin-left:-60px;
+    .ewm-wrap {
+      width: 120px;
+      height: 120px;
+      margin-top: -60px;
+      margin-left: -60px;
     }
   }
 </style>
@@ -147,7 +147,7 @@
     @size: 40px;
     @borderColor: #eee;
     position: absolute;
-    right: -80px;
+    right: -40px;
     bottom: 0;
     width: @size;
     min-height: @size;
@@ -171,7 +171,7 @@
       }
       &.go-top {
         height: 0;
-        border-top-width:0;
+        border-top-width: 0;
         border-bottom-width: 0;
         overflow: hidden;
         transition: height .3s;
@@ -188,7 +188,7 @@
         &.is-show {
           height: @size;
           border-bottom-width: 1px;
-          border-top-width:1px;
+          border-top-width: 1px;
           overflow: hidden;
         }
         &:hover {
@@ -209,11 +209,17 @@
     }
   }
 
-  @media screen and (max-width:767px) {
+  @media screen and (max-width: 767px) {
     .side-bar-wrap {
       bottom: 20px;
     }
 
+    .side-bar {
+      right: 0;
+    }
+  }
+
+  @media screen and (max-width: 1180px) {
     .side-bar {
       right: 10px;
     }

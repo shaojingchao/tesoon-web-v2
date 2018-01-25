@@ -27,11 +27,6 @@
         isLoading: false
       }
     },
-    metaInfo () {
-      return {
-        title: '天星教育 - 教育出版'
-      }
-    },
     mounted () {
       this.isLoading = true
       this.$http.get(CF.getMemorabilia).then(res => {

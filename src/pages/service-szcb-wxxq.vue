@@ -28,11 +28,6 @@
 </template>
 <script type="text/ecmascript-6">
   export default {
-    metaInfo () {
-      return {
-        title: '天星教育 - 数字出版 - 微学习圈'
-      }
-    }
   }
 </script>
 <style lang="less" scoped>
