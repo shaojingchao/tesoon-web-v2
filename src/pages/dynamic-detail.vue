@@ -45,7 +45,7 @@
     }
   }
 </style>
-<style lang="less" scoped>
+<style lang="less">
   @import "../assets/css/_mixins-wln.less";
 
   .dynamic-detail {
@@ -81,9 +81,6 @@
       color: #7b7b7b;
       line-height: 1.8;
       text-align: justify;
-      img {
-        max-width: 100%;
-      }
     }
   }
 
@@ -101,4 +98,12 @@
   /*}*/
   /*}*/
   /*}*/
+</style>
+<style lang="less"> // 重要！！ scoped 将使得img max-width 不可用
+  .detail-context{
+    img {
+      max-width: 100%;
+      height: auto !important;  // 修复img 自带 尺寸使得图片变形
+    }
+  }
 </style>
