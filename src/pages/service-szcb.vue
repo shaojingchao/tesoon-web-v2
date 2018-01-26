@@ -124,7 +124,7 @@
         color: #999;
         border-radius: 1px;
         background-color: #fff;
-        &.exact-active {
+        &.active {
           border-color: @primary;
           color: #fff;
           background-color: @primary;
@@ -159,87 +159,11 @@
 
   @media screen and (max-width: 767px) {
     .page-service-szcb {
-
-      .service-detail {
-        padding-top: 30px;
-        padding-bottom: 80px;
-        .main-title {
-          font-size: 24px;
-          line-height: 1.5;
-          &:after {
-            content: '';
-            float: left;
-            display: inline-block;
-            margin-top: 0.25em;
-            border-left: 4px solid @primary;
-            margin-right: 0.3em;
-            height: 1em;
-          }
-        }
-        .main-info {
-          font-size: 14px;
-          color: #9fa5ac;
-          padding-left: 13px;
-          margin-top: 5px;
-        }
-        .detail-context {
-          font-size: 14px;
-          line-height: 2;
-          .main-section {
-            margin-top: 10px;
-            color: #7b7b7b;
-            padding-bottom: 40px;
-            text-indent: 2em;
-          }
-          p {
-            margin-bottom: 1.1em;
-          }
-          img {
-            max-width: 100%;
-          }
-        }
-      }
-
       .router-nav {
-        text-align: center;
         .btn {
           width: 6em;
           padding: 6px 0;
-          line-height: 1;
           margin: 0 0.3em;
-          border-color: #eee;
-          color: #999;
-          border-radius: 1px;
-          background-color: #fff;
-          &.exact-active {
-            border-color: @primary;
-            color: #fff;
-            background-color: @primary;
-          }
-        }
-      }
-
-      .service-szcb-view-wrap {
-        .intro-item {
-          padding: 30px 10px 40px;
-          border-bottom: 1px solid #eee;
-          h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
-          }
-          p {
-            text-indent: 2em;
-            line-height: 1.8;
-            color: #7b7b7b;
-          }
-          .img-view {
-            padding-top: 30px;
-            img {
-              display: block;
-              margin: 0 auto;
-              max-width: 100%;
-            }
-          }
         }
       }
     }

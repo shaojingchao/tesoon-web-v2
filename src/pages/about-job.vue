@@ -54,7 +54,7 @@
       <div class="tc text-muted f16 mt30">
         <a href="http://company.zhaopin.com/%E9%83%91%E5%B7%9E%E5%A4%A9%E6%98%9F%E6%95%99%E8%82%B2%E5%9B%BE%E4%B9%A6%E7%AD%96%E5%88%92%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8_CC153971215.htm"
            target="_blank"
-           class="btn btn-link">查看全部招聘信息 <small>（智联招聘）</small></a>
+           class="btn btn-second">查看全部招聘信息</a>
       </div>
 
     </div>
@@ -102,7 +102,7 @@
         this.$http.get(CF.getJobs, {
           params: {
             page: this.pages.page,
-            pagesize: 15 // 请求 5 条数据
+            pagesize: 20 // 请求 5 条数据
           }
         }).then(res => {
           if (res.data.data) {

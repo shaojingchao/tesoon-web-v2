@@ -40,7 +40,7 @@ let pageNav = [
       },
       {
         name: '数字出版',
-        to: {name: 'shuzichuban'}
+        to: {name: 'shuzichuban', query: {top: 1}}
       }
     ]
   },

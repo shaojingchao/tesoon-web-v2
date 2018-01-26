@@ -27,7 +27,7 @@
 </template>
 
 <script type="text/javascript">
-  import Sky from './sky.vue'
+  // import Sky from './sky.vue'
   // import $ from 'jquery'
 
   export default {
@@ -45,7 +45,7 @@
       }
     },
     components: {
-      Sky
+      // Sky
     },
     data () {
       return {
@@ -80,21 +80,21 @@
 </script>
 <style lang="less" scoped>
 
-  .banner-words {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: url(../../assets/img/banner/banner_words.png) 50% 40% no-repeat;
-    transition: all 1.8s;
-    transform: translateY(10%);
-    opacity: 0;
-    &.in {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
+  /*.banner-words {*/
+    /*position: absolute;*/
+    /*left: 0;*/
+    /*top: 0;*/
+    /*width: 100%;*/
+    /*height: 100%;*/
+    /*background: url(../../assets/img/banner/banner_words.png) 50% 40% no-repeat;*/
+    /*transition: all 1.8s;*/
+    /*transform: translateY(10%);*/
+    /*opacity: 0;*/
+    /*&.in {*/
+      /*transform: translateY(0);*/
+      /*opacity: 1;*/
+    /*}*/
+  /*}*/
 
   .wln-slider {
     //min-width:1200px;

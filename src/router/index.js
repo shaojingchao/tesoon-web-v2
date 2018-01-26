@@ -30,7 +30,6 @@ const router = new Router({
   linkExactActiveClass: 'exact-active',
   // 仅在 mode history 可用
   scrollBehavior (to, from, savedPosition) {
-    console.log('scrollBehavior')
     if (to.hash && to.hash !== '#') {
       return {
         selector: to.hash

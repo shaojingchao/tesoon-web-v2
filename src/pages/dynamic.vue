@@ -116,7 +116,7 @@
   }
 </script>
 
-<style lang="less" rel="stylesheet/less">
+<style lang="less" scoped>
   @import "../assets/css/_mixins-wln.less";
   //天星动态
   .page-dynamic {

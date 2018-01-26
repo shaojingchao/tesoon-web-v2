@@ -26,7 +26,7 @@
     <!--天星动态-->
     <div id="dynamic" class="index-section bg-white wow fadeInUp" data-wow-offset="100">
       <h1 class="section-title">天星动态<br>
-        <small>STAR EDUCATION</small>
+        <small>TIANXING NEWS</small>
       </h1>
 
       <div class="content clearfix">
@@ -52,7 +52,7 @@
 
           <ul class="dynamic-show">
             <router-link
-              v-for='(item,index) in dynamicList.slice(1,5)'
+              v-for='(item,index) in dynamicList.slice(1)'
               tag="li"
               class="news-wow dynamic-item-hover fadeInUp"
               :data-wow-delay="(index*0.15)+'s'"
@@ -103,7 +103,7 @@
     <!--综合出版-->
     <div id="zonghe" class="index-section bg-white wow fadeInUp" data-wow-offset="200">
       <h1 class="section-title">综合出版<br>
-        <small>COMPREHENSIVE PUBLICATION</small>
+        <small>COMPREHENSIVE PUBLISHING</small>
       </h1>
       <div class="content zonghe-list">
         <router-link class="zonghe-item"
@@ -138,7 +138,7 @@
           <i class="iconfont tx-icon-down"></i>
         </span>
         <div class="website-list-scroll">
-          <div :style="{transform: 'translate(-'+(33.333 * webCurrentPage)+'%,0)'}" :title="webCurrentPage" class="content website-list">
+          <div :style="{transform: 'translate(-'+(33.333 * webCurrentPage)+'%,0)'}" class="content website-list">
             <router-link class="screen-shot"
                          :class="{'is-active': siteScreenshotActiveIndex === index}"
                          v-for="(site,index) in websiteList"
@@ -160,7 +160,7 @@
     <div id="know-us" class="index-section index-section-gray wow fadeInUp" data-wow-offset="200">
       <div class="content text-content">
         <h1 class="section-title">了解天星<br>
-          <small>KNOW THE STARS</small>
+          <small>KNOW TIANXING</small>
         </h1>
         <div class="context">
           天星教育是一家致力于教育图书出版及提供教育信息服务的文化教育机构，自1998年成立以来，已发展成为河南民营书业的旗舰品牌。公司坐落于历史文化源远流长的中原大地，秉承着中原儿女自强不息、上下求索的民族精神，积极投身于文化产业发展的大潮中，为了民族教育的振兴和发展，贡献着自己的智慧和热忱。
@@ -252,7 +252,7 @@
 
 <script type="text/ecmascript-6">
   import Slider from '../components/common/slider'
-  import WOW from '../bower_components/wow/dist/wow.min'
+  import WOW from 'wowjs'
   import {supportWebp} from '../util/isSupportWebp'
   import CF from '../api/index'
 
@@ -377,7 +377,12 @@
       this.$nextTick(() => {
         this.initWOW('wow')
       })
-      this.$http.get(CF.getDynamicsList + '?pagesize=' + 6).then(res => {
+      this.$http.get(CF.getDynamicsList, {
+        params: {
+          pagesize: 5
+        }
+      }).then(res => {
+        console.log(res.data.data)
         if (!res.data.data) {
           return false
         }
@@ -386,8 +391,14 @@
           this.initWOW('news-wow')
         })
       })
-      this.$http.get(CF.getReviews).then(res => {
+      // 用户评价
+      this.$http.get(CF.getReviews, {
+        params: {
+          pagesize: 6
+        }
+      }).then(res => {
         if (res.data) {
+          console.log(res.data)
           this.userRatingList = res.data
         }
       })

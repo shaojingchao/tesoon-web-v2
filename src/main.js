@@ -3,10 +3,12 @@
 import Vue from 'vue'
 import jQuery from 'jquery'
 import VueLazyload from 'vue-lazyload'
+import VueProgressBar from 'vue-progressbar'
 import App from './App'
 import router from './router'
 import store from './store/index'
 import './assets/css/base.less'
+import './assets/iconfont/icon.css'
 import './bower_components/animate.css/animate.min.css'
 
 import Loading from './components/common/loading'
@@ -26,6 +28,19 @@ Vue.use(VueLazyload, {
   // loading: 'static/img/loading.gif',
   attempt: 1
 })
+Vue.use(VueProgressBar, {
+  color: '#4290ef',
+  failedColor: '#eb5743',
+  thickness: '2px',
+  transition: {
+    speed: '0.2s',
+    opacity: '0.6s',
+    termination: 300
+  },
+  autoRevert: true,
+  location: 'top',
+  inverse: false
+})
 promise.polyfill()
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
@@ -38,11 +53,9 @@ Vue.component(PageFooter.name, PageFooter)
 Vue.component(PageBanner.name, PageBanner)
 Vue.component(PartLoading.name, PartLoading)
 
-router.beforeEach((to, from, next) => {
-  /* globals Pace */
-  Pace.restart()
-  next()
-})
+// router.beforeEach((to, from, next) => {
+//   next()
+// })
 window.tesoon = new Vue({
   el: '#app',
   router,
