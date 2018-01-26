@@ -1,6 +1,6 @@
 <template>
   <div class="news-list">
-    <router-link
+    <router-link v-if="list.length"
       class="nl-item clearfix"
       v-for="(item,index) in list"
       :key="item.id"
@@ -42,7 +42,8 @@
       }
     },
     props: {
-      list: Array
+      list: Array,
+      default: []
     }
   }
 </script>

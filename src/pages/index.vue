@@ -185,7 +185,7 @@
             <div class="ku-item">
               <div class="icon"><i class="iconfont tx-icon-piechart"></i></div>
               <div class="title">业务市场</div>
-              <div class="desc">已覆盖全国30个省市地区</div>
+              <div class="desc">已覆盖全国29个省市</div>
             </div>
           </div>
         </div>

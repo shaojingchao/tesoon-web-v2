@@ -29,6 +29,7 @@
                :totalCount="pages.totalCount"
                v-if="pages.pageNum > 1"/>
       </div>
+      <p class="text-muted tc p30" v-if="newList.length === 0 && !isLoading">未找到相关信息~</p>
       <part-loading v-if="isLoading"/>
     </div>
     <page-footer/>
@@ -93,10 +94,12 @@
         }
         this.getNewList(params, (res) => {
           this.isLoading = false
-          this.newList = res.data.data
-          this.pages.pageNum = parseInt(res.data.pages.pageNum)
-          this.pages.totalCount = parseInt(res.data.pages.totalCount)
-          this.pages.currentPage = parseInt(params.page)
+          if (res.data && res.data.data) {
+            this.newList = res.data.data
+            this.pages.pageNum = parseInt(res.data.pages.pageNum)
+            this.pages.totalCount = parseInt(res.data.pages.totalCount)
+            this.pages.currentPage = parseInt(params.page)
+          }
         })
       },
       goToPage (index) {
