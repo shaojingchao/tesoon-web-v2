@@ -11,65 +11,74 @@
   <meta name="keywords" content="天星教育,教育图书,教育信息,河南民营书业"/>
   <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon"/>
   <link rel="icon" href="/static/favicon.ico" type="image/x-icon"/>
-  <!--<link rel="stylesheet" href="//at.alicdn.com/t/font_545083_ql4gqn7q7lvaq0k9.css">-->
-</head>
-<body>
-<div id="app">
   <style rel="stylesheet/css">
-    .loading {
+    #i-loading{
+      position: fixed;
+      top:0;
+      bottom:0;
+      left:0;
+      right:0;
+      z-index:20180126;
+      transition: opacity .2s;
+    }
+    .i-loading {
       width: 80px;
-      height: 40px;
+      text-align: center;
+      height: 16px;
       margin: 0 auto;
       margin-top: 100px;
       transform: scale(0.6) translateY(-50%);
     }
 
-    .loading span {
+    .i-loading span {
       display: inline-block;
       width: 8px;
       height: 100%;
-      background: #7bbbef;
-      -webkit-animation: load 1s ease infinite;
+      background: #4290ef;
+      transform-origin: center center;
+      -webkit-animation: i-loading 1s ease infinite;
     }
 
-    @-webkit-keyframes load {
+    @-webkit-keyframes i-loading {
       0%, 100% {
-        height: 40px;
-        background: #7bbbef;
+        transform: scaleY(1);
       }
       50% {
-        height: 80px;
-        margin: -20px 0;
-        background: #4290ef;
+        transform: scaleY(2.4);
       }
     }
 
-    .loading span:nth-child(2) {
+    .i-loading span:nth-child(2) {
       -webkit-animation-delay: 0.2s;
     }
 
-    .loading span:nth-child(3) {
+    .i-loading span:nth-child(3) {
       -webkit-animation-delay: 0.4s;
     }
 
-    .loading span:nth-child(4) {
+    .i-loading span:nth-child(4) {
       -webkit-animation-delay: 0.6s;
     }
 
-    .loading span:nth-child(5) {
+    .i-loading span:nth-child(5) {
       -webkit-animation-delay: 0.8s;
     }
   </style>
-  <div style="padding-top:30vh;">
-    <div class="loading">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
+  <!--<link rel="stylesheet" href="//at.alicdn.com/t/font_545083_ql4gqn7q7lvaq0k9.css">-->
+</head>
+<body>
+<div id="app">
+  <div id="i-loading">
+    <div style="padding-top:30vh;">
+      <div class="i-loading">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
   </div>
-</div>
 </div>
 <!-- built files will be auto injected -->
 </body>

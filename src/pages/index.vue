@@ -382,7 +382,6 @@
           pagesize: 5
         }
       }).then(res => {
-        console.log(res.data.data)
         if (!res.data.data) {
           return false
         }
@@ -398,7 +397,6 @@
         }
       }).then(res => {
         if (res.data) {
-          console.log(res.data)
           this.userRatingList = res.data
         }
       })
@@ -1538,7 +1536,7 @@
         width: 100%;
         .rating-item {
           width: 100%;
-          padding: 0 3px 30px;
+          padding: 10px 3px 20px;
           .item-body {
             .item-context {
               &:after {

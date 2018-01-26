@@ -1,5 +1,5 @@
 <template>
-  <div class="loading">
+  <div class="part-loading">
     <div class="svg">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="#ccc">
         <path transform="translate(2)" d="M0 12 V20 H4 V12z">
@@ -23,7 +23,7 @@
   </div>
 </template>
 <style lang="less" scoped>
-  .loading{
+  .part-loading{
     padding:20px;
     text-align: center;
     color:#ccc;

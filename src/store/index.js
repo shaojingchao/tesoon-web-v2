@@ -8,7 +8,7 @@ Vuex.Store.prototype.$http = axios
 let pageNav = [
   {
     name: '天星动态',
-    subName: 'STAR DYNAMIC',
+    subName: 'TIANXING NEWS',
     to: {name: 'dynamic'},
     children: [
       {
@@ -46,7 +46,7 @@ let pageNav = [
   },
   {
     name: '了解天星',
-    subName: 'KNOW THE STARS',
+    subName: 'KNOW TIANXING',
     to: {name: 'about'},
     children: [
       {

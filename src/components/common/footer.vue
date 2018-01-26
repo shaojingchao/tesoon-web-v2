@@ -148,6 +148,9 @@
         padding-top: 20px;
         padding-bottom: 20px;
         padding-right: 0;
+        img{
+          max-width:100px;
+        }
         p {
           line-height: 1.4;
         }

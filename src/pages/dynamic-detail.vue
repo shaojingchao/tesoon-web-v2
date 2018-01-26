@@ -4,16 +4,14 @@
     <div class="content hide-xs">
       <div class="page-crumbs">天星动态 <span v-if="content.tname"> > {{content.tname}} > 正文</span></div>
     </div>
+    <part-loading v-if="isLoading"/>
     <div class="dynamic-detail content">
-      <h2 class="main-title">{{content.title}}</h2>
+      <h2 class="main-title" v-if="content.title">{{content.title}}</h2>
       <p class="main-info">
         <span class="mr15">{{content.add_time}}</span>
-        <!--<span class="mr15">{{content.add_user}}</span>-->
-        <!--<span>{{content.dept}}</span>-->
       </p>
       <div class="detail-context" v-html="content.content">
       </div>
-      <part-loading v-if="isLoading"/>
     </div>
     <page-footer/>
   </div>
@@ -47,7 +45,7 @@
     }
   }
 </style>
-<style lang="less">
+<style lang="less" scoped>
   @import "../assets/css/_mixins-wln.less";
 
   .dynamic-detail {
@@ -90,17 +88,17 @@
   }
 
   /*@media screen and (max-width: 767px) {*/
-    /*.dynamic-detail {*/
-      /*!*font-size:14px;*!*/
-      /*line-height: 1.5;*/
-      /*padding-top: 30px;*/
-      /*padding-bottom: 30px;*/
-      /*h2 {*/
-        /*line-height: 1.4;*/
-        /*font-size: 24px;*/
-        /*font-weight: 700;*/
-        /*padding-bottom: 10px;*/
-      /*}*/
-    /*}*/
+  /*.dynamic-detail {*/
+  /*!*font-size:14px;*!*/
+  /*line-height: 1.5;*/
+  /*padding-top: 30px;*/
+  /*padding-bottom: 30px;*/
+  /*h2 {*/
+  /*line-height: 1.4;*/
+  /*font-size: 24px;*/
+  /*font-weight: 700;*/
+  /*padding-bottom: 10px;*/
+  /*}*/
+  /*}*/
   /*}*/
 </style>
