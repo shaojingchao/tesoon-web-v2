@@ -224,6 +224,9 @@ router.afterEach((to, from) => {
       scrollTo(0, 0)
     }
   })
+  // 统计代码
+  /* global _hmt */
+  _hmt.push(['_trackPageview', to.fullPath])
 })
 
 export default router

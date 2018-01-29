@@ -102,7 +102,9 @@
           margin-top: 10px;
           color: #7b7b7b;
           padding-bottom: 40px;
-          text-indent: 2em;
+          p{
+            text-indent:2em;
+          }
         }
         p {
           margin-bottom: 1.1em;
@@ -141,7 +143,6 @@
           margin-bottom: 10px;
         }
         p {
-          text-indent: 2em;
           line-height: 1.8;
           color: #7b7b7b;
         }

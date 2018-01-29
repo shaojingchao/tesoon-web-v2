@@ -109,8 +109,10 @@
         margin-top: 10px;
         color: #7b7b7b;
         padding-bottom: 40px;
-        text-indent: 2em;
         border-bottom: 1px solid #eee;
+        p{
+          text-indent:2em;
+        }
       }
       .pro-list-section {
         padding-top: 40px;

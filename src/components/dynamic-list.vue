@@ -20,7 +20,7 @@
       </div>
 
       <div class="item-other">
-        <span class="info-item" :title="item.add_time">{{isMobile ? item.add_time : item.add_time.substr(5)}}</span>
+        <span class="info-item" :title="item.add_time">{{isMobile ? item.add_time : item.add_time.substr(0, 7)}}</span>
       </div>
     </router-link>
   </div>
@@ -69,10 +69,10 @@
         box-shadow: 0 8px 20px -1px rgba(0, 0, 0, .12);
         border-bottom-color: transparent;
         .nl-item-img {
-          transform: translateX(30px);
+          transform: translateX(12px);
         }
         .item-context {
-          transform: translateX(30px);
+          transform: translateX(12px);
         }
       }
     }

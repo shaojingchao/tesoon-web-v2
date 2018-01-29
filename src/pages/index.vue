@@ -24,7 +24,7 @@
     </div>
 
     <!--天星动态-->
-    <div id="dynamic" class="index-section bg-white wow fadeInUp" data-wow-offset="100">
+    <div id="dynamic" class="index-section bg-white">
       <h1 class="section-title">天星动态<br>
         <small>TIANXING NEWS</small>
       </h1>
@@ -32,7 +32,7 @@
       <div class="content clearfix">
 
         <div class="clearfix" v-if="dynamicList.length > 0">
-          <div class="dynamic-focus news-wow fadeInUp">
+          <div class="dynamic-focus">
             <router-link class="ds-list-item"
                          :title="focusDynamic.title"
                          :to="{name:'dynamicdetail',params:{tid: focusDynamic.tid, id: focusDynamic.id}}">
@@ -54,8 +54,7 @@
             <router-link
               v-for='(item,index) in dynamicList.slice(1)'
               tag="li"
-              class="news-wow dynamic-item-hover fadeInUp"
-              :data-wow-delay="(index*0.15)+'s'"
+              class="dynamic-item-hover"
               key="item.id"
               :to="{name:'dynamicdetail',params:{tid: item.tid, id: item.id}}">
               <a class="ds-list-item-text" :title="item.title">
@@ -77,7 +76,7 @@
     </div>
 
     <!--教育出版-->
-    <div id="jiaoyu" class="index-section index-section-gray wow fadeInUp" data-wow-offset="200">
+    <div id="jiaoyu" class="index-section index-section-gray">
       <h1 class="section-title">教育出版<br>
         <small>EDUCATION PUBLISHING</small>
       </h1>
@@ -101,7 +100,7 @@
     </div>
 
     <!--综合出版-->
-    <div id="zonghe" class="index-section bg-white wow fadeInUp" data-wow-offset="200">
+    <div id="zonghe" class="index-section bg-white">
       <h1 class="section-title">综合出版<br>
         <small>COMPREHENSIVE PUBLISHING</small>
       </h1>
@@ -126,7 +125,7 @@
     </div>
 
     <!--数字出版-->
-    <div id="website" class="index-section index-section-gray wow fadeInUp" data-wow-offset="200">
+    <div id="website" class="index-section index-section-gray">
       <h1 class="section-title">数字出版<br>
         <small>DIGITAL PUBLISHING</small>
       </h1>
@@ -157,7 +156,7 @@
     </div>
 
     <!--了解天星-->
-    <div id="know-us" class="index-section index-section-gray wow fadeInUp" data-wow-offset="200">
+    <div id="know-us" class="index-section index-section-gray">
       <div class="content text-content">
         <h1 class="section-title">了解天星<br>
           <small>KNOW TIANXING</small>
@@ -193,7 +192,7 @@
     </div>
 
     <!--用户评价-->
-    <div id="user-rating" class="index-section bg-white wow fadeInUp" data-wow-offset="200">
+    <div id="user-rating" class="index-section bg-white">
       <h1 class="section-title">用户评价<br>
         <small>USER RATING</small>
       </h1>
@@ -283,29 +282,29 @@
         dynamicList: [],
         jiaoyuList: [
           {
-            title: '试题调研',
-            subTitle: '天星教育精品图书',
-            img: isSupportWebp ? require('../assets/img/index/webp/jycb_item1.webp') : require('../assets/img/index/jycb_item1.png'),
-            bgPosition: '85% 30px',
-            to: {name: 'jiaoyuchuban', hash: '#stdy'}
-          },
-          {
             title: '金考卷',
-            subTitle: '天星教育精品图书',
+            subTitle: '金考卷，试卷专家',
             img: isSupportWebp ? require('../assets/img/index/webp/jycb_item2.webp') : require('../assets/img/index/jycb_item2.png'),
             bgPosition: '100% 30px',
             to: {name: 'jiaoyuchuban', hash: '#jkj'}
           },
           {
+            title: '试题调研',
+            subTitle: '中国高考意见领袖',
+            img: isSupportWebp ? require('../assets/img/index/webp/jycb_item1.webp') : require('../assets/img/index/jycb_item1.png'),
+            bgPosition: '85% 30px',
+            to: {name: 'jiaoyuchuban', hash: '#stdy'}
+          },
+          {
             title: '教材帮',
-            subTitle: '天星教育精品图书',
+            subTitle: '同步到高考 名师一帮到底',
             img: isSupportWebp ? require('../assets/img/index/webp/jycb_item3.webp') : require('../assets/img/index/jycb_item3.png'),
             bgPosition: '96% 30px',
             to: {name: 'jiaoyuchuban', hash: '#jcb'}
           },
           {
             title: '一遍过',
-            subTitle: '天星教育精品图书',
+            subTitle: '一遍解决所有学习难题',
             img: isSupportWebp ? require('../assets/img/index/webp/jycb_item4.webp') : require('../assets/img/index/jycb_item4.png'),
             bgPosition: '90% 30px',
             to: {name: 'jiaoyuchuban', hash: '#ybg'}
@@ -385,10 +384,11 @@
         if (!res.data.data) {
           return false
         }
+        console.log(res.data.data)
         this.dynamicList = res.data.data
-        this.$nextTick(() => {
-          this.initWOW('news-wow')
-        })
+        // this.$nextTick(() => {
+        //   this.initWOW('news-wow')
+        // })
       })
       // 用户评价
       this.$http.get(CF.getReviews, {

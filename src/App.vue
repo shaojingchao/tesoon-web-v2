@@ -9,7 +9,6 @@
 <script type="text/ecmascript-6">
   import SideBar from './components/common/side-bar.vue'
   import SideBarWeixin from './components/common/side-bar-weixin.vue'
-
   export default {
     name: 'app',
     data () {
@@ -23,17 +22,6 @@
     },
     created () {
       this.$Progress.start()
-      this.$router.beforeEach((to, from, next) => {
-        if (to.meta.progress !== undefined) {
-          let meta = to.meta.progress
-          this.$Progress.parseMeta(meta)
-        }
-        this.$Progress.start()
-        next()
-      })
-      this.$router.afterEach((to, from) => {
-        this.$Progress.finish()
-      })
     },
     mounted () {
       this.$Progress.finish()
