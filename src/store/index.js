@@ -81,7 +81,8 @@ const store = new Vuex.Store({
   state: {
     isMobile: false,
     mobileWidth: 767,
-    pageNav
+    pageNav,
+    indexBanner: []
   },
   getters: {
     dynamicNav (state) {
@@ -91,6 +92,10 @@ const store = new Vuex.Store({
   mutations: {
     resize (state) {
       state.isMobile = document.body.clientWidth <= state.mobileWidth
+    },
+    setIndexBanner (state, bn) {
+      console.log(bn)
+      state.indexBanner = bn
     },
     updateMainNav (state, list) {
       state.pageNav[0].children = list.map(item => {
@@ -103,6 +108,14 @@ const store = new Vuex.Store({
     }
   },
   actions: {
+    getIndexBanner () {
+      this.$http.get(CF.getIndexBanner).then((res) => {
+        console.log(res.data)
+        if (res.data && res.data.length > 0) {
+          this.commit('setIndexBanner', res.data)
+        }
+      })
+    },
     getDynamicType () {
       // 获取新闻分类
       this.$http.get(CF.getDynamicsType).then((res, rev) => {

@@ -38,7 +38,7 @@
       display: inline-block;
       border: 1px solid #fff;
       background: #fff;
-      color: #333;
+      color: @black-color;
       &.side-btn {
         /*width:4em;*/
         font-size: 1.15em;

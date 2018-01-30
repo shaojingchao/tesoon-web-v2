@@ -13,9 +13,9 @@
         </span>
       </div>
     </div>
-    <div class="bd">
+    <div class="bd" :class="{'start-load': banner.length === 0}">
       <ul>
-        <li v-for="(item,index) in bannerPic"
+        <li v-for="(item,index) in banner"
             :class="{active: currentIndex===index}"
             v-lazy:background-image="item">
           <!--<div class="banner-words" v-if="index === 1"/>-->
@@ -29,6 +29,7 @@
 <script type="text/javascript">
   // import Sky from './sky.vue'
   // import $ from 'jquery'
+  import CF from '../../api/index'
 
   export default {
     props: {
@@ -38,10 +39,7 @@
       },
       bannerPic: {
         type: Array,
-        required: true,
-        validator: function (len) {
-          return len.length >= 1
-        }
+        required: true
       }
     },
     components: {
@@ -49,8 +47,24 @@
     },
     data () {
       return {
+        baseUrl: CF.baseUrl,
         timer: null,
-        currentIndex: 0
+        currentIndex: 0,
+        lazyObj: {
+          error: require('../../../static/img_error.png'),
+          loading: require('../../../static/loading.gif')
+        }
+      }
+    },
+    computed: {
+      banner () {
+        return this.bannerPic.map((item) => {
+          return {
+            src: this.baseUrl + item,
+            error: this.lazyObj.error,
+            loading: this.lazyObj.loading
+          }
+        })
       }
     },
     mounted () {
@@ -105,6 +119,9 @@
       position: relative;
       z-index: 0;
       height: 100%;
+      &.start-load{
+        background: url(../../../static/loading.gif) 50% 50% no-repeat;
+      }
       ul {
         position: relative;
         height: 100%;
@@ -115,9 +132,9 @@
           top: 0;
           width: 100%;
           height: 100%;
+          background-color: #fff;
           background-position: center center !important;
           background-repeat: no-repeat;
-          background-size: cover !important;
           visibility: hidden;
           opacity: 0;
           transition: opacity 0.9s, visibility 0.9s;
@@ -126,9 +143,12 @@
           }
           &.active {
             display: block;
-            visibility: visible;
-            opacity: 1;
             left: 0;
+            visibility: visible;
+            opacity: 0.6;
+            &[lazy=loaded]{
+              opacity: 1;
+            }
           }
         }
       }
@@ -182,6 +202,10 @@
           height: @height;
           li {
             height: @height;
+            background-size: cover;
+            &[lazy=loading]{
+              background-size: 26px 26px;
+            }
           }
         }
       }

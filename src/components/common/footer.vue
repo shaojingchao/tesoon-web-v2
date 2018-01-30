@@ -9,7 +9,7 @@
             </div>
             <ul v-if="item.children && item.children.length > 0">
               <li v-for="(subItem,subIndex) in item.children" :key="subIndex">
-                <router-link :to="subItem.to">{{subItem.name}}</router-link>
+                <router-link :to="subItem.to" target="_blank">{{subItem.name}}</router-link>
               </li>
             </ul>
           </div>

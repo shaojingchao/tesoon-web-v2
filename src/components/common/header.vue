@@ -1,7 +1,7 @@
 <template>
   <header class="page-header header wow fadeInDown clearfix" data-wow-duration="0.5s" data-wow-delay="0.1s">
     <div class="content">
-      <router-link class="logo fl cur-poi" title="首页" tag="div" to="/"></router-link>
+      <router-link class="logo db fl cur-poi" title="首页" :to="{name: 'index'}"></router-link>
       <MyNav/>
     </div>
   </header>
@@ -24,7 +24,7 @@
     .logo {
       float: left;
       width: 131px;
-      height: 80px;
+      height: 100px;
       background: url(../../assets/img/logo_normal.png) 50% 50% no-repeat;
     }
   }

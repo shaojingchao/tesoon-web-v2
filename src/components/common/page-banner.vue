@@ -16,6 +16,7 @@
 </script>
 
 <style lang="less" scoped>
+  @import "../../assets/css/_mixins-wln.less";
   //页面通用banner
   .page-header-banner {
     position: relative;

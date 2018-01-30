@@ -2,7 +2,11 @@
   <div class="page-dynamic-detail">
     <page-header/>
     <div class="content hide-xs">
-      <div class="page-crumbs">天星动态 <span v-if="content.tname"> > {{content.tname}} > 正文</span></div>
+      <div class="page-crumbs" v-if="content.id">
+        <router-link :to="{name: 'dynamic'}">天星动态</router-link> &gt;
+        <router-link :to="{name: 'dynamictype', params: {tid: content.tid}}">{{content.tname}}
+        </router-link> &gt; 正文
+      </div>
     </div>
     <part-loading v-if="isLoading"/>
     <div class="dynamic-detail content">
@@ -71,14 +75,14 @@
     }
     .main-info {
       font-size: 14px;
-      color: #9fa5ac;
+      color: #999;
       padding-left: 13px;
       margin-top: 5px;
     }
     .detail-context {
       padding-top: 40px;
-      font-size: 14px;
-      color: #7b7b7b;
+      font-size: 15px;
+      color: #444;
       line-height: 1.8;
       text-align: justify;
     }

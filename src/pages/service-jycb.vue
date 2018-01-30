@@ -98,7 +98,6 @@
     }
     .main-info {
       font-size: 14px;
-      color: #9fa5ac;
       padding-left: 13px;
       margin-top: 5px;
     }
@@ -107,7 +106,6 @@
       line-height: 2;
       .main-section {
         margin-top: 10px;
-        color: #7b7b7b;
         padding-bottom: 40px;
         border-bottom: 1px solid #eee;
         p{
@@ -133,7 +131,6 @@
           }
           p {
             font-size: 14px;
-            color: #7b7b7b;
           }
         }
       }

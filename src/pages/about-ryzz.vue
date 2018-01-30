@@ -92,12 +92,12 @@
         float: left;
         width: 128px;
         line-height: 1.4;
-        color: #7f7f7f;
+        color: @black-color;
         font-size: 26px;
         small {
           font-size: 14px;
-          margin-left: 4px;
           vertical-align: 2px;
+          color:#666;
         }
         &:after {
           content: '';
@@ -105,7 +105,7 @@
           margin-top: 0.76em;
           display: inline-block;
           height: 0;
-          border-bottom: 1px solid #888;
+          border-bottom: 1px solid #bbb;
           width: 30px;
         }
       }
@@ -115,7 +115,7 @@
         line-height: 2;
         p {
           font-size: 14px;
-          color: #7b7b7b;
+          color: @black-color;
         }
         .rongyu-pic {
           padding-top: 10px;

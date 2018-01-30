@@ -78,7 +78,7 @@
     }
     .main-section {
       margin-top: 10px;
-      color: #7b7b7b;
+      color: @black-color;
       padding-bottom: 20px;
       text-indent: 2em;
       line-height: 1.8;
@@ -96,7 +96,7 @@
       p {
         text-indent: 2em;
         font-size: 14px;
-        color: #7b7b7b;
+        color: @black-color;
         margin-bottom:0.4em;
       }
     }

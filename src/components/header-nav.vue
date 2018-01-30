@@ -4,7 +4,7 @@
     <keep-alive>
       <transition name="fadeIn-down">
         <ul class="nav" v-show="isShowNavMenu || !isMobile" v-if="navList && navList.length">
-          <router-link tag="li" to="/" v-if="$route.path !== '/'"><a>首页</a></router-link>
+          <router-link tag="li" :to="{name: 'index'}" v-if="$route.path !== '/'"><a>首页</a></router-link>
           <li v-for="(item,index) in navList"
               @mouseenter="() => {!isMobile ? navItemVisible = index : ''}"
               @mouseleave="() => {!isMobile ? navItemVisible = false : ''}"
@@ -14,6 +14,7 @@
               <div class="nav-item-menu" v-if="item.children && navItemVisible === index">
                 <router-link v-for="(subItem,index) in item.children"
                              :to="subItem.to"
+                             target="_blank"
                              @click.native="showNavMenu"
                              :key="index">{{subItem.name}}
                 </router-link>
@@ -66,12 +67,12 @@
       li {
         position: relative;
         box-sizing: border-box;
-        font-size: 14px;
+        font-size: 16px;
         display: inline-block;
         padding: 20px 6px;
         margin: 0 14px;
-        height: 80px;
-        line-height: 40px;
+        height: 100px;
+        line-height: 60px;
         cursor: pointer;
         &:last-child {
           margin-right: 0;
@@ -110,7 +111,7 @@
         }
         .nav-item-menu {
           position: absolute;
-          top: 70px;
+          top: 90px;
           padding-top: 10px;
           padding-bottom: 10px;
           left: 50%;
@@ -120,15 +121,16 @@
           background-color: #fff;
           box-shadow: 0 7px 15px 0 rgba(0, 0, 0, 0.15);
           a {
+            font-size:14px;
             display: block;
             line-height: 40px;
-            color: #999;
+            color: #777;
             text-align: center;
             transition: all 0.3s;
             background-color: #fff;
             border-bottom: 1px solid #eee;
             &:hover {
-              color: #333;
+              color: @black-color;
               background-color: #f5f5f5;
             }
             &:last-child{
@@ -245,7 +247,7 @@
                 z-index: 10;
               }
               &:hover {
-                color: #333;
+                color: @black-color;
                 background-color: #f5f5f5;
               }
             }

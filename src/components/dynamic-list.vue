@@ -4,6 +4,7 @@
       class="nl-item clearfix"
       v-for="(item,index) in list"
       :key="item.id"
+      target="_blank"
       :to="{path:'/dynamic/'+item.tid+'/'+item.id}">
 
       <!--配图-->
@@ -97,15 +98,15 @@
     }
     .item-context {
       float: left;
-      width: 508px;
+      width: 480px;
       padding-top: 18px;
       transition: transform .3s;
       .title {
         font-size: 16px;
-        color: #444;
+        color: @black-color;
       }
       .context {
-        color: #afafaf;
+        color: @muted-color;
         line-height: 1.7;
         margin-top: 15px;
         display: -webkit-box;
@@ -116,17 +117,16 @@
       .info-item {
         display: inline-block;
         margin-right: 20px;
-        color: #aaa;
+        color: @black-color;
       }
     }
     .item-other {
       float: right;
-      width: 110px;
+      width: 5em;
       padding-top: 42px;
-      font-family: 'Microsoft Yahei', sans-serif;
       text-align: center;
       font-weight: 100;
-      color: #afafaf;
+      color: @black-color;
       font-size: 28px;
     }
   }

@@ -127,7 +127,6 @@
     }
     .main-section {
       margin-top: 10px;
-      color: #7b7b7b;
       padding-bottom: 20px;
       text-indent: 2em;
       line-height: 1.8;
@@ -147,7 +146,6 @@
       }
       p {
         font-size: 14px;
-        color: #7b7b7b;
         margin-bottom:0.4em;
       }
       .photo-show{
@@ -169,7 +167,6 @@
             margin: 15px 0;
             font-size:14px;
             text-align: center;
-            color:#7b7b7b;
           }
         }
 

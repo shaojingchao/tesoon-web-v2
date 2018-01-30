@@ -91,7 +91,6 @@
       }
       .main-info {
         font-size: 14px;
-        color: #9fa5ac;
         padding-left: 13px;
         margin-top: 5px;
       }
@@ -100,7 +99,7 @@
         line-height: 2;
         .main-section {
           margin-top: 10px;
-          color: #7b7b7b;
+          color: @black-color;
           padding-bottom: 40px;
           p{
             text-indent:2em;
@@ -120,10 +119,11 @@
       .btn {
         width: 10em;
         padding: 6px 0;
-        line-height: 1;
+        line-height: 1.2;
         margin: 0 0.5em;
+        font-size:16px;
         border-color: #eee;
-        color: #999;
+        color: #555;
         border-radius: 1px;
         background-color: #fff;
         &.active {
@@ -144,7 +144,6 @@
         }
         p {
           line-height: 1.8;
-          color: #7b7b7b;
         }
         .img-view {
           padding-top: 30px;
@@ -165,6 +164,7 @@
           width: 6em;
           padding: 6px 0;
           margin: 0 0.3em;
+          font-size:13px;
         }
       }
     }

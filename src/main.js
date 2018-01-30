@@ -8,7 +8,6 @@ import App from './App'
 import router from './router'
 import store from './store/index'
 import './assets/css/base.less'
-import './assets/iconfont/icon.css'
 import './bower_components/animate.css/animate.min.css'
 
 import Loading from './components/common/loading'

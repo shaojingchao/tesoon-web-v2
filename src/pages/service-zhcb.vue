@@ -160,7 +160,7 @@
       line-height: 2;
       .main-section {
         margin-top: 10px;
-        color: #7b7b7b;
+        color: @black-color;
         padding-bottom: 40px;
         border-bottom: 1px solid #eee;
         p{
@@ -188,12 +188,13 @@
             font-size: 18px;
             small{
               font-size:14px;
-              color: #7b7b7b;
+              color: #999;
+              font-weight:400;
             }
           }
           p {
             font-size: 14px;
-            color: #7b7b7b;
+            color: @black-color;
           }
         }
       }

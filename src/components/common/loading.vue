@@ -5,6 +5,7 @@
   </div>
 </template>
 <style lang="less">
+  @import "../../assets/css/_mixins-wln.less";
   .g-shade{
     position: fixed;
     z-index: 1000;
@@ -22,7 +23,7 @@
       width:100px;
       height:100px;
       text-align: center;
-      color:#333;
+      color:@black-color;
       font-size:15px;
       box-sizing: border-box;
       padding:60px 0 0;

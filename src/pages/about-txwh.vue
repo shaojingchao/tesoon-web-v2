@@ -133,14 +133,14 @@
           margin-top:0.7em;
           display: inline-block;
           height:0;
-          border-bottom:1px solid #888;
+          border-bottom:1px solid #bbb;
           width:30px;
         }
       }
       .pro-desc {
         p {
           font-size: 14px;
-          color: #7b7b7b;
+          color: @black-color;
           text-indent: 2em;
         }
       }
@@ -151,7 +151,7 @@
       margin-top: 30px;
       .main-section {
         margin-top: 10px;
-        color: #7b7b7b;
+        color: @black-color;
         padding-bottom: 40px;
         text-indent: 2em;
         border-bottom: 1px solid #eee;
