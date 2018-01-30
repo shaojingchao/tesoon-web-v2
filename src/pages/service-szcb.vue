@@ -34,7 +34,6 @@
     name: 'ServiceSzcb',
     data () {
       return {
-        pageBanner: require('../assets/img/banner/dynamic_banner.png'),
         routerNav: [
           {
             name: '天星教育网',

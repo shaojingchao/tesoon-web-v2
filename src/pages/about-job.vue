@@ -67,7 +67,6 @@
   export default {
     data () {
       return {
-        pageBanner: require('../assets/img/banner/product_banner.png'),
         jobListShowMap: [], // 默认展开全部职位
         isLoading: false,
         pages: {

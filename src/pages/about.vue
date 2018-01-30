@@ -13,7 +13,7 @@
   export default {
     data () {
       return {
-        pageBanner: require('../assets/img/banner/about_banner.png')
+        pageBanner: require('../assets/img/banner/about_banner.jpg')
       }
     }
   }

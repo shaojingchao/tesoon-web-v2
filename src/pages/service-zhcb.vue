@@ -122,12 +122,7 @@
 </template>
 <script type="text/ecmascript-6">
   export default {
-    name: 'ServiceZhcb',
-    data () {
-      return {
-        pageBanner: require('../assets/img/banner/product_banner.png')
-      }
-    }
+    name: 'ServiceZhcb'
   }
 </script>
 <style lang="less" scoped>

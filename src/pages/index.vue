@@ -161,7 +161,7 @@
     </div>
 
     <!--了解天星-->
-    <div id="know-us" class="index-section index-section-gray">
+    <div id="know-us" class="index-section-gray">
       <div class="content text-content">
         <h1 class="section-title">了解天星<br>
           <small>KNOW TIANXING</small>
@@ -814,6 +814,7 @@
         color: #4e4e4e;
         line-height: 1.7;
         text-indent: 2em;
+        text-align: justify;
       }
     }
     .bg-content {

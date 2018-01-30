@@ -4,7 +4,7 @@
       <h2 class="main-title">教育出版</h2>
       <div class="detail-context">
         <div class="main-section">
-          <img class="fr" v-lazy="require('../assets/img/jy/pro_01.png')">
+          <img class="fr" v-lazy="require('../assets/img/jy/pro_01.jpg')">
           <p>
             天星教育以独到、敏锐的市场眼光，独辟蹊径地首创MOOK教辅理念，开中国教辅杂志化先河，实现了图书优势和杂志优势的完美结合，出版的《金考卷》《试题调研》等系列图书，将全国示范名校优质备考资源传递给万千学子，一时畅销大江南北。</p>
           <p>永不止步的天星人，又迅速切入初高中同步和高考总复习等主流市场，开发了《讲义》系列图书，实现了公司产品从侧翼市场到核心市场的战略过渡。</p>
@@ -69,12 +69,7 @@
 </template>
 <script type="text/ecmascript-6">
   export default {
-    name: 'ServiceJycb',
-    data () {
-      return {
-        pageBanner: require('../assets/img/banner/product_banner.png')
-      }
-    }
+    name: 'ServiceJycb'
   }
 </script>
 <style lang="less" scoped>

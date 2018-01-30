@@ -31,7 +31,7 @@
       </div>
 
       <div class="bottom-banner">
-        <img src="../assets/img/about_gsys_01.jpg">
+        <img src="../assets/img/about_gsys_01.png">
       </div>
 
     </div>
@@ -39,11 +39,6 @@
 </template>
 <script type="text/ecmascript-6">
   export default {
-    data () {
-      return {
-        pageBanner: require('../assets/img/banner/product_banner.png')
-      }
-    }
   }
 </script>
 <style lang="less" scoped>

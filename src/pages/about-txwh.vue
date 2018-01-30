@@ -57,7 +57,7 @@
         </div>
 
         <div class="bottom-banner">
-          <img src="../assets/img/about_txwh_bottom.png">
+          <img src="../assets/img/about_txwh_bottom.jpg">
         </div>
       </div>
     </div>
@@ -66,11 +66,6 @@
 <script type="text/ecmascript-6">
   export default {
     name: 'ServiceJycb',
-    data () {
-      return {
-        pageBanner: require('../assets/img/banner/product_banner.png')
-      }
-    },
     metaInfo () {
       return {
         title: '天星教育 - 教育出版'
