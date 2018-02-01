@@ -59,7 +59,6 @@
         isLoading: false,
         baseUrl: CF.baseUrl,
         pageBanner: require('../assets/img/banner/dynamic_banner.jpg'),
-        navItemTag: ['0', '9', '10', '11'],
         currentNav: '',
         newList: [],
         pages: {
@@ -102,8 +101,8 @@
           }
         })
       },
-      goToPage (index) {
-        this.$router.push({query: {page: index}})
+      goToPage (page) {
+        this.$router.push({query: {page: page}})
       },
 
       // 获取列表数据

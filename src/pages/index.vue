@@ -73,7 +73,7 @@
         <part-loading v-else/>
       </div>
       <div class="known-more-wrap" v-if="dynamicList.length>0">
-        <router-link class="known-more-btn btn" :to="{name: 'dynamic'}">更多</router-link>
+        <router-link class="known-more-btn btn" target="_blank" :to="{name: 'dynamic'}">更多</router-link>
       </div>
     </div>
 
@@ -333,11 +333,11 @@
           },
           {
             src: isSupportWebp ? require('../assets/img/index/webp/szcb_item2.webp') : require('../assets/img/index/szcb_item2.jpg'),
-            to: {name: 'shuzichuban_weixuexiquan', query: {top: 1}}
+            to: {name: 'shuzichuban_weilainao', query: {top: 1}}
           },
           {
             src: isSupportWebp ? require('../assets/img/index/webp/szcb_item3.webp') : require('../assets/img/index/szcb_item3.jpg'),
-            to: {name: 'shuzichuban_weilainao', query: {top: 1}}
+            to: {name: 'shuzichuban_weixuexiquan', query: {top: 1}}
           }
         ],
         siteScreenshotDefIndex: 1,

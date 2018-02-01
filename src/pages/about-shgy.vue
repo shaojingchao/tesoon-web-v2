@@ -42,7 +42,7 @@
             photo: [
               {
                 title: '第二届《教材帮》编委颁奖会',
-                src: require('../assets/img/shgy/shgy_photo01.png')
+                src: require('../assets/img/shgy_photo01.png')
               }
             ]
           },
@@ -52,39 +52,39 @@
             photo: [
               {
                 title: '天星教育爱心捐书助学校园行',
-                src: require('../assets/img/shgy/shgy_photo02.png')
+                src: require('../assets/img/shgy_photo02.png')
               },
               {
                 title: '天星教育校园行',
-                src: require('../assets/img/shgy/shgy_photo03.png')
+                src: require('../assets/img/shgy_photo03.png')
               },
               {
                 title: '天星教育爱心捐书助学校园行',
-                src: require('../assets/img/shgy/shgy_photo04.png')
+                src: require('../assets/img/shgy_photo04.png')
               },
               {
                 title: '天星教育向沁阳一中捐赠价值二十三万元图书',
-                src: require('../assets/img/shgy/shgy_photo05.png')
+                src: require('../assets/img/shgy_photo05.png')
               },
               {
                 title: '天星教育爱心图书捐赠仪式在周口举行 ',
-                src: require('../assets/img/shgy/shgy_photo06.png')
+                src: require('../assets/img/shgy_photo06.png')
               },
               {
                 title: '天星教育向滑县六中捐赠价值二十三万元图书',
-                src: require('../assets/img/shgy/shgy_photo07.png')
+                src: require('../assets/img/shgy_photo07.png')
               },
               {
                 title: '向宋庆龄基金会捐款十万元',
-                src: require('../assets/img/shgy/shgy_photo08.png')
+                src: require('../assets/img/shgy_photo08.png')
               },
               {
                 title: '天星教育向梁北二中捐赠500余册图书',
-                src: require('../assets/img/shgy/shgy_photo09.png')
+                src: require('../assets/img/shgy_photo09.png')
               },
               {
                 title: '天星教育援助汶川赈灾',
-                src: require('../assets/img/shgy/shgy_photo10.png')
+                src: require('../assets/img/shgy_photo10.png')
               }
             ]
           }

@@ -38,7 +38,7 @@
         offsetHeight: 800,
         isShowSideBar: false,
         scrollTop: null,
-        duration: 1200,
+        duration: 800,
         pageIsBackingTop: false
       }
     },

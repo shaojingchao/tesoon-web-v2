@@ -24,7 +24,6 @@
         </ul>
       </transition>
     </keep-alive>
-
   </div>
 </template>
 <script type="text/ecmascript-6">

@@ -45,18 +45,18 @@
             }
           },
           {
-            name: '微学习圈',
+            name: '未来脑',
             to: {
-              name: 'shuzichuban_weixuexiquan',
+              name: 'shuzichuban_weilainao',
               meta: {
                 scrollToTop: false
               }
             }
           },
           {
-            name: '未来脑',
+            name: '微学习圈',
             to: {
-              name: 'shuzichuban_weilainao',
+              name: 'shuzichuban_weixuexiquan',
               meta: {
                 scrollToTop: false
               }
