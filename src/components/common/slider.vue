@@ -57,10 +57,14 @@
       }
     },
     computed: {
+      isMobile () {
+        return this.$store.state.isMobile
+      },
       banner () {
         return this.bannerPic.map((item) => {
+          let _itemSrc = this.isMobile ? item.mobile_src : item.web_src
           return {
-            src: this.baseUrl + item,
+            src: this.baseUrl + _itemSrc,
             error: this.lazyObj.error,
             loading: this.lazyObj.loading
           }

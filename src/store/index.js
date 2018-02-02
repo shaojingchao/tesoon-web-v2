@@ -94,7 +94,6 @@ const store = new Vuex.Store({
       state.isMobile = document.body.clientWidth <= state.mobileWidth
     },
     setIndexBanner (state, bn) {
-      console.log(bn)
       state.indexBanner = bn
     },
     updateMainNav (state, list) {

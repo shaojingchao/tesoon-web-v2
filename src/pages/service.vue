@@ -11,7 +11,7 @@
   export default {
     data () {
       return {
-        pageBanner: require('../assets/img/banner/product_banner.jpg')
+        pageBanner: require('../assets/img/product_banner.jpg')
       }
     }
   }

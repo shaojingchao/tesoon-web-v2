@@ -58,7 +58,7 @@
       return {
         isLoading: false,
         baseUrl: CF.baseUrl,
-        pageBanner: require('../assets/img/banner/dynamic_banner.jpg'),
+        pageBanner: require('../assets/img/dynamic_banner.jpg'),
         currentNav: '',
         newList: [],
         pages: {

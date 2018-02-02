@@ -89,7 +89,7 @@
                      target="_blank"
                      :to="item.to">
           <div class="item-body"
-               v-lazy:background-image="item.img"
+               v-lazy:background-image="isMobile ? item.img.mobile : item.img.web"
                :style="{'background-position': jiaoyuListBgPosition}">
             <h3>{{item.title}}</h3>
             <p>{{item.subTitle}}</p>
@@ -115,7 +115,7 @@
                      :to="item.to">
           <div class="item-body">
             <div class="item-bg"
-                 v-lazy:background-image="item.img"
+                 v-lazy:background-image="isMobile ? item.img.mobile : item.img.web"
                  :style="{'background-position': '50% 45px'}"></div>
             <span class="link-btn iconfont tx-icon-right1"></span>
             <h3>{{item.title}}</h3>
@@ -134,10 +134,10 @@
         <small>DIGITAL PUBLISHING</small>
       </h1>
       <div class="website-list-scroll-wrap">
-        <span class="scroll-to-left" :class="{'disabled':webCurrentPage === 0}" @click="webGoLeft" v-if="isMobile">
+        <span class="scroll-to-left" @click="webGoLeft" v-if="isMobile">
           <i class="iconfont tx-icon-down"></i>
         </span>
-        <span class="scroll-to-right" :class="{'disabled':webCurrentPage === 2}" @click="webGoRight" v-if="isMobile">
+        <span class="scroll-to-right" @click="webGoRight" v-if="isMobile">
           <i class="iconfont tx-icon-down"></i>
         </span>
         <div class="website-list-scroll">
@@ -150,7 +150,7 @@
                          @mouseenter.native="siteScreenshotActive(index)"
                          @mouseleave.native="siteScreenshotActiveIndex = siteScreenshotDefIndex"
                          :key="index">
-              <img v-lazy="site.src">
+              <img v-lazy="isMobile ? site.src.mobile : site.src.web">
             </router-link>
           </div>
         </div>
@@ -173,7 +173,8 @@
           <router-link class="btn btn-link" target="_blank" :to="{name: 'aboutgongsijianjie'}">更多</router-link>
         </div>
       </div>
-      <div class="bg-content" v-lazy:background-image="require('../assets/img/index/about_us_bg.png')">
+      <div class="bg-content"
+           v-lazy:background-image="isSupportWebp ? require('../assets/img/webp/about_us_bg.webp') : require('../assets/img/about_us_bg.png')">
         <div class="content">
           <div class="ku-icon">
             <div class="ku-item">
@@ -232,7 +233,8 @@
 
     <!--联系我们-->
 
-    <div id="contact" v-lazy:background-image="require('../assets/img/index/address_map.png')">
+    <div id="contact"
+         v-lazy:background-image="isSupportWebp ? require('../assets/img/webp/address_map.webp') : require('../assets/img/address_map.png')">
       <div class="content contact-content">
         <div class="position-tips" role="位置标记"></div>
         <div class="content address-info">
@@ -263,6 +265,54 @@
 
   const isSupportWebp = supportWebp()
 
+  // 静态图片资源
+  const jiaoyuListImgs = [
+    {
+      mobile: isSupportWebp ? require('../assets/img_mobile/webp/jycb_item1.webp') : require('../assets/img_mobile/jycb_item1.png'),
+      web: isSupportWebp ? require('../assets/img/webp/jycb_item1.webp') : require('../assets/img/jycb_item1.png')
+    },
+    {
+      mobile: isSupportWebp ? require('../assets/img_mobile/webp/jycb_item2.webp') : require('../assets/img_mobile/jycb_item2.png'),
+      web: isSupportWebp ? require('../assets/img/webp/jycb_item2.webp') : require('../assets/img/jycb_item2.png')
+    },
+    {
+      mobile: isSupportWebp ? require('../assets/img_mobile/webp/jycb_item3.webp') : require('../assets/img_mobile/jycb_item3.png'),
+      web: isSupportWebp ? require('../assets/img/webp/jycb_item3.webp') : require('../assets/img/jycb_item3.png')
+    },
+    {
+      mobile: isSupportWebp ? require('../assets/img_mobile/webp/jycb_item4.webp') : require('../assets/img_mobile/jycb_item4.png'),
+      web: isSupportWebp ? require('../assets/img/webp/jycb_item4.webp') : require('../assets/img/jycb_item4.png')
+    }
+  ]
+  const zongheListImgs = [
+    {
+      mobile: isSupportWebp ? require('../assets/img_mobile/webp/zhcb_item1.webp') : require('../assets/img_mobile/zhcb_item1.png'),
+      web: isSupportWebp ? require('../assets/img/webp/zhcb_item1.webp') : require('../assets/img/zhcb_item1.png')
+    },
+    {
+      mobile: isSupportWebp ? require('../assets/img_mobile/webp/zhcb_item2.webp') : require('../assets/img_mobile/zhcb_item2.png'),
+      web: isSupportWebp ? require('../assets/img/webp/zhcb_item2.webp') : require('../assets/img/zhcb_item2.png')
+    },
+    {
+      mobile: isSupportWebp ? require('../assets/img_mobile/webp/zhcb_item3.webp') : require('../assets/img_mobile/zhcb_item3.png'),
+      web: isSupportWebp ? require('../assets/img/webp/zhcb_item3.webp') : require('../assets/img/zhcb_item3.png')
+    }
+  ]
+  const websiteListImgs = [
+    {
+      mobile: isSupportWebp ? require('../assets/img_mobile/webp/szcb_item1.webp') : require('../assets/img_mobile/szcb_item1.jpg'),
+      web: isSupportWebp ? require('../assets/img/webp/szcb_item1.webp') : require('../assets/img/szcb_item1.jpg')
+    },
+    {
+      mobile: isSupportWebp ? require('../assets/img_mobile/webp/szcb_item2.webp') : require('../assets/img_mobile/szcb_item2.jpg'),
+      web: isSupportWebp ? require('../assets/img/webp/szcb_item2.webp') : require('../assets/img/szcb_item2.jpg')
+    },
+    {
+      mobile: isSupportWebp ? require('../assets/img_mobile/webp/szcb_item3.webp') : require('../assets/img_mobile/szcb_item3.jpg'),
+      web: isSupportWebp ? require('../assets/img/webp/szcb_item3.webp') : require('../assets/img/szcb_item3.jpg')
+    }
+  ]
+
   export default {
     name: 'PageIndex',
     components: {
@@ -278,31 +328,32 @@
     },
     data () {
       return {
+        isSupportWebp: isSupportWebp,
         baseUrl: CF.baseUrl,
-        dynamicList: [],
+        dynamicList: [], // 天星动态
         jiaoyuList: [
           {
             title: '《金考卷》',
             subTitle: '金考卷，试卷专家',
-            img: isSupportWebp ? require('../assets/img/index/webp/jycb_item2.webp') : require('../assets/img/index/jycb_item2.png'),
+            img: jiaoyuListImgs[0],
             to: {name: 'jiaoyuchuban', hash: '#jkj'}
           },
           {
             title: '《试题调研》',
             subTitle: '中国高考意见领袖',
-            img: isSupportWebp ? require('../assets/img/index/webp/jycb_item1.webp') : require('../assets/img/index/jycb_item1.png'),
+            img: jiaoyuListImgs[1],
             to: {name: 'jiaoyuchuban', hash: '#stdy'}
           },
           {
             title: '《教材帮》',
             subTitle: '同步到高考 名师一帮到底',
-            img: isSupportWebp ? require('../assets/img/index/webp/jycb_item3.webp') : require('../assets/img/index/jycb_item3.png'),
+            img: jiaoyuListImgs[2],
             to: {name: 'jiaoyuchuban', hash: '#jcb'}
           },
           {
             title: '《一遍过》',
             subTitle: '一遍解决所有学习难题',
-            img: isSupportWebp ? require('../assets/img/index/webp/jycb_item4.webp') : require('../assets/img/index/jycb_item4.png'),
+            img: jiaoyuListImgs[3],
             to: {name: 'jiaoyuchuban', hash: '#ybg'}
           }
         ],
@@ -310,33 +361,33 @@
           {
             title: '疯狂阅读',
             subTitle: '专注所以疯狂，激情成就梦想',
-            img: isSupportWebp ? require('../assets/img/index/webp/zhcb_item1.webp') : require('../assets/img/index/zhcb_item1.png'),
+            img: zongheListImgs[0],
             to: {name: 'zonghechuban', hash: '#fkyd'}
           },
           {
             title: '疯狂作文',
             subTitle: '高考满分作文系列为高中必备工具书',
-            img: isSupportWebp ? require('../assets/img/index/webp/zhcb_item2.webp') : require('../assets/img/index/zhcb_item2.png'),
+            img: zongheListImgs[1],
             to: {name: 'zonghechuban', hash: '#fkzw'}
           },
           {
             title: '天星童书',
             subTitle: '天星童书系列专为0-12岁幼儿设计',
-            img: isSupportWebp ? require('../assets/img/index/webp/zhcb_item3.webp') : require('../assets/img/index/zhcb_item3.png'),
+            img: zongheListImgs[2],
             to: {name: 'zonghechuban', hash: '#qqjx'}
           }
         ],
         websiteList: [
           {
-            src: isSupportWebp ? require('../assets/img/index/webp/szcb_item1.webp') : require('../assets/img/index/szcb_item1.jpg'),
+            src: websiteListImgs[0],
             to: {name: 'shuzichuban_tianxingjiaoyu', query: {top: 1}}
           },
           {
-            src: isSupportWebp ? require('../assets/img/index/webp/szcb_item2.webp') : require('../assets/img/index/szcb_item2.jpg'),
+            src: websiteListImgs[1],
             to: {name: 'shuzichuban_weilainao', query: {top: 1}}
           },
           {
-            src: isSupportWebp ? require('../assets/img/index/webp/szcb_item3.webp') : require('../assets/img/index/szcb_item3.jpg'),
+            src: websiteListImgs[2],
             to: {name: 'shuzichuban_weixuexiquan', query: {top: 1}}
           }
         ],
@@ -347,7 +398,9 @@
         userRatingListActive: 0,
         ratingCurrentPage: 1,
         ratingTimer: null,
+        webGoTimer: null,
         ratingDuration: 6, // 秒
+        webGoDuration: 5, // 秒
         pjCurrentIndex: 0
       }
     },
@@ -376,6 +429,7 @@
       this.$nextTick(() => {
         this.initWOW('wow')
       })
+      // 天星动态
       this.$http.get(CF.getDynamicsList, {
         params: {
           pagesize: 5
@@ -389,10 +443,13 @@
         //   this.initWOW('news-wow')
         // })
       })
+      // 数字出版
+      this.webGoAutoPlay()
       // 用户评价
+      let _pagesize = this.isMobile ? 2 : 6
       this.$http.get(CF.getReviews, {
         params: {
-          pagesize: 6
+          pagesize: _pagesize
         }
       }).then(res => {
         if (res.data) {
@@ -418,15 +475,29 @@
       },
       webGoRight () { // 数字出版滑动效果
         if (!this.isMobile) return false
-        if (this.webCurrentPage < 2) {
+        if (this.webCurrentPage < this.websiteList.length - 1) {
           this.webCurrentPage++
+        } else {
+          this.webCurrentPage = 0
         }
       },
       webGoLeft () { // 数字出版滑动效果
         if (!this.isMobile) return false
         if (this.webCurrentPage > 0) {
           this.webCurrentPage--
+        } else {
+          this.webCurrentPage = this.websiteList.length - 1
         }
+      },
+      webGoAutoPlay () {
+        clearInterval(this.webGoTimer)
+        this.webGoTimer = setInterval(() => {
+          if (this.webCurrentPage < this.websiteList.length - 1) {
+            this.webCurrentPage++
+          } else {
+            this.webCurrentPage = 0
+          }
+        }, this.webGoDuration * 1000)
       },
       ratingNextPage (i) { /* 用户评价 */
         this.ratingCurrentPage = i
@@ -470,7 +541,7 @@
     }
 
     .index-section {
-      padding: 60px 0;
+      padding: 60px 0 20px;
       background-color: #fff;
     }
 
@@ -483,7 +554,7 @@
       padding: 40px;
       margin: 0 auto;
       text-align: center;
-      padding-bottom: 2px;
+      /*padding-bottom: 2px;*/
     }
     .known-more-btn {
       border-color: #e1e1e1;
@@ -492,7 +563,6 @@
       font-size: 16px;
       padding: 0.55em 4.5em;
       transition: all 0.3s;
-      transform: translateZ(0);
       &:hover {
         color: #fff;
         border-color: @primary;
@@ -1256,7 +1326,7 @@
     .page-index {
       .known-more-wrap {
         padding: 20px;
-        padding-bottom: 2px;
+        /*padding-bottom: 2px;*/
       }
 
       /*section*/
@@ -1268,7 +1338,7 @@
       }
 
       .index-section {
-        padding: 30px 0;
+        padding: 30px 0 10px;
       }
     }
 
@@ -1434,34 +1504,34 @@
 
     /*数字出版*/
     #website {
-      .website-list-scroll-wrap{
+      .website-list-scroll-wrap {
         position: relative;
-        .scroll-to-left,.scroll-to-right{
-          height:50px;
-          line-height:50px;
-          width:50px;
+        .scroll-to-left, .scroll-to-right {
+          height: 50px;
+          line-height: 50px;
+          width: 50px;
           position: absolute;
-          top:50%;
-          color:@muted-color;
-          margin-top:-25px;
+          top: 50%;
+          color: @muted-color;
+          margin-top: -25px;
           text-align: center;
-          .iconfont{
-            font-size:30px;
+          .iconfont {
+            font-size: 30px;
             display: inline-block;
           }
-          &:active{
-            color:#666;
+          &:active {
+            color: #666;
           }
-          &.disabled{
+          &.disabled {
             opacity: 0.6;
           }
         }
-        .scroll-to-left{
+        .scroll-to-left {
           transform: rotateZ(90deg);
-          left:0;
+          left: 0;
         }
-        .scroll-to-right{
-          right:0;
+        .scroll-to-right {
+          right: 0;
           transform: rotateZ(-90deg);
         }
       }
@@ -1475,7 +1545,7 @@
         width: 300%;
         flex-wrap: nowrap;
         margin-bottom: 8px;
-        padding:15px 0;
+        padding: 15px 0;
         transition: transform 1.2s @effectFunc;
         .screen-shot {
           width: 98%;
@@ -1517,7 +1587,7 @@
             }
             .title {
               padding-top: 4px;
-              font-size:12px;
+              font-size: 12px;
             }
             .desc {
               margin-top: 20px;
