@@ -4,7 +4,7 @@
       <h2 class="main-title">数字出版</h2>
       <div class="detail-context">
         <div class="main-section">
-          <img class="fr ml20" v-lazy="require('../assets/img/szcb_pro_01.png')">
+          <img class="fr ml20" v-lazy="isMobile ? require('../assets/img_mobile/szcb_pro_01.png') : require('../assets/img/szcb_pro_01.png')">
           <p>
             秉持“致力于打造真正有效的智能教与学解决方案”的基本理念，追求“让科技走向课堂，教师轻松教，学生高效学”的基本目标，利用信息技术为老师实现高效教学提供最方便、最有效的辅助，将老师从繁重的基础工作中解放出来，使之可以专注于传道授业解惑。</p>
           <p>数字出版是天星教育旗下的在线教育平台，平台以兴趣圈子社群为纽带，致力于连接全国知名教育机构、团队和名师资源，为K12阶段学生及家长提供在线知识专栏和在线课程服务。</p>
@@ -63,6 +63,11 @@
             }
           }
         ]
+      }
+    },
+    computed: {
+      isMobile () {
+        return this.$store.state.isMobile
       }
     }
   }

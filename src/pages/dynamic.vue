@@ -1,7 +1,7 @@
 <template>
   <div class="page-dynamic">
     <page-header/>
-    <page-banner :picture="pageBanner"/>
+    <page-banner :picture="pageBanner" v-if="!isMobile"/>
     <div class="dynamic-page content clearfix">
       <div class="dynamic-cate" v-if="dynamicNav && dynamicNav.children.length">
         <div class="cate-item">
@@ -40,7 +40,11 @@
   import DynamicList from '../components/dynamic-list.vue'
   import Pager from '../components/common/pager.vue'
   import CF from '../api/index'
-
+  import {supportWebp} from '../util/isSupportWebp'
+  const pageBanner = {
+    mobile: supportWebp() ? require('../assets/img_mobile/webp/dynamic_banner.webp') : require('../assets/img_mobile/dynamic_banner.jpg'),
+    web: supportWebp() ? require('../assets/img/webp/dynamic_banner.webp') : require('../assets/img/dynamic_banner.jpg')
+  }
   export default {
     components: {
       DynamicList,
@@ -52,13 +56,15 @@
       ]),
       isMobile () {
         return this.$store.state.isMobile
+      },
+      pageBanner () {
+        return this.isMobile ? pageBanner.mobile : pageBanner.web
       }
     },
     data () {
       return {
         isLoading: false,
         baseUrl: CF.baseUrl,
-        pageBanner: require('../assets/img/dynamic_banner.jpg'),
         currentNav: '',
         newList: [],
         pages: {
@@ -75,8 +81,6 @@
     beforeRouteUpdate (to, from, next) {
       this.routeFunc(to)
       next()
-    },
-    mounted () {
     },
     methods: {
       routeFunc (to) {
@@ -117,7 +121,13 @@
     }
   }
 </script>
-
+<style lang="less" scoped>
+  .page-dynamic {
+    .page-header {
+      box-shadow: 0 1px 0 rgba(0, 0, 0, .1) !important;
+    }
+  }
+</style>
 <style lang="less" scoped>
   @import "../assets/css/_mixins-wln.less";
   //天星动态
@@ -158,8 +168,8 @@
             font-size: 12px;
             line-height: 45px;
             overflow: hidden;
-            border-top: 1px solid rgba(255, 255, 255, .13);
-            border-bottom: 1px solid rgba(255, 255, 255, .13);
+            border-top: 1px solid rgba(255, 255, 255, .1);
+            border-bottom: 1px solid rgba(255, 255, 255, .1);
             margin-top: -1px;
             transition: all .3s;
             &:first-child {
@@ -175,17 +185,15 @@
             }
             &:hover {
               a {
-                transform: translateX(10px);
+                background-color: #3985e4;
               }
             }
             &.current {
               position: relative;
               z-index: 10;
               background-color: #3985e4;
-              border-color: #3985e4;
               a {
                 cursor: default;
-                transform: translateX(10px);
               }
               &:hover {
                 background-color: #3985e4;

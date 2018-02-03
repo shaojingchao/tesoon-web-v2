@@ -4,7 +4,7 @@
       <h2 class="main-title">教育出版</h2>
       <div class="detail-context">
         <div class="main-section">
-          <img class="fr" v-lazy="require('../assets/img/jycb_pro_01.jpg')">
+          <img class="fr" v-lazy="isMobile ? require('../assets/img_mobile/jycb_pro_01.jpg') : require('../assets/img/jycb_pro_01.jpg')">
           <p>
             天星教育以独到、敏锐的市场眼光，独辟蹊径地首创MOOK教辅理念，开中国教辅杂志化先河，实现了图书优势和杂志优势的完美结合，出版的《金考卷》《试题调研》等系列图书，将全国示范名校优质备考资源传递给万千学子，一时畅销大江南北。</p>
           <p>永不止步的天星人，又迅速切入初高中同步和高考总复习等主流市场，开发了《讲义》系列图书，实现了公司产品从侧翼市场到核心市场的战略过渡。</p>
@@ -13,7 +13,7 @@
         </div>
         <div class="pro-list-section" id="jkj">
           <div class="pro-cover">
-            <img v-lazy="require('../assets/img/jycb_pro_02.png')">
+            <img v-lazy="isMobile ? require('../assets/img_mobile/jycb_pro_02.png') : require('../assets/img/jycb_pro_02.png')">
           </div>
           <div class="pro-desc">
             <h3>金考卷 —— 金考卷，试卷专家</h3>
@@ -25,7 +25,7 @@
 
         <div class="pro-list-section" id="stdy">
           <div class="pro-cover">
-            <img v-lazy="require('../assets/img/jycb_pro_03.png')">
+            <img v-lazy="isMobile ? require('../assets/img_mobile/jycb_pro_03.png') : require('../assets/img/jycb_pro_03.png')">
           </div>
           <div class="pro-desc">
             <h3>试题调研 —— 中国高考意见领袖</h3>
@@ -39,7 +39,7 @@
 
         <div class="pro-list-section" id="jcb">
           <div class="pro-cover">
-            <img v-lazy="require('../assets/img/jycb_pro_04.png')">
+            <img v-lazy="isMobile ? require('../assets/img_mobile/jycb_pro_04.png') : require('../assets/img/jycb_pro_04.png')">
           </div>
           <div class="pro-desc">
             <h3>教材帮 —— 同步到高考 名师一帮到底</h3>
@@ -52,7 +52,7 @@
 
         <div class="pro-list-section" id="ybg">
           <div class="pro-cover">
-            <img v-lazy="require('../assets/img/jycb_pro_05.png')">
+            <img v-lazy="isMobile ? require('../assets/img_mobile/jycb_pro_05.png') : require('../assets/img/jycb_pro_05.png')">
           </div>
           <div class="pro-desc">
             <h3>一遍过 —— 一遍解决所有学习难题</h3>
@@ -69,7 +69,12 @@
 </template>
 <script type="text/ecmascript-6">
   export default {
-    name: 'ServiceJycb'
+    name: 'ServiceJycb',
+    computed: {
+      isMobile () {
+        return this.$store.state.isMobile
+      }
+    }
   }
 </script>
 <style lang="less" scoped>
@@ -151,6 +156,8 @@
           }
         }
         .pro-list-section {
+          padding-top: 20px;
+          padding-bottom: 20px;
           .pro-cover {
             width: 100px;
             padding-right: 15px;

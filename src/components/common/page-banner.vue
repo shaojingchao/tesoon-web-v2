@@ -34,7 +34,7 @@
   }
 
   @media screen and (max-width: 767px) {
-    @bannerHeight: (200 / 1080 ) * 100vw; // 图片大小 1080 * 200
+    @bannerHeight: (360 / 750 ) * 100vw; // 图片大小 750 * 360
     .page-header-banner {
       height: @bannerHeight;
     }

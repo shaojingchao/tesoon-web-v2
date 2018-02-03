@@ -110,6 +110,7 @@
       text-align: center;
       color: @color;
       img {
+        width:150px;
         display: block;
         margin: 0 auto;
         margin-bottom: 15px;

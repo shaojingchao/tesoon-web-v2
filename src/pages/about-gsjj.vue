@@ -30,7 +30,7 @@
         <p>天星教育利用自身的品牌优势，以人为本，以市场为导向，以管理为基础，以诚信为宗旨，以质量为保证，依托优质的客户服务，不断提高员工素质，开拓进取，稳健发展。在新的发展道路上，天星怀着对中国教育事业的无限热爱，秉承着对人民群众的无限赤诚，为自己树立如下使命：为优质教育资源的普及不懈努力，为人民群众综合素质的提高不懈奋斗。</p>
       </div>
 
-      <div class="bottom-banner">
+      <div class="bottom-banner" v-if="!isMobile">
         <img src="../assets/img/about_gsys_01.png">
       </div>
 
@@ -39,6 +39,11 @@
 </template>
 <script type="text/ecmascript-6">
   export default {
+    computed: {
+      isMobile () {
+        return this.$store.state.isMobile
+      }
+    }
   }
 </script>
 <style lang="less" scoped>
@@ -98,5 +103,13 @@
   }
 
   @media screen and (max-width: 767px) {
+    .about-detail {
+      padding-bottom: 80px;
+      .main-list-section{
+        h3{
+          font-weight: 700;
+        }
+      }
+    }
   }
 </style>

@@ -56,7 +56,7 @@
           </div>
         </div>
 
-        <div class="bottom-banner">
+        <div class="bottom-banner" v-if="!isMobile">
           <img src="../assets/img/about_txwh_bottom.jpg">
         </div>
       </div>
@@ -65,10 +65,9 @@
 </template>
 <script type="text/ecmascript-6">
   export default {
-    name: 'ServiceJycb',
-    metaInfo () {
-      return {
-        title: '天星教育 - 教育出版'
+    computed: {
+      isMobile () {
+        return this.$store.state.isMobile
       }
     }
   }
@@ -161,5 +160,8 @@
   }
 
   @media screen and (max-width: 767px) {
+    .about-detail {
+      padding-bottom: 80px;
+    }
   }
 </style>

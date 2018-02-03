@@ -1,17 +1,17 @@
 <template>
   <div class="un-select pagination-wrap">
     <ul class="pagination">
-      <li :class="{disabled:currentPage === 1}" @click="goToPage(1)"><a title="首页" class="side-btn" href="javascript:"><<</a>
+      <li :class="{disabled:currentPage === 1}" @click="goToPage(1)"><a title="首页" class="side-btn iconfont tx-icon-left_double" href="javascript:"></a>
       </li>
-      <li :class="{disabled:currentPage === 1}" @click="prevPage()"><a title="上一页" class="side-btn"
-                                                                       href="javascript:"><</a></li>
+      <li :class="{disabled:currentPage === 1}" @click="prevPage()"><a title="上一页" class="side-btn iconfont tx-icon-left"
+                                                                       href="javascript:"></a></li>
       <li v-for="item in pages"
           :class="{active:currentPage === item}"
           @click="goToPage(item)"><a href="javascript:">{{item}}</a></li>
-      <li :class="{disabled:currentPage === pageNum}" @click="nextPage()"><a title="下一页" class="side-btn"
-                                                                             href="javascript:">></a></li>
-      <li :class="{disabled:currentPage === pageNum}" @click="goToPage(pageNum)"><a title="尾页" class="side-btn"
-                                                                                    href="javascript:">>></a></li>
+      <li :class="{disabled:currentPage === pageNum}" @click="nextPage()"><a title="下一页" class="side-btn iconfont tx-icon-right"
+                                                                             href="javascript:"></a></li>
+      <li :class="{disabled:currentPage === pageNum}" @click="goToPage(pageNum)"><a title="尾页" class="side-btn iconfont tx-icon-right_double"
+                                                                                    href="javascript:"></a></li>
     </ul>
   </div>
 </template>
@@ -40,11 +40,11 @@
       background: #fff;
       color: @black-color;
       &.side-btn {
-        /*width:4em;*/
-        font-size: 1.15em;
         line-height: 26px;
         font-weight: 400;
         font-family: Simsun, sans-serif;
+        background-color: #f7f7f7;
+        border-color: #f7f7f7;
       }
     }
 

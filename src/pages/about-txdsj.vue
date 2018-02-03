@@ -101,5 +101,8 @@
   }
 
   @media screen and (max-width: 767px) {
+    .about-detail {
+      padding-bottom: 80px;
+    }
   }
 </style>

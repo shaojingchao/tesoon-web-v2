@@ -8,7 +8,7 @@
 
 <script type="text/ecmascript-6">
   import SideBar from './components/common/side-bar.vue'
-  import SideBarWeixin from './components/common/side-bar-weixin.vue'
+
   export default {
     name: 'app',
     data () {
@@ -17,8 +17,7 @@
       }
     },
     components: {
-      SideBar,
-      SideBarWeixin
+      SideBar
     },
     created () {
       this.$Progress.start()

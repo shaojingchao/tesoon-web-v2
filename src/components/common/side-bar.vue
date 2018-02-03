@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="mask-layer" v-if="weixinIsVisible" @click="weixinIsVisible = false">
+      <a href="javascript:" class="close-btn">×</a>
       <transition name="fadeIn-up" appear>
         <div class="ewm-wrap">
           <img src="../../assets/img/ewm.png">
@@ -106,16 +107,29 @@
     left: 0;
     right: 0;
     background-color: rgba(0, 0, 0, .5);
+    .close-btn{
+      display: block;
+      position: absolute;
+      top:20px;
+      right:20px;
+      font-size:60px;
+      color:rgba(255,255,255,.8);
+      font-weight:100;
+      text-align: center;
+      line-height: 1;
+      height:60px;
+      width:60px;
+    }
   }
 
   .ewm-wrap {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 150px;
-    height: 150px;
-    margin-top: -75px;
-    margin-left: -75px;
+    width: 258px;
+    height: 258px;
+    margin-top: -258px / 2;
+    margin-left: -258px / 2;
     img {
       display: block;
       max-height: 100%;
@@ -124,11 +138,20 @@
   }
 
   @media screen and (max-width: 767px) {
+    .mask-layer {
+      .close-btn{
+        top:0;
+        right:0;
+      }
+    }
     .ewm-wrap {
-      width: 120px;
-      height: 120px;
-      margin-top: -60px;
-      margin-left: -60px;
+      width: 180px;
+      height: 180px;
+      margin-top: -90px;
+      margin-left: -90px;
+      img{
+        display: block;
+      }
     }
   }
 </style>

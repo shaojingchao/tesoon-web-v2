@@ -209,16 +209,17 @@
 
   @media screen and (max-width: 767px) {
     .about-detail {
+      padding-bottom: 80px;
       .job-list-table {
         .table {
           thead {
             font-size: 14px;
           }
           th {
-            padding: .7em .2em;
+            padding: .8em .1em;
           }
           td {
-            padding: .6em .2em;
+            padding: .8em .1em;
             font-size: 12px;
             text-align: center;
           }
@@ -240,7 +241,9 @@
           }
           tr.job-item {
             cursor: pointer;
-            font-weight: 700;
+            .handle{
+              font-size:12px;
+            }
           }
           tr.job-desc-tr {
             td {

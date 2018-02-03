@@ -4,7 +4,7 @@
       <h2 class="main-title">综合出版</h2>
       <div class="detail-context">
         <div class="main-section">
-          <img class="fr" src="../assets/img/zhcb_pro_01.png">
+          <img class="fr" v-lazy="isMobile ? require('../assets/img_mobile/zhcb_pro_01.png') : require('../assets/img/zhcb_pro_01.png')">
           <p>天星教育长期关注青少年素质教育与儿童阅读成长，构建了以青少年期刊、中小学读写拓展、少儿读物为主要领域的综合出版格局。</p>
           <p>《疯狂阅读》杂志秉承激情专注之精神，怀抱出类拔萃之信念，长期执着于青少年读写拓展研究，形成了《疯狂阅读》《疯狂作文》《最美文》《素材控》《英语时空》《青春风》在内的青少年期刊群。</p>
           <p>中小学阅读拓展领域现有语文拓展阅读、课外综合阅读、科普阅读、英语阅读、作文辅导等图书系列，可有效帮助青少年读者扩大知识视野、提高读写能力、积淀人文素养。</p>
@@ -13,7 +13,7 @@
 
         <div class="pro-list-section" id="fkyd">
           <div class="pro-cover">
-            <img src="../assets/img/zhcb_pro_03.png">
+            <img v-lazy="isMobile ? require('../assets/img_mobile/zhcb_pro_03.png') : require('../assets/img/zhcb_pro_03.png')">
           </div>
           <div class="pro-desc">
             <h3>《疯狂阅读  英语时空》 <small class="text-muted">品异域风情，学地道英语！</small></h3>
@@ -25,7 +25,7 @@
 
         <div class="pro-list-section" id="fkzw">
           <div class="pro-cover">
-            <img src="../assets/img/zhcb_pro_02.png">
+            <img v-lazy="isMobile ? require('../assets/img_mobile/zhcb_pro_02.png') : require('../assets/img/zhcb_pro_02.png')">
           </div>
           <div class="pro-desc">
             <h3>《疯狂作文》（初中版、高考版）</h3>
@@ -82,7 +82,7 @@
 
         <div class="pro-list-section" id="qqjx">
           <div class="pro-cover">
-            <img src="../assets/img/zhcb_pro_08.png">
+            <img v-lazy="isMobile ? require('../assets/img_mobile/zhcb_pro_08.png') : require('../assets/img/zhcb_pro_08.png')">
           </div>
           <div class="pro-desc">
             <h3>天星童书系列——《我的小影子》</h3>
@@ -122,7 +122,12 @@
 </template>
 <script type="text/ecmascript-6">
   export default {
-    name: 'ServiceZhcb'
+    name: 'ServiceZhcb',
+    computed: {
+      isMobile () {
+        return this.$store.state.isMobile
+      }
+    }
   }
 </script>
 <style lang="less" scoped>

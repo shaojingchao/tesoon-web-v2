@@ -158,6 +158,7 @@
             width:300px;
             height:200px;
             img{
+              display: block;
               max-height: 100%;
               max-width:100%;
             }
@@ -174,5 +175,31 @@
   }
 
   @media screen and (max-width: 767px) {
+    .about-detail {
+      padding-bottom: 80px;
+      .main-list-section {
+        h3{
+          font-weight:700;
+        }
+        .photo-show{
+          padding-top: 10px;
+          .img-item-content{
+            width:50%;
+            margin-right:0;
+            margin-bottom: 0;
+            padding:8px;
+            box-sizing: border-box;
+            .img-item{
+              width:100%;
+              height:auto;
+            }
+            .item-desc{
+              line-height:1.4;
+            }
+          }
+
+        }
+      }
+    }
   }
 </style>

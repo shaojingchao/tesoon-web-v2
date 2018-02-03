@@ -93,7 +93,7 @@
                :style="{'background-position': jiaoyuListBgPosition}">
             <h3>{{item.title}}</h3>
             <p>{{item.subTitle}}</p>
-            <span class="link-btn iconfont tx-icon-right1"></span>
+            <span class="link-btn iconfont tx-icon-right"></span>
           </div>
         </router-link>
       </div>
@@ -117,7 +117,7 @@
             <div class="item-bg"
                  v-lazy:background-image="isMobile ? item.img.mobile : item.img.web"
                  :style="{'background-position': '50% 45px'}"></div>
-            <span class="link-btn iconfont tx-icon-right1"></span>
+            <span class="link-btn iconfont tx-icon-right"></span>
             <h3>{{item.title}}</h3>
             <p>{{item.subTitle}}</p>
           </div>
@@ -490,6 +490,7 @@
         }
       },
       webGoAutoPlay () {
+        if (!this.isMobile) return false
         clearInterval(this.webGoTimer)
         this.webGoTimer = setInterval(() => {
           if (this.webCurrentPage < this.websiteList.length - 1) {
@@ -1003,7 +1004,7 @@
               width: 0;
               height: 0;
               border-style: solid;
-              border-width: 4px 10px 0 10px;
+              border-width: 6px 10px 0 10px;
               border-color: #f3f5f7 transparent transparent transparent;
               transition: all .3s;
             }
@@ -1048,7 +1049,7 @@
               box-shadow: 0 10px 30px -8px rgba(0, 0, 0, .2);
               &:after {
                 bottom: -12px;
-                border-width: 12px 10px 0 10px;
+                border-width: 14px 10px 0 10px;
                 border-color: @primary transparent transparent transparent;
               }
               h3 {
@@ -1543,6 +1544,7 @@
       }
       .website-list {
         width: 300%;
+        max-width:none;
         flex-wrap: nowrap;
         margin-bottom: 8px;
         padding: 15px 0;

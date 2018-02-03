@@ -10,10 +10,21 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import {supportWebp} from '../util/isSupportWebp'
+
+  const pageBanner = {
+    mobile: supportWebp() ? require('../assets/img_mobile/webp/about_banner.webp') : require('../assets/img_mobile/about_banner.jpg'),
+    web: supportWebp() ? require('../assets/img/webp/about_banner.webp') : require('../assets/img/about_banner.jpg')
+  }
+
   export default {
-    data () {
-      return {
-        pageBanner: require('../assets/img/about_banner.jpg')
+    name: 'About',
+    computed: {
+      isMobile () {
+        return this.$store.state.isMobile
+      },
+      pageBanner () {
+        return this.isMobile ? pageBanner.mobile : pageBanner.web
       }
     }
   }
